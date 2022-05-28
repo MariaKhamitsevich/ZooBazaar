@@ -1,0 +1,6 @@
+framework module Pods_ZooBazaar {
+  umbrella header "Pods-ZooBazaar-umbrella.h"
+
+  export *
+  module * { export * }
+}

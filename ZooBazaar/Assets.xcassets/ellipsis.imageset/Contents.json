@@ -1,0 +1,42 @@
+{
+  "images" : [
+    {
+      "filename" : "ellipses.pdf",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "ellipses-2.pdf",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "ellipses-3.pdf",
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "ellipses-1.pdf",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "ellipses-4.pdf",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "ellipses-5.pdf",
+      "idiom" : "iphone",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}
