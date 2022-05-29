@@ -235,6 +235,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
             make.top.equalTo(emailPasswordStack.snp.bottom).offset(20)
             make.centerX.equalTo(emailPasswordStack.snp.centerX)
             make.width.equalTo(160)
+            make.height.equalTo(32)
         }
         self.rememberLabel.snp.updateConstraints { make in
             make.top.equalTo(confirmButton.snp.bottom).offset(16)
@@ -244,6 +245,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
             make.top.equalTo(registrationStack.snp.bottom).offset(20)
             make.centerX.equalTo(registrationStack.snp.centerX)
             make.width.equalTo(160)
+            make.height.equalTo(32)
         }
     }
     

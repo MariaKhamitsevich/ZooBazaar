@@ -38,7 +38,7 @@ class CartViewController: UIViewController {
         super.viewDidLoad()
         cartView.cartTable.rowHeight = UITableView.automaticDimension
         cartView.cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: "CartTableViewCell")
-        cartView.cartTable.separatorStyle = .none
+        cartView.cartTable.separatorStyle = .singleLine
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
         
                 

@@ -36,6 +36,7 @@
 		4C71F1672835607200F1A524 /* DescroptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F1662835607200F1A524 /* DescroptionViewController.swift */; };
 		4C71F1692835608F00F1A524 /* DescriprionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F1682835608F00F1A524 /* DescriprionView.swift */; };
 		4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */; };
+		4CC3D99A284350AA00E7DE51 /* UIButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3D999284350AA00E7DE51 /* UIButton .swift */; };
 		4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643528187D250052A2C2 /* AppDelegate.swift */; };
 		4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643728187D250052A2C2 /* SceneDelegate.swift */; };
 		4CED643A28187D250052A2C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643928187D250052A2C2 /* ViewController.swift */; };
@@ -76,6 +77,7 @@
 		4C71F1662835607200F1A524 /* DescroptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescroptionViewController.swift; sourceTree = "<group>"; };
 		4C71F1682835608F00F1A524 /* DescriprionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriprionView.swift; sourceTree = "<group>"; };
 		4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		4CC3D999284350AA00E7DE51 /* UIButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton .swift"; sourceTree = "<group>"; };
 		4CED643228187D250052A2C2 /* ZooBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CED643528187D250052A2C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CED643728187D250052A2C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				4C039B552832D48B001EEDB6 /* UIFont.swift */,
+				4CC3D999284350AA00E7DE51 /* UIButton .swift */,
 			);
 			name = Extentions;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				4C71F16328355A4500F1A524 /* CartTableViewCell.swift in Sources */,
 				4C5278492820FC6300BACCB8 /* ProductsTableHeaderView.swift in Sources */,
 				4C4A3F4128390164005C5F8E /* SomeViewController.swift in Sources */,
+				4CC3D99A284350AA00E7DE51 /* UIButton .swift in Sources */,
 				4C039B532832A3D3001EEDB6 /* ProfileViewController.swift in Sources */,
 				4C5457AB28223B220043205D /* HomeScreenTableViewCell.swift in Sources */,
 				4CED644C28187E7F0052A2C2 /* HomeScreenView.swift in Sources */,

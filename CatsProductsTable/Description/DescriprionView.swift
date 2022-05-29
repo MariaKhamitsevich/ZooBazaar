@@ -75,7 +75,10 @@ class DescriprionView: UIView {
         addSubview(exampleButton)
         
         setAllConstraints()
+        
+
     }
+    
    
     
     required init?(coder: NSCoder) {
