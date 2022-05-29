@@ -41,6 +41,8 @@ class DescroptionViewController: UIViewController {
     
     @objc func addToCart() {
         let controller = CartViewController()
+        let cartManager = CartManager.shared
+        
         if let currentProduct = descriprionVeiw.currentProduct {
             cartManager.addProduct(product: currentProduct)
         }
@@ -48,24 +50,10 @@ class DescroptionViewController: UIViewController {
             view.cartTable.reloadData()
         }
         
-        self.descriprionVeiw.addToCartButton.animateButtonTap(view: self.descriprionVeiw, startWidth: 240, startHeight: 32)
-//        UIView.animate(withDuration: 0.1, delay: .zero, options: .curveLinear, animations: {
-//            self.descriprionVeiw.addToCartButton.snp.updateConstraints { make in
-//                make.height.equalTo(30)
-//                make.width.equalTo(235)
-//            }
-//            self.descriprionVeiw.layoutIfNeeded()
-//        }, completion: {_ in
-//            UIView.animate(withDuration: 0.1, delay: .zero, options: .curveLinear) {
-//                self.descriprionVeiw.addToCartButton.snp.updateConstraints { make in
-//                    make.height.equalTo(32)
-//                    make.width.equalTo(240)
-//                }
-//                self.descriprionVeiw.layoutIfNeeded()
-//            }
-//
-//        }
-//        )
+        self.descriprionVeiw.addToCartButton.animateButtonTap(startWidth: 240, startHeight: 32) { _ in
+            self.dismiss(animated: true)
+
+        }
         
     }
 }

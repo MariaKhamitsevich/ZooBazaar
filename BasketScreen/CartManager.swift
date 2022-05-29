@@ -18,23 +18,30 @@ class CartManager {
     func productCount() -> Int {
         cartProducts.count
     }
+    
     func getProduct(indexPath: IndexPath) -> Product {
         cartProducts[indexPath.row]
     }
     
     func addProduct(product: Product) {
+        if !cartProducts.contains(product) {
         cartProducts.append(product)
+        }
     }
     
     func deleteProduct(product: Product) {
         if !cartProducts.isEmpty {
-            for i in 0...(cartProducts.count - 1) {
+            let count = cartProducts.count
+            var products = cartProducts
+            
+            for i in 0...(count - 1) {
                 if cartProducts[i] == product {
-                    cartProducts.remove(at: i)
+                    products.remove(at: i)
                 }
             }
+            
+            cartProducts = products
         }
     }
 }
 
-var cartManager = CartManager.shared

@@ -21,9 +21,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
 
         navigationController?.isNavigationBarHidden = true
-        navigationController?.viewControllers.removeFirst()
-              
-        
+      
         profileView.exitButton.addTarget(self, action: #selector(returnToRegistration), for: .touchUpInside)
     }
     
