@@ -43,5 +43,9 @@ class CartManager {
             cartProducts = products
         }
     }
+    
+    func exapleAdding(product: Product, position: Int = 0) {
+        cartProducts.insert(product, at: position)
+    }
 }
 

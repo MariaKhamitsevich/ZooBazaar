@@ -36,6 +36,12 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    var selectedIndex: IndexPath? = nil
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath
+    }
+    
 }
 
 class CartViewController: UIViewController {
@@ -58,6 +64,7 @@ class CartViewController: UIViewController {
         cartView.cartTable.separatorStyle = .singleLine
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
         
+        cartView.addButton.addTarget(self, action: #selector(addProduct), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,7 +72,17 @@ class CartViewController: UIViewController {
         cartView.cartTable.reloadData()
     }
     
-    
+    @objc func addProduct() {
+        let cartManager = CartManager.shared
+        if let selectedIndex = cartTableDelegate.selectedIndex {
+            cartManager.exapleAdding(product: Product(name: "Example", description: "\(Int.random(in: 1...100))", image: UIImage(named: "launchScreen"), price: "\(Int.random(in: 1...10))", isFirstweight: true, isSecondweight: true, isThirdweight: true, isFourthweight: true), position: selectedIndex.row)
+        
+        cartView.cartTable.beginUpdates()
+        cartView.cartTable.insertRows(at: [selectedIndex], with: .automatic)
+        cartView.cartTable.endUpdates()
+    }
+
+    }
 }
 
 

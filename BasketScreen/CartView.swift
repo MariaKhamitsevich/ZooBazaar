@@ -29,6 +29,14 @@ class CartView: UIView {
         return label
     }()
     
+    lazy var addButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        
+        
+        return button
+    }()
+    
      lazy var cartTable: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
@@ -42,6 +50,8 @@ class CartView: UIView {
         addSubview(logoImageView)
         addSubview(totalPriceLabel)
         addSubview(cartTable)
+        
+        addSubview(addButton)
         
         setAllConstraints()
     }
@@ -67,6 +77,13 @@ class CartView: UIView {
             make.leading.equalTo(self.snp.leading).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
             make.height.equalTo(UIScreen.main.bounds.height / 2)
+        }
+        
+        self.addButton.snp.updateConstraints { make in
+            make.top.equalTo(totalPriceLabel.snp.top)
+            make.trailing.equalToSuperview().offset(-8)
+            make.width.equalTo(32)
+            make.height.equalTo(32)
         }
     }
 }
