@@ -23,15 +23,10 @@ struct BrandProducts {
     let productDescription: String
     let productImage: UIImage!
     let productPrice: Double
-    var weights: [Weights]
+    let productID: Int
 }
 
-enum Weights: Int {
-    case threehundred = 300
-    case fivehundred = 500
-    case onethousand = 1000
-    case twothousand = 2000
-}
+
 
 enum Pets {
     case cats

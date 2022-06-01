@@ -23,10 +23,33 @@ class CartManager {
         cartProducts[indexPath.row]
     }
     
-    func addProduct(product: Product) {
-        if !cartProducts.contains(product) {
-        cartProducts.append(product)
+    func checkProductAmount(product: Product) -> Int {
+        guard !cartProducts.isEmpty
+        else {
+            return 0
         }
+        for i in 0...(cartProducts.count - 1) {
+            if product.productID == cartProducts[i].productID {
+                return cartProducts[i].productAmount
+            }
+        }
+        return 0
+    }
+    func addProduct(product: Product) {
+        guard !cartProducts.isEmpty
+        else {
+            cartProducts.append(product)
+            return
+        }
+       
+            for i in 0...(cartProducts.count - 1) {                
+                if product.productID == cartProducts[i].productID {
+                    cartProducts[i].productAmount += 1
+                    return
+                }
+            }
+        cartProducts.append(product)
+       
     }
     
     func deleteProduct(product: Product) {
@@ -44,8 +67,24 @@ class CartManager {
         }
     }
     
-    func exapleAdding(product: Product, position: Int = 0) {
-        cartProducts.insert(product, at: position)
+    func decreaseAmount(product: Product) {
+        for i in 0...(cartProducts.count - 1) {
+            if product.productID == cartProducts[i].productID {
+                if cartProducts[i].productAmount != 1 {
+                    cartProducts[i].productAmount -= 1
+                    return
+                }
+            }
+        }
+    }
+    
+    func increaseAmount(product: Product) {
+        for i in 0...(cartProducts.count - 1) {
+            if product.productID == cartProducts[i].productID {
+                cartProducts[i].productAmount += 1
+                return
+            }
+        }
     }
 }
 

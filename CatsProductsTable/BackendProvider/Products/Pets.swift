@@ -37,8 +37,7 @@ struct Product: Equatable {
             "\(price) рублей за кг"
         }
     }
-    let isFirstweight: Bool
-    let isSecondweight: Bool
-    let isThirdweight: Bool
-    let isFourthweight: Bool
+    
+    let productID: String
+    var productAmount = 1
 }

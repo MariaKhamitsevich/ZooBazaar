@@ -15,29 +15,22 @@ struct BackendObtainer {
     }
     
     func obtainPet() -> Pet {
-        
         var products: [ProductsForPets] = []
         
         for data in data.backendData {
             let product = ProductsForPets(title: data.brendName, products: data.brendProducts.compactMap{transformProduct(brandProduct: $0)})
-            
             products.append(product)
         }
-        
         return Pet(pet: data.pet, products: products)
     }
     
     private func transformProduct(brandProduct: BrandProducts) -> Product {
-        
         Product(
             name: brandProduct.productName,
             description: brandProduct.productDescription,
             image: brandProduct.productImage,
             price: String(brandProduct.productPrice),
-            isFirstweight: brandProduct.weights.contains(.threehundred),
-            isSecondweight: brandProduct.weights.contains(.fivehundred),
-            isThirdweight: brandProduct.weights.contains(.onethousand),
-            isFourthweight: brandProduct.weights.contains(.twothousand))
+            productID: String(brandProduct.productID))
     }
 }
 

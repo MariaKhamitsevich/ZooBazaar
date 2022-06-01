@@ -11,8 +11,6 @@
 		4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C039B502832A3C1001EEDB6 /* ProfileView.swift */; };
 		4C039B532832A3D3001EEDB6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C039B522832A3D3001EEDB6 /* ProfileViewController.swift */; };
 		4C039B562832D48B001EEDB6 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C039B552832D48B001EEDB6 /* UIFont.swift */; };
-		4C1DAB03281928C20043B08D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DAB02281928C20043B08D /* SettingsViewController.swift */; };
-		4C1DAB05281928D40043B08D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DAB04281928D40043B08D /* SettingsView.swift */; };
 		4C1DAB0A2819453E0043B08D /* CartViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1DAB092819453E0043B08D /* CartViewControllerViewController.swift */; };
 		4C21A87028290EFF00C47623 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A86F28290EFF00C47623 /* RegistrationViewController.swift */; };
 		4C21A873282910C100C47623 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A872282910C100C47623 /* RegistrationView.swift */; };
@@ -52,8 +50,6 @@
 		4C039B502832A3C1001EEDB6 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4C039B522832A3D3001EEDB6 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4C039B552832D48B001EEDB6 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		4C1DAB02281928C20043B08D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		4C1DAB04281928D40043B08D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4C1DAB092819453E0043B08D /* CartViewControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewControllerViewController.swift; sourceTree = "<group>"; };
 		4C21A86F28290EFF00C47623 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4C21A872282910C100C47623 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
@@ -119,15 +115,6 @@
 			name = Extentions;
 			sourceTree = "<group>";
 		};
-		4C1DAB06281928E40043B08D /* SettingsScreen */ = {
-			isa = PBXGroup;
-			children = (
-				4C1DAB02281928C20043B08D /* SettingsViewController.swift */,
-				4C1DAB04281928D40043B08D /* SettingsView.swift */,
-			);
-			path = SettingsScreen;
-			sourceTree = "<group>";
-		};
 		4C21A87128290F0700C47623 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +138,7 @@
 		4C37E0BB281F058900D393F5 /* CatsProductsTable */ = {
 			isa = PBXGroup;
 			children = (
+				4C71F16A28356BBF00F1A524 /* BackendProvider */,
 				4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */,
 				4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */,
 				4C5278482820FC6300BACCB8 /* ProductsTableHeaderView.swift */,
@@ -175,8 +163,6 @@
 			children = (
 				4C71F1662835607200F1A524 /* DescroptionViewController.swift */,
 				4C71F1682835608F00F1A524 /* DescriprionView.swift */,
-				4C4A3F4028390164005C5F8E /* SomeViewController.swift */,
-				4C4A3F4228390280005C5F8E /* SomeView.swift */,
 			);
 			path = Description;
 			sourceTree = "<group>";
@@ -184,6 +170,7 @@
 		4C71F16A28356BBF00F1A524 /* BackendProvider */ = {
 			isa = PBXGroup;
 			children = (
+				4C71F16B28356BE700F1A524 /* Products */,
 				4C71F15A2834D0EA00F1A524 /* BackendData.swift */,
 				4C71F15C2834D3C800F1A524 /* BackendObtainer.swift */,
 				4C71F15E2835169D00F1A524 /* PetProvider.swift */,
@@ -206,7 +193,6 @@
 				4C21A8762829550400C47623 /* MapsScreen */,
 				4C37E0BB281F058900D393F5 /* CatsProductsTable */,
 				4C37E0BE281F10F600D393F5 /* BasketScreen */,
-				4C1DAB06281928E40043B08D /* SettingsScreen */,
 				4C21A87128290F0700C47623 /* ProfileScreen */,
 				4CED644D28187E8E0052A2C2 /* HomeScreen */,
 				4CED643428187D250052A2C2 /* ZooBazaar */,
@@ -234,10 +220,10 @@
 				4CED643E28187D290052A2C2 /* Assets.xcassets */,
 				4CED644028187D290052A2C2 /* LaunchScreen.storyboard */,
 				4CED644328187D290052A2C2 /* Info.plist */,
-				4C71F16A28356BBF00F1A524 /* BackendProvider */,
 				4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */,
 				4C5457AC2822CC8D0043205D /* ColorsManager.swift */,
-				4C71F16B28356BE700F1A524 /* Products */,
+				4C4A3F4028390164005C5F8E /* SomeViewController.swift */,
+				4C4A3F4228390280005C5F8E /* SomeView.swift */,
 			);
 			path = ZooBazaar;
 			sourceTree = "<group>";
@@ -375,7 +361,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C1DAB05281928D40043B08D /* SettingsView.swift in Sources */,
 				4C1DAB0A2819453E0043B08D /* CartViewControllerViewController.swift in Sources */,
 				4C71F1672835607200F1A524 /* DescroptionViewController.swift in Sources */,
 				4C039B562832D48B001EEDB6 /* UIFont.swift in Sources */,
@@ -408,7 +393,6 @@
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
 				4C71F1692835608F00F1A524 /* DescriprionView.swift in Sources */,
 				4C71F15B2834D0EA00F1A524 /* BackendData.swift in Sources */,
-				4C1DAB03281928C20043B08D /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

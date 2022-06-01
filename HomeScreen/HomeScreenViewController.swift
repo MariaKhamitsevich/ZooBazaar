@@ -71,13 +71,10 @@ class HomeScreenViewController: UIViewController, BackgroundColorSetable {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        
-        homeView.settingsButton.addTarget(self, action: #selector(runToSettings), for: .touchUpInside)
-                      
+                              
         homeView.tableView.rowHeight = UITableView.automaticDimension
         homeView.tableView.register(HomeScreenTableViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
         tableDelegate.controllerDelegate = self
-        
         
     }
     
@@ -85,17 +82,6 @@ class HomeScreenViewController: UIViewController, BackgroundColorSetable {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
     }
-    @objc func runToSettings(_ sender: UIButton) {
-        
-        let controller = SettingsViewController()
-        controller.backgroundDelegate = self
-        controller.view.backgroundColor = view.backgroundColor
-        controller.redValue = redShadeOfBackground
-        controller.greenValue = greenShadeOfBackground
-        controller.blueValue = blueShadeOfBackGround
-        present(controller, animated: true)
-    }
-    
     
     func setBackgroundColor(red: Float, green: Float, blue: Float, alpha: Double) {
         let backgroundColor = UIColor(red: CGFloat(red / 255), green: CGFloat(green / 255), blue: CGFloat(blue / 255), alpha: alpha)

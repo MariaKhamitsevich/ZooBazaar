@@ -21,22 +21,7 @@ class DescroptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        descriprionVeiw.exampleButton.addTarget(self, action: #selector(presentToController), for: .touchUpInside)
         descriprionVeiw.addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
-    }
-    
-    @objc func presentToController() {
-//        let controller = SomeViewController()
-//        present(controller, animated: true)
-//
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: .calculationModeCubic) {
-            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.25) {
-                self.descriprionVeiw.exampleButton.transform = CGAffineTransform(scaleX: 0.98, y: 0.95)
-            }
-            UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.25) {
-                self.descriprionVeiw.exampleButton.transform = CGAffineTransform(scaleX: 1, y: 1)
-        }
-    }
     }
     
     @objc func addToCart() {

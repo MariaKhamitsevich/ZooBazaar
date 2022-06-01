@@ -8,10 +8,6 @@
 import UIKit
 import SnapKit
 
-
-
-
-
 class ProductsTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -30,7 +26,6 @@ class ProductsTableViewCell: UITableViewCell {
         stack.addArrangedSubview(productDescription)
         stack.addArrangedSubview(emptyView)
         stack.addArrangedSubview(productPriceLabel)
-        stack.addArrangedSubview(productWeightLabels)
         stack.spacing = 4
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -74,75 +69,7 @@ class ProductsTableViewCell: UITableViewCell {
         }
         return view
     }()
-    
-    //MARK: Weight Labels
-    private lazy var productWeightLabels: UIStackView = {
-        let stack = UIStackView()
-        stack.addArrangedSubview(firstWeight)
-        stack.addArrangedSubview(secondWeight)
-        stack.addArrangedSubview(thirdWeight)
-        stack.addArrangedSubview(fourthWeight)
-        stack.addArrangedSubview(emptyWeightLabel)
-        stack.alignment = .leading
-        stack.axis = .horizontal
-        stack.spacing = 16
-        for label in stack.arrangedSubviews {
-            if let label = label as? UILabel {
-                label.font = UIFont.systemFont(ofSize: 12)
-            }
-        }
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stack
-    }()
-    private lazy var firstWeight: UILabel = {
-        let label = UILabel()
-        label.text = "300 g"
-        label.textColor = .purple
-        label.tag = 0
-        label.isHidden = true
-        
-        return label
-    }()
-    private lazy var secondWeight: UILabel = {
-        let label = UILabel()
-        label.text = "500 g"
-        label.textColor = .purple
-        label.tag = 1
-        label.isHidden = true
-        
-        return label
-    }()
-    private lazy var thirdWeight: UILabel = {
-        let label = UILabel()
-        label.text = "1000 g"
-        label.textColor = .purple
-        label.tag = 2
-        label.isHidden = true
-        
-        return label
-    }()
-    private lazy var fourthWeight: UILabel = {
-        let label = UILabel()
-        label.text = "2000 g"
-        label.textColor = .purple
-        label.tag = 3
-        label.isHidden = true
-        
-        return label
-    }()
-    private lazy var emptyWeightLabel: UILabel = {
-        let label = UILabel()
-        label.tag = 4
-        label.snp.updateConstraints { make in
-            make.width.greaterThanOrEqualTo(1)
-        }
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    
-    
+  
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -166,22 +93,6 @@ class ProductsTableViewCell: UITableViewCell {
         productDescription.text = product.description
         productImageView.image = product.image
         productPriceLabel.text = product.priceForKg
-        
-        for weight in productWeightLabels.arrangedSubviews {
-            switch weight.tag {
-            case 0:
-                weight.isHidden = !product.isFirstweight
-            case 1:
-                weight.isHidden = !product.isSecondweight
-            case 2:
-                weight.isHidden = !product.isThirdweight
-            case 3:
-                weight.isHidden = !product.isFourthweight
-            default:
-                weight.isHidden = false
-            }
-        }
-        
     }
     
     private func setAllConstraints() {
