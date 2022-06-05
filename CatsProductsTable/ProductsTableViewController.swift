@@ -46,7 +46,7 @@ class ProductsTableViewController: UITableViewController, TableDataReloading {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
-        navigationController?.navigationBar.backItem?.title = "Other pats"
+        navigationController?.navigationBar.backItem?.title = "Назад в каталог"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor
         navigationController?.navigationBar.barTintColor = ColorsManager.zbzbBackgroundColor
         

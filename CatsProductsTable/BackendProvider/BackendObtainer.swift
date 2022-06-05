@@ -24,13 +24,26 @@ struct BackendObtainer {
         return Pet(pet: data.pet, products: products)
     }
     
+    func obtainPopularProducts() -> [Product] {
+        var products: [ProductsForPets] = []
+        
+        for data in data.backendData {
+            let product = ProductsForPets(title: data.brendName, products: data.brendProducts.compactMap{transformProduct(brandProduct: $0)})
+            products.append(product)
+        }
+        let popularProducts = products.flatMap {$0.products.filter { $0.isPopular}}
+        return popularProducts
+    }
+    
     private func transformProduct(brandProduct: BrandProducts) -> Product {
         Product(
             name: brandProduct.productName,
             description: brandProduct.productDescription,
             image: brandProduct.productImage,
             price: String(brandProduct.productPrice),
+            isPopular: brandProduct.isPopular,
             productID: String(brandProduct.productID))
+        
     }
 }
 

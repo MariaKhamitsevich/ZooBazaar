@@ -92,8 +92,8 @@ class DescriprionView: UIView {
         }
         self.productDescription.snp.updateConstraints { make in
             make.top.equalTo(productImage.snp.bottom)
-            make.leading.equalTo(self.snp.leading).offset(4)
-            make.trailing.equalTo(self.snp.trailing).offset(-4)
+            make.leading.equalTo(self.snp.leading).offset(16)
+            make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.height.equalTo(UIScreen.main.bounds.height / 4)
         }
         self.addToCartButton.snp.updateConstraints { make in

@@ -31,5 +31,9 @@ struct PetProvider {
     func getProduct(numberOfSection IndexPath: IndexPath) -> Product {
         self.pet.products[IndexPath.section].products[IndexPath.row]
     }
+    
+    func getPopularProducts() -> [Product] {
+        self.petObtainer.obtainPopularProducts()
+    }
 }
  

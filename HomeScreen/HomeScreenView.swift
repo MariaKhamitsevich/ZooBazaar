@@ -15,13 +15,15 @@ class HomeScreenView: UIView {
         return label
     }()
     
-          
     private(set) lazy var tableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.backgroundColor = ColorsManager.zbzbBackgroundColor
         
+        let table = UITableView()
+        table.backgroundColor = ColorsManager.zbzbBackgroundColor
+        table.translatesAutoresizingMaskIntoConstraints = false
+
         return table
     }()
+    
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -30,9 +32,9 @@ class HomeScreenView: UIView {
         
         addSubview(wellcomeLabel)
         addSubview(tableView)
-        
+
+
         setAllConstrains()
-        [wellcomeLabel, tableView].forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
     }
     
     required init?(coder: NSCoder) {
@@ -48,10 +50,10 @@ class HomeScreenView: UIView {
         }
         
         self.tableView.snp.updateConstraints { make in
-            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(24)
-            make.bottom.equalTo(self.snp.bottomMargin)
+            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
             make.leadingMargin.equalToSuperview().offset(8)
             make.trailingMargin.equalTo(-8)
+            make.bottom.equalToSuperview().offset(-8)
         }
     }
 }

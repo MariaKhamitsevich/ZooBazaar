@@ -23,6 +23,7 @@ struct BrandProducts {
     let productDescription: String
     let productImage: UIImage!
     let productPrice: Double
+    var isPopular: Bool
     let productID: Int
 }
 

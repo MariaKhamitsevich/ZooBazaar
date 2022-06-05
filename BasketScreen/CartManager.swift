@@ -58,7 +58,7 @@ class CartManager {
             var products = cartProducts
             
             for i in 0...(count - 1) {
-                if cartProducts[i] == product {
+                if cartProducts[i].productID == product.productID {
                     products.remove(at: i)
                 }
             }

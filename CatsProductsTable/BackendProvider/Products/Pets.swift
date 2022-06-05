@@ -25,13 +25,14 @@ struct ProductsForPets {
     var products: [Product]
 }
 
-struct Product: Equatable {
+struct Product {
     
     
     let name: String
     let description: String
     let image: UIImage!
     let price: String
+    var isPopular: Bool
     var priceForKg: String {
         get {
             "\(price) рублей за кг"
