@@ -43,7 +43,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  E-mail"
+        textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -55,7 +55,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  Пароль"
+        textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -82,7 +82,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  Имя"
+       textField.attributedPlaceholder = NSAttributedString(string: " Имя", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .alphabet
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -95,7 +95,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
    private lazy var emailForRegistrationTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  E-mail"
+       textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -108,7 +108,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var passwordForRegistrationTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  Пароль"
+        textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -120,7 +120,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var confirmPasswordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "  Подтвердите пароль"
+        textField.attributedPlaceholder = NSAttributedString(string: " Подтвердите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -161,6 +161,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return button
     }()
     
+    
 //    var name = ""
 //    var email = ""
     
@@ -175,6 +176,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         addSubview(confirmButton)
         addSubview(rememberLabel)
         addSubview(registrationButton)
+        
+ 
         
         setAllConstraints()
         addAllTargets()
@@ -198,6 +201,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         nameTextField.addTarget(self, action: #selector(setName(_:)), for: .editingChanged)
         emailForRegistrationTextField.addTarget(self, action: #selector(setEmail(_:)), for: .editingChanged)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(startEditing), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
         emailPasswordStack.arrangedSubviews.forEach( { subview in
             if let subview = subview as? UITextField {
                 subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
@@ -206,11 +211,34 @@ class RegistrationView: UIView, UITextFieldDelegate {
         
         registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
     }
-    
+
+    @objc func startEditing() {
+        registrationStack.arrangedSubviews.forEach( { subview in
+            if let subview = subview as? UITextField {
+                if subview.isFirstResponder {
+                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "", attributes: [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+                } else {
+                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "")
+                }
+            }
+        })
+        
+        emailPasswordStack.arrangedSubviews.forEach( { subview in
+            if let subview = subview as? UITextField {
+                if subview.isFirstResponder {
+                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "", attributes: [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
+                } else {
+                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "")
+                }
+            }
+        })
+    }
+                                                    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
     @objc func pressReturn() {
         self.endEditing(true)
     }
