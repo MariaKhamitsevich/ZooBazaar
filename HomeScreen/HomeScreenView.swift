@@ -14,31 +14,28 @@ class HomeScreenView: UIView {
         
         return label
     }()
-    
-    private(set) lazy var tableView: UITableView = {
-        
-        let table = UITableView()
-        table.backgroundColor = ColorsManager.zbzbBackgroundColor
-        table.translatesAutoresizingMaskIntoConstraints = false
-
-        return table
-    }()
-    
-    
+ 
     //MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = ColorsManager.zbzbBackgroundColor
         
         addSubview(wellcomeLabel)
-        addSubview(tableView)
-
-
         setAllConstrains()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addTableConstraints(tableView: UITableView) {
+        addSubview(tableView)
+        tableView.snp.updateConstraints { make in
+            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
+            make.leadingMargin.equalTo(self.layoutMarginsGuide.snp.leading).offset(8)
+            make.trailingMargin.equalTo(self.layoutMarginsGuide.snp.trailing).offset(-8)
+            make.bottom.equalTo(self.snp.bottom).offset(-8)
+        }
     }
     
     private func setAllConstrains() {
@@ -47,13 +44,6 @@ class HomeScreenView: UIView {
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(64)
-        }
-        
-        self.tableView.snp.updateConstraints { make in
-            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
-            make.leadingMargin.equalToSuperview().offset(8)
-            make.trailingMargin.equalTo(-8)
-            make.bottom.equalToSuperview().offset(-8)
         }
     }
 }

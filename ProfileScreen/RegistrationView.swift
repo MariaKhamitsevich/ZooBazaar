@@ -35,7 +35,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         stack.addArrangedSubview(passwordTextField)
         
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 20
         
         
         return stack
@@ -43,7 +43,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "E-mail"
+        textField.placeholder = "  E-mail"
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -55,7 +55,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Пароль"
+        textField.placeholder = "  Пароль"
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -74,7 +74,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         stack.addArrangedSubview(confirmPasswordTextField)
      
         stack.axis = .vertical
-        stack.spacing = 16
+        stack.spacing = 20
         
         stack.isHidden = true
         
@@ -82,7 +82,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Имя"
+        textField.placeholder = "  Имя"
         textField.keyboardType = .alphabet
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -95,7 +95,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
    private lazy var emailForRegistrationTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "E-mail"
+        textField.placeholder = "  E-mail"
         textField.keyboardType = .emailAddress
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -108,7 +108,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var passwordForRegistrationTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Пароль"
+        textField.placeholder = "  Пароль"
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -120,7 +120,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     private lazy var confirmPasswordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Подтвердите пароль"
+        textField.placeholder = "  Подтвердите пароль"
         textField.keyboardType = .numbersAndPunctuation
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
@@ -161,8 +161,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return button
     }()
     
-    var name = ""
-    var email = ""
+//    var name = ""
+//    var email = ""
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -176,9 +176,19 @@ class RegistrationView: UIView, UITextFieldDelegate {
         addSubview(rememberLabel)
         addSubview(registrationButton)
         
+        setAllConstraints()
+        addAllTargets()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Add all targets
+    private func addAllTargets() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
         
         registrationStack.arrangedSubviews.forEach( { subview in
             if let subview = subview as? UITextField {
@@ -195,29 +205,60 @@ class RegistrationView: UIView, UITextFieldDelegate {
         })
         
         registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
-        
-        setAllConstraints()
-        
-        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    @objc func pressReturn() {
+        self.endEditing(true)
     }
     
+    @objc private func chooseSegmentedControl(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            emailPasswordStack.isHidden = false
+            confirmButton.isHidden = false
+            rememberLabel.isHidden = false
+            registrationStack.isHidden = true
+            registrationButton.isHidden = true
+        case 1:
+            emailPasswordStack.isHidden = true
+            confirmButton.isHidden = true
+            rememberLabel.isHidden = true
+            registrationStack.isHidden = false
+            registrationButton.isHidden = false
+            
+        default:
+            registrationStack.isHidden = true
+        }
+    }
     
-    
+    @objc private func setName(_ sender: UITextField) {
+        //        if let text = sender.text {
+        //            self.name = text
+        //        }
+        UserDefaults.standard.set(sender.text, forKey: "UserName")
+    }
+    @objc private func setEmail(_ sender: UITextField) {
+        //        if let text = sender.text {
+        //            self.email = text
+        //        }
+        UserDefaults.standard.set(sender.text, forKey: "UserEmail")
+    }
+   
 //   MARK: Constraints
     private func setAllConstraints() {
         self.logoImageView.snp.updateConstraints { make in
-            make.top.equalTo(self.snp.topMargin)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
             make.trailing.equalToSuperview()
             make.leading.equalToSuperview()
-            make.bottom.equalTo(self.snp.bottomMargin)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         
         self.registrationSegmentedControl.snp.updateConstraints { make in
-            make.top.equalTo(self.snp.topMargin).offset(24)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(48)
             make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
         }
@@ -249,42 +290,4 @@ class RegistrationView: UIView, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    @objc func pressReturn() {
-        self.endEditing(true)
-    }
-    
-   @objc private func chooseSegmentedControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            emailPasswordStack.isHidden = false
-            confirmButton.isHidden = false
-            rememberLabel.isHidden = false
-            registrationStack.isHidden = true
-            registrationButton.isHidden = true
-        case 1:
-            emailPasswordStack.isHidden = true
-            confirmButton.isHidden = true
-            rememberLabel.isHidden = true
-            registrationStack.isHidden = false
-            registrationButton.isHidden = false
-            
-        default:
-            registrationStack.isHidden = true
-        }
-    }
-    
-    @objc private func setName(_ sender: UITextField) {
-        if let text = sender.text {
-            self.name = text
-        }
-    }
-    @objc private func setEmail(_ sender: UITextField) {
-        if let text = sender.text {
-            self.email = text
-        }
-    }
 }

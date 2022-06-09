@@ -73,6 +73,7 @@ class CartViewController: UIViewController {
         cartView.cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: "CartTableViewCell")
         cartView.cartTable.separatorStyle = .singleLine
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
+        navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -34,11 +34,9 @@ class RegistrationViewController: UIViewController {
     
     @objc private func runToProfile(_ sender: UIButton) {
         let controller = ProfileViewController()
-        controller.profileView.setEmail(email: registrationView.email)
-        controller.profileView.setName(name: registrationView.name)
+//        controller.profileView.setEmail(email: registrationView.email)
+//        controller.profileView.setName(name: registrationView.name)
         navigationController?.pushViewController(controller, animated: true)
         navigationController?.viewControllers.removeFirst()
-        print(registrationView.name)
-        print(registrationView.email)
     }
 }

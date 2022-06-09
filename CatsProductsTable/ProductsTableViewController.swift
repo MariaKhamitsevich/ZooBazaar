@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol TableDataReloading: AnyObject {
-    func reload()
-}
-
-class ProductsTableViewController: UITableViewController, TableDataReloading {
+class ProductsTableViewController: UITableViewController {
     
     
     
@@ -49,7 +45,6 @@ class ProductsTableViewController: UITableViewController, TableDataReloading {
         navigationController?.navigationBar.backItem?.title = "Назад в каталог"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor
         navigationController?.navigationBar.barTintColor = ColorsManager.zbzbBackgroundColor
-        
     }
     
 
@@ -74,20 +69,20 @@ class ProductsTableViewController: UITableViewController, TableDataReloading {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductsTableViewCell") as! ProductsTableViewCell
-        cell.tableReloadDelegate = self
+//        cell.tableReloadDelegate = self
         cell.updateValues(product: pets.getProduct(numberOfSection: indexPath))
         return cell
     }
     
-    func reload() {
-        
-        if let index = self.tableView.indexPathForSelectedRow {
-            self.tableView.reloadRows(at: [index], with: .none)
-        } else {
-            self.tableView.reloadRows(at: [], with: .none)
-        }
-        
-    }
+//    func reload() {
+//        
+//        if let index = self.tableView.indexPathForSelectedRow {
+//            self.tableView.reloadRows(at: [index], with: .none)
+//        } else {
+//            self.tableView.reloadRows(at: [], with: .none)
+//        }
+//        
+//    }
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -13,7 +13,7 @@ protocol ProfileDataSettable: AnyObject {
     func setName(name: String)
 }
 
-class ProfileView: UIView, ProfileDataSettable {
+class ProfileView: UIView {
     
     private lazy var profileLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +49,7 @@ class ProfileView: UIView, ProfileDataSettable {
         label.textColor = ColorsManager.zbzbTextColor
         label.font = UIFont.italicSystemFont(ofSize: 16)
         label.textAlignment = .left
+        label.text = UserDefaults.standard.string(forKey: "UserName")
         
         return label
     }()
@@ -58,7 +59,8 @@ class ProfileView: UIView, ProfileDataSettable {
         label.textColor = ColorsManager.zbzbTextColor
         label.font = UIFont.italicSystemFont(ofSize: 16)
         label.textAlignment = .left
-        
+        label.text = UserDefaults.standard.string(forKey: "UserEmail")
+
         return label
     }()
     
@@ -100,13 +102,13 @@ class ProfileView: UIView, ProfileDataSettable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setEmail(email: String) {
-            emailLabel.text = email
-    }
-
-    func setName(name: String) {
-            nameLabel.text = name
-    }
+//    func setEmail(email: String) {
+//            emailLabel.text = email
+//    }
+//
+//    func setName(name: String) {
+//            nameLabel.text = name
+//    }
     
 //  MARK: Constraints
     private func setAllConstraints() {

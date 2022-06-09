@@ -81,7 +81,6 @@ class ProductsTableViewCell: UITableViewCell {
         contentView.backgroundColor = ColorsManager.zbzbBackgroundColor
         
         setAllConstraints()
-        addDescriptionGesture()
     }
     
     required init?(coder: NSCoder) {
@@ -110,27 +109,5 @@ class ProductsTableViewCell: UITableViewCell {
             make.bottom.equalTo(contentView.snp.bottom).offset(-8)
         }
 
-    }
-    
-    private var isActive: Bool = false
-    weak var tableReloadDelegate: TableDataReloading?
-    
-    private func addDescriptionGesture() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(watchTheDescription))
-        productDescription.addGestureRecognizer(gesture)
-    }
-    
-    
-    @objc func watchTheDescription(_ gesture: UITapGestureRecognizer) {
-        
-        isActive.toggle()
-        if isActive {
-            productNameLabel.numberOfLines = 0
-            productDescription.numberOfLines = 0
-        } else {
-            productNameLabel.numberOfLines = 2
-            productDescription.numberOfLines = 4
-        }
-        tableReloadDelegate?.reload()
     }
 }

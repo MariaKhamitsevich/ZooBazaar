@@ -32,6 +32,7 @@ class CartView: UIView {
     private(set) lazy var cartTable: UITableView = {
         let table = UITableView()
         table.backgroundColor = .clear
+        table.showsVerticalScrollIndicator = false
         
         return table
     }()
