@@ -20,7 +20,6 @@
 		4C21A87C282BAF0400C47623 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A87B282BAF0400C47623 /* Pets.swift */; };
 		4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */; };
 		4C37E0BD281F10EA00D393F5 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */; };
-		4C4A3F3F2838FA9A005C5F8E /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F3E2838FA9A005C5F8E /* Products.swift */; };
 		4C4A3F4128390164005C5F8E /* SomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F4028390164005C5F8E /* SomeViewController.swift */; };
 		4C4A3F4328390280005C5F8E /* SomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F4228390280005C5F8E /* SomeView.swift */; };
 		4C5278492820FC6300BACCB8 /* ProductsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5278482820FC6300BACCB8 /* ProductsTableHeaderView.swift */; };
@@ -39,6 +38,7 @@
 		4C870F6128520D7100A3677D /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C870F6028520D7100A3677D /* UITextField.swift */; };
 		4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */; };
 		4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA88F932850F10400E81986 /* HomeTableViewController.swift */; };
+		4CB7374D285238A1008EC3C7 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7374C285238A1008EC3C7 /* Products.swift */; };
 		4CC3D99A284350AA00E7DE51 /* UIButton .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3D999284350AA00E7DE51 /* UIButton .swift */; };
 		4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643528187D250052A2C2 /* AppDelegate.swift */; };
 		4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643728187D250052A2C2 /* SceneDelegate.swift */; };
@@ -64,7 +64,6 @@
 		4C21A87B282BAF0400C47623 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
 		4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
-		4C4A3F3E2838FA9A005C5F8E /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Products.swift; path = /Users/maria/Developer/DZ/ZooBazaar/ZooBazaar/Products/Products.swift; sourceTree = "<absolute>"; };
 		4C4A3F4028390164005C5F8E /* SomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeViewController.swift; sourceTree = "<group>"; };
 		4C4A3F4228390280005C5F8E /* SomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeView.swift; sourceTree = "<group>"; };
 		4C5278482820FC6300BACCB8 /* ProductsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableHeaderView.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		4C870F6028520D7100A3677D /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4CA88F932850F10400E81986 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		4CB7374C285238A1008EC3C7 /* Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		4CC3D999284350AA00E7DE51 /* UIButton .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton .swift"; sourceTree = "<group>"; };
 		4CED643228187D250052A2C2 /* ZooBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CED643528187D250052A2C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,7 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				4C21A87B282BAF0400C47623 /* Pets.swift */,
-				4C4A3F3E2838FA9A005C5F8E /* Products.swift */,
+				4CB7374C285238A1008EC3C7 /* Products.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -392,6 +392,7 @@
 				4C5457AB28223B220043205D /* CatalogHomeScreenViewCell.swift in Sources */,
 				4CED644C28187E7F0052A2C2 /* HomeScreenView.swift in Sources */,
 				4C71F15F2835169D00F1A524 /* PetProvider.swift in Sources */,
+				4CB7374D285238A1008EC3C7 /* Products.swift in Sources */,
 				4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */,
 				4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */,
 				4C21A87A2829556500C47623 /* MapsView.swift in Sources */,
@@ -403,7 +404,6 @@
 				4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */,
 				4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */,
 				4C870F6128520D7100A3677D /* UITextField.swift in Sources */,
-				4C4A3F3F2838FA9A005C5F8E /* Products.swift in Sources */,
 				4C4A3F4328390280005C5F8E /* SomeView.swift in Sources */,
 				4C54F28B283E9FEA0056E9B7 /* CartManager.swift in Sources */,
 				4C21A87028290EFF00C47623 /* RegistrationViewController.swift in Sources */,
@@ -554,6 +554,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GQC9F7HZZ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZooBazaar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -582,6 +583,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GQC9F7HZZ3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ZooBazaar/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

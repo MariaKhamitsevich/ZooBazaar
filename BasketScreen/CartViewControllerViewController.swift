@@ -21,6 +21,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
         
         cell.updateValue(product: cartManager.getProduct(indexPath: indexPath), indexPath: indexPath)
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
         
         cell.callBack = {
             if self.cartManager.productCount() == 1 {
@@ -48,9 +49,6 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
     
 }
 

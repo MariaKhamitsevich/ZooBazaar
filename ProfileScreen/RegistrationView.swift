@@ -213,25 +213,24 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }
 
     @objc func startEditing() {
-        registrationStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                if subview.isFirstResponder {
-                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "", attributes: [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
-                } else {
-                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "")
-                }
-            }
-        })
         
-        emailPasswordStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                if subview.isFirstResponder {
-                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "", attributes: [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
-                } else {
-                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder != nil ? subview.placeholder! : "")
+        let attributes = [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5),
+                          NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]
+        
+        func setupSubviewsPlaceholder(for stack: UIStackView) {
+            stack.arrangedSubviews.forEach( { subview in
+                if let subview = subview as? UITextField {
+                    if subview.isFirstResponder {
+                        subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "", attributes: attributes)
+                    } else {
+                        subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "")
+                    }
                 }
-            }
-        })
+            })
+        }
+        
+        setupSubviewsPlaceholder(for: registrationStack)
+        setupSubviewsPlaceholder(for: emailPasswordStack)  
     }
                                                     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
