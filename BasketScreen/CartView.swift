@@ -10,6 +10,8 @@ import SnapKit
 
 class CartView: UIView {
     
+    let cartManager = CartManager.shared
+    
     private lazy var logoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "launchScreen")
@@ -19,9 +21,9 @@ class CartView: UIView {
         return image
     }()
     
-    private lazy var totalPriceLabel: UILabel = {
+    private(set) lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
-        label.text = "Итого"
+        label.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
         label.textAlignment = .left
         label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 22))()
         label.textColor = ColorsManager.zbzbTextColor
@@ -67,7 +69,7 @@ class CartView: UIView {
             make.top.equalTo(totalPriceLabel.snp.bottom).offset(8)
             make.leading.equalTo(self.snp.leading).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
-            make.height.equalTo(UIScreen.main.bounds.height / 2)
+            make.height.equalTo(UIScreen.main.bounds.height / 3 * 2)
         }
     }
 }

@@ -49,7 +49,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
+//        textField.enablesReturnKeyAutomatically = true
         
         return textField
     }()
@@ -61,7 +61,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
+        textField.isSecureTextEntry = true
         
         return textField
     }()
@@ -88,7 +88,6 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
         textField.tag = 0
         
         return textField
@@ -101,7 +100,6 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
         textField.tag = 1
         
         return textField
@@ -114,7 +112,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
+        textField.isSecureTextEntry = true
+
         
         return textField
     }()
@@ -126,7 +125,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        textField.enablesReturnKeyAutomatically = true
+        textField.isSecureTextEntry = true
+
         
         return textField
     }()
@@ -229,8 +229,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
             })
         }
         
+        setupSubviewsPlaceholder(for: emailPasswordStack)
         setupSubviewsPlaceholder(for: registrationStack)
-        setupSubviewsPlaceholder(for: emailPasswordStack)  
     }
                                                     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
@@ -240,6 +240,16 @@ class RegistrationView: UIView, UITextFieldDelegate {
     
     @objc func pressReturn() {
         self.endEditing(true)
+        
+        func setupSubviewsPlaceholder(for stack: UIStackView) {
+            stack.arrangedSubviews.forEach( { subview in
+                if let subview = subview as? UITextField {
+                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "")
+                }
+            })
+        }
+        setupSubviewsPlaceholder(for: emailPasswordStack)
+        setupSubviewsPlaceholder(for: registrationStack)
     }
     
     @objc private func chooseSegmentedControl(_ sender: UISegmentedControl) {
@@ -299,11 +309,17 @@ class RegistrationView: UIView, UITextFieldDelegate {
             make.leading.equalToSuperview().offset(32)
             make.trailing.equalToSuperview().offset(-32)
         }
+        self.registrationStack.arrangedSubviews.forEach({ $0.snp.updateConstraints { make in
+            make.height.equalTo(UIScreen.main.bounds.height * 0.04)
+        }})
+        self.emailPasswordStack.arrangedSubviews.forEach({ $0.snp.updateConstraints { make in
+            make.height.equalTo(UIScreen.main.bounds.height * 0.04)
+        }})
         self.confirmButton.snp.updateConstraints { make in
             make.top.equalTo(emailPasswordStack.snp.bottom).offset(20)
             make.centerX.equalTo(emailPasswordStack.snp.centerX)
-            make.width.equalTo(160)
-            make.height.equalTo(32)
+            make.width.equalTo(UIScreen.main.bounds.width / 3 * 2)
+            make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
         self.rememberLabel.snp.updateConstraints { make in
             make.top.equalTo(confirmButton.snp.bottom).offset(16)
@@ -312,8 +328,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         self.registrationButton.snp.updateConstraints { make in
             make.top.equalTo(registrationStack.snp.bottom).offset(20)
             make.centerX.equalTo(registrationStack.snp.centerX)
-            make.width.equalTo(160)
-            make.height.equalTo(32)
+            make.width.equalTo(UIScreen.main.bounds.width / 3 * 2)
+            make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
     }
     

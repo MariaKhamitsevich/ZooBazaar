@@ -61,7 +61,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(8)
             make.leading.equalToSuperview().offset(2)
             make.bottom.equalToSuperview().offset(-8)
-            make.height.equalTo(110)
+            make.height.equalTo(102)
             make.width.equalTo(60)
         }
         self.productNameLabel.snp.updateConstraints { make in

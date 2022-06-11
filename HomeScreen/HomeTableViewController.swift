@@ -17,6 +17,7 @@ class HomeTableViewController: UITableViewController {
         tableView.rowHeight = 220
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
         tableView.register(HomeScreenTableViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
     }
 

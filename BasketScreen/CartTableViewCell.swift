@@ -60,7 +60,7 @@ class CartTableViewCell: UITableViewCell {
     private lazy var amountStack: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [amountName, amountManagerStack])
         stack.axis = .vertical
-        stack.spacing = 8
+        stack.spacing = 4
         stack.alignment = .center
         
         return stack
@@ -88,6 +88,12 @@ class CartTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrowtriangle.backward.fill"), for: .normal)
         button.tintColor = ColorsManager.zbzbTextColor
+        button.imageView?.snp.updateConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(24)
+        }
+        button.clipsToBounds = true
+        
         
         return button
     }()
@@ -96,6 +102,10 @@ class CartTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
         button.tintColor = ColorsManager.zbzbTextColor
+        button.imageView?.snp.updateConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(24)
+        }
         
         return button
     }()
@@ -104,7 +114,7 @@ class CartTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = " "
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         label.textColor = ColorsManager.zbzbTextColor
         
         return label
@@ -138,7 +148,7 @@ class CartTableViewCell: UITableViewCell {
     func updateValue(product: Product, indexPath: IndexPath) {
         productName.text = product.name
         productImage.image = product.image
-        productPrice.text = product.priceForKg
+        productPrice.text = "Цена: " + String(product.totalCost) + " BYN"
         currentProduct = product
         amount.text = String(product.productAmount)
 
@@ -195,8 +205,8 @@ class CartTableViewCell: UITableViewCell {
             make.bottom.equalTo(contentView.safeAreaLayoutGuide.snp.bottom).offset(-4)
         }
         self.amountStack.snp.updateConstraints { make in
-            make.top.equalTo(productName.snp.bottom).offset(24)
             make.centerX.equalTo(productName.snp.centerX)
+            make.bottom.equalTo(productPrice.snp.top).offset(-4)
         }
         self.amount.snp.updateConstraints { make in
             make.width.equalTo(24)

@@ -86,5 +86,15 @@ class CartManager {
             }
         }
     }
+    
+    func countTotalPrice() -> Double {
+        var totalPrice = 0.0
+        
+        for product in cartProducts {
+            totalPrice += product.totalCost
+        }
+        
+        return totalPrice
+    }
 }
 

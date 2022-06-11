@@ -9,6 +9,7 @@ import UIKit
 class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     let cartManager = CartManager.shared
+    var updateTotalCost: (() -> Void)?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartManager.productCount()
@@ -26,6 +27,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
         cell.callBack = {
             if self.cartManager.productCount() == 1 {
                 tableView.reloadData()
+                self.updateTotalCost?()
             } else {
                 tableView.beginUpdates()
                 tableView.deleteRows(at: [indexPath], with: .bottom)
@@ -33,17 +35,20 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                     tableView.reloadData()
                 }
+                self.updateTotalCost?()
             }
         }
         
         cell.reloadCell = {
-                    tableView.beginUpdates()
-                    tableView.reloadRows(at: [indexPath], with: .none)
-                    tableView.endUpdates()
-                }
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPath], with: .none)
+            tableView.endUpdates()
+            self.updateTotalCost?()
+        }
         
         cell.reloadTable = {
             tableView.reloadData()
+            self.updateTotalCost?()
         }
         
         return cell
@@ -54,6 +59,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
 
 class CartViewController: UIViewController {
     
+    let cartManager = CartManager.shared
     var cartTableDelegate = CartTableViewSettings()
     private var cartView: CartView {
         view as! CartView
@@ -71,12 +77,18 @@ class CartViewController: UIViewController {
         cartView.cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: "CartTableViewCell")
         cartView.cartTable.separatorStyle = .singleLine
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
+        cartTableDelegate.updateTotalCost = updateTotalCost
         navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cartView.cartTable.reloadData()
+        cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
+    }
+    
+    private func updateTotalCost() {
+        cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
     }
 }
 

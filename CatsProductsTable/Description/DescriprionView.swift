@@ -22,7 +22,25 @@ class DescriprionView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 2
         label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 22))()
+        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 26))()
+        
+        return label
+    }()
+    
+    private lazy var productId: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = ColorsManager.zbzbTextColor
+        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 16))()
+        
+        return label
+    }()
+    
+    private lazy var productPrice: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
+        label.textColor = ColorsManager.zbzbTextColor
+        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 16))()
         
         return label
     }()
@@ -58,6 +76,8 @@ class DescriprionView: UIView {
         
         addSubview(productImage)
         addSubview(productName)
+        addSubview(productId)
+        addSubview(productPrice)
         addSubview(productDescription)
         addSubview(addToCartButton)
 
@@ -73,21 +93,33 @@ class DescriprionView: UIView {
     
     func update(product: Product) {
         self.productName.text = product.name
+        self.productId.text = "Артикул: " + product.productID
+        self.productPrice.text = product.priceForKg
         self.productImage.image = product.image
         self.productDescription.text = product.description
     }
     
     private func setAllConstraints() {
         self.productImage.snp.updateConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(72)
-            make.leading.equalTo(self.snp.leading).offset(4)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(112)
+            make.leading.equalTo(self.snp.leading).offset(8)
             make.height.equalTo(UIScreen.main.bounds.height / 3)
             make.width.equalTo(UIScreen.main.bounds.width / 2.5)
         }
         self.productName.snp.updateConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(4)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.bottom.equalTo(productImage.snp.top)
             make.leading.equalTo(self.snp.leading).offset(8)
+            make.trailing.equalTo(self.snp.trailing).offset(-8)
+        }
+        self.productId.snp.updateConstraints { make in
+            make.top.equalTo(productName.snp.bottom).offset(16)
+            make.leading.equalTo(productImage.snp.trailing).offset(8)
+            make.trailing.equalTo(self.snp.trailing).offset(-8)
+        }
+        self.productPrice.snp.updateConstraints { make in
+            make.top.equalTo(productId.snp.bottom).offset(16)
+            make.leading.equalTo(productImage.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
         }
         self.productDescription.snp.updateConstraints { make in
@@ -99,8 +131,8 @@ class DescriprionView: UIView {
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
-            make.height.equalTo(32)
-            make.width.equalTo(240)
+            make.width.equalTo(UIScreen.main.bounds.width / 4 * 3)
+            make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
     }
     

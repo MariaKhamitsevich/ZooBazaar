@@ -26,7 +26,7 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         
         let flow = UICollectionViewFlowLayout()
         flow.scrollDirection = .horizontal
-        flow.minimumInteritemSpacing = 2
+        flow.minimumInteritemSpacing = 1
         flow.sectionInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: flow)
         view.backgroundColor = ColorsManager.zbzbBackgroundColor
@@ -55,7 +55,7 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch numberOfSectionInTable {
         case 0:
-        return .init(width: UIScreen.main.bounds.width / 2 - 8, height: 210)
+        return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 210)
         default:
             return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 150)
         }

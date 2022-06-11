@@ -31,12 +31,15 @@ struct Product {
     let name: String
     let description: String
     let image: UIImage!
-    let price: String
+    let price: Double
     var isPopular: Bool
     var priceForKg: String {
         get {
             "\(price) рублей за кг"
         }
+    }
+    var totalCost: Double {
+        price * Double(productAmount)
     }
     
     let productID: String

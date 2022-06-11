@@ -40,7 +40,7 @@ struct BackendObtainer {
             name: brandProduct.productName,
             description: brandProduct.productDescription,
             image: brandProduct.productImage,
-            price: String(brandProduct.productPrice),
+            price: brandProduct.productPrice,
             isPopular: brandProduct.isPopular,
             productID: String(brandProduct.productID))
         
