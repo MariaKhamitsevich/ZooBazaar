@@ -49,6 +49,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
+        textField.textContentType = .emailAddress
 //        textField.enablesReturnKeyAutomatically = true
         
         return textField
@@ -61,6 +62,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
+        textField.textContentType = .password
         textField.isSecureTextEntry = true
         
         return textField
@@ -89,6 +91,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.tag = 0
+       textField.textContentType = .nickname
         
         return textField
     }()
@@ -101,6 +104,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.tag = 1
+       textField.textContentType = .emailAddress
         
         return textField
     }()
@@ -112,6 +116,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
+        textField.textContentType = .password
         textField.isSecureTextEntry = true
 
         
@@ -125,6 +130,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
+        textField.textContentType = .password
         textField.isSecureTextEntry = true
 
         
@@ -162,8 +168,11 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }()
     
     
-//    var name = ""
-//    var email = ""
+    var name = ""
+    var email = ""
+    private let regexForPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"
+    private let regexForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+//    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{6,}$"
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -192,23 +201,32 @@ class RegistrationView: UIView, UITextFieldDelegate {
     private func addAllTargets() {
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        nameTextField.delegate = self
+        emailForRegistrationTextField.delegate = self
+        passwordForRegistrationTextField.delegate = self
+        confirmPasswordTextField.delegate = self
         
+        //Added target on return button
         registrationStack.arrangedSubviews.forEach( { subview in
             if let subview = subview as? UITextField {
                 subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
             }
         })
-        nameTextField.addTarget(self, action: #selector(setName(_:)), for: .editingChanged)
-        emailForRegistrationTextField.addTarget(self, action: #selector(setEmail(_:)), for: .editingChanged)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(startEditing), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         emailPasswordStack.arrangedSubviews.forEach( { subview in
             if let subview = subview as? UITextField {
                 subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
             }
         })
         
+        //Save data for email and name
+        nameTextField.addTarget(self, action: #selector(setName(_:)), for: .editingChanged)
+        emailForRegistrationTextField.addTarget(self, action: #selector(setEmail(_:)), for: .editingChanged)
+        
+        
+        //Choose textField and change it's placeholder
+        NotificationCenter.default.addObserver(self, selector: #selector(startEditing), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        //Hide textFields by tap of segmentedControl
         registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
     }
 
@@ -273,19 +291,17 @@ class RegistrationView: UIView, UITextFieldDelegate {
     }
     
     @objc private func setName(_ sender: UITextField) {
-        //        if let text = sender.text {
-        //            self.name = text
-        //        }
-        UserDefaults.standard.set(sender.text, forKey: "UserName")
+        if let text = sender.text {
+            self.name = text
+        }
     }
     @objc private func setEmail(_ sender: UITextField) {
-        //        if let text = sender.text {
-        //            self.email = text
-        //        }
-        UserDefaults.standard.set(sender.text, forKey: "UserEmail")
+        if let text = sender.text {
+            self.email = text
+        }
     }
-   
-//   MARK: Constraints
+    
+    //   MARK: Constraints
     private func setAllConstraints() {
         self.logoImageView.snp.updateConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
@@ -333,4 +349,55 @@ class RegistrationView: UIView, UITextFieldDelegate {
         }
     }
     
+}
+
+extension RegistrationView {
+    
+    private func checkValidation(textField: UITextField) {
+        var regex: String = ""
+        switch textField.textContentType {
+        case .emailAddress?: regex = regexForEmail
+        case .password?: regex = regexForPassword
+        default: return
+        }
+            
+        if let text = textField.text {
+            if text.matches(regex) {
+            confirmButton.isUserInteractionEnabled = true
+            registrationButton.isUserInteractionEnabled = true
+            } else {
+                confirmButton.isUserInteractionEnabled = false
+                registrationButton.isUserInteractionEnabled = false
+            }
+        }
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = (textField.text ?? "") + string
+        let res: String
+        
+        if range.length == 1 {
+            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+            res = String(text[text.startIndex..<end])
+        } else {
+            res = text
+        }
+        
+        checkValidation(textField: textField)
+        textField.text = res
+        return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+
+extension String {
+    func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
 }

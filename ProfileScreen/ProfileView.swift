@@ -13,7 +13,7 @@ protocol ProfileDataSettable: AnyObject {
     func setName(name: String)
 }
 
-class ProfileView: UIView {
+class ProfileView: UIView, ProfileDataSettable {
     
     private lazy var profileLabel: UILabel = {
         let label = UILabel()
@@ -102,13 +102,13 @@ class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func setEmail(email: String) {
-//            emailLabel.text = email
-//    }
-//
-//    func setName(name: String) {
-//            nameLabel.text = name
-//    }
+    func setEmail(email: String) {
+            emailLabel.text = email
+    }
+
+    func setName(name: String) {
+            nameLabel.text = name
+    }
     
 //  MARK: Constraints
     private func setAllConstraints() {
