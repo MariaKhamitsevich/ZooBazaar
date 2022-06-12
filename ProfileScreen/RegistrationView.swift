@@ -41,10 +41,11 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return stack
     }()
     
-    private lazy var emailTextField: UITextField = {
+    private(set) lazy var emailTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
@@ -54,7 +55,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         
         return textField
     }()
-    private lazy var passwordTextField: UITextField = {
+    
+    private(set) lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
@@ -82,33 +84,37 @@ class RegistrationView: UIView, UITextFieldDelegate {
         
         return stack
     }()
-   private lazy var nameTextField: UITextField = {
+    
+    private(set) lazy var nameTextField: UITextField = {
         let textField = UITextField()
-       textField.attributedPlaceholder = NSAttributedString(string: " Имя", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+        textField.attributedPlaceholder = NSAttributedString(string: " Имя", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .alphabet
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.tag = 0
-       textField.textContentType = .nickname
+        textField.textContentType = .nickname
         
         return textField
     }()
-   private lazy var emailForRegistrationTextField: UITextField = {
+    
+    private(set) lazy var emailForRegistrationTextField: UITextField = {
         let textField = UITextField()
-       textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+        textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .emailAddress
+        textField.autocapitalizationType = .none
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.tag = 1
-       textField.textContentType = .emailAddress
+        textField.textContentType = .emailAddress
         
         return textField
     }()
-    private lazy var passwordForRegistrationTextField: UITextField = {
+    
+    private(set) lazy var passwordForRegistrationTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
@@ -118,10 +124,11 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true
-
+        
         
         return textField
     }()
+    
     private lazy var confirmPasswordTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Подтвердите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
@@ -132,7 +139,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true
-
+        
         
         return textField
     }()
@@ -172,7 +179,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
     var email = ""
     private let regexForPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"
     private let regexForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-//    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{6,}$"
+    //    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{6,}$"
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -186,7 +193,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         addSubview(rememberLabel)
         addSubview(registrationButton)
         
- 
+        
         
         setAllConstraints()
         addAllTargets()

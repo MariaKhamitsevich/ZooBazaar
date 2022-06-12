@@ -47,6 +47,7 @@
 		4CED644228187D290052A2C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CED644028187D290052A2C2 /* LaunchScreen.storyboard */; };
 		4CED644A28187E5E0052A2C2 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED644928187E5E0052A2C2 /* HomeScreenViewController.swift */; };
 		4CED644C28187E7F0052A2C2 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED644B28187E7F0052A2C2 /* HomeScreenView.swift */; };
+		4CFEE0752855FCE800DE7EEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CFEE0742855FCE800DE7EEF /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		4CED644328187D290052A2C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4CED644928187E5E0052A2C2 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		4CED644B28187E7F0052A2C2 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		4CFEE0742855FCE800DE7EEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9DD676816D64993129A1D5D7 /* Pods_ZooBazaar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZooBazaar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -231,6 +233,7 @@
 				4CED643E28187D290052A2C2 /* Assets.xcassets */,
 				4CED644028187D290052A2C2 /* LaunchScreen.storyboard */,
 				4CED644328187D290052A2C2 /* Info.plist */,
+				4CFEE0742855FCE800DE7EEF /* GoogleService-Info.plist */,
 				4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */,
 				4C5457AC2822CC8D0043205D /* ColorsManager.swift */,
 				4C4A3F4028390164005C5F8E /* SomeViewController.swift */,
@@ -324,6 +327,7 @@
 			files = (
 				4CED644228187D290052A2C2 /* LaunchScreen.storyboard in Resources */,
 				4CED643F28187D290052A2C2 /* Assets.xcassets in Resources */,
+				4CFEE0752855FCE800DE7EEF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

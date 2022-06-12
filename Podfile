@@ -7,4 +7,7 @@ target 'ZooBazaar' do
 
   # Pods for ZooBazaar
   pod 'SnapKit'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
 end
