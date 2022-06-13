@@ -24,8 +24,8 @@ class RegistrationView: UIView, UITextFieldDelegate {
         segmentedControl.insertSegment(withTitle: "Вход", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Регистрация", at: 1, animated: false)
         segmentedControl.selectedSegmentIndex = 0
-
-                
+        
+        
         return segmentedControl
     }()
     
@@ -51,7 +51,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.textContentType = .emailAddress
-//        textField.enablesReturnKeyAutomatically = true
+        //        textField.enablesReturnKeyAutomatically = true
         
         return textField
     }()
@@ -70,13 +70,13 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return textField
     }()
     
-    private lazy var registrationStack: UIStackView = {
+    private(set) lazy var registrationStack: UIStackView = {
         let stack = UIStackView()
         stack.addArrangedSubview(nameTextField)
         stack.addArrangedSubview(emailForRegistrationTextField)
         stack.addArrangedSubview(passwordForRegistrationTextField)
         stack.addArrangedSubview(confirmPasswordTextField)
-     
+        
         stack.axis = .vertical
         stack.spacing = 20
         
@@ -118,6 +118,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
+        textField.autocapitalizationType = .none
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
@@ -133,6 +134,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: " Подтвердите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
         textField.keyboardType = .numbersAndPunctuation
+        textField.autocapitalizationType = .none
         textField.backgroundColor = .white
         textField.textColor = ColorsManager.zbzbTextColor
         textField.layer.cornerRadius = 4
@@ -149,6 +151,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         button.backgroundColor = ColorsManager.zbzbTextColor
         button.setTitle("Вход", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor.gray, for: .disabled)
         button.layer.cornerRadius = 8
         
         return button
@@ -236,7 +239,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         //Hide textFields by tap of segmentedControl
         registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
     }
-
+    
     @objc func startEditing() {
         
         let attributes = [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5),
@@ -257,7 +260,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         setupSubviewsPlaceholder(for: emailPasswordStack)
         setupSubviewsPlaceholder(for: registrationStack)
     }
-                                                    
+    
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -360,41 +363,88 @@ class RegistrationView: UIView, UITextFieldDelegate {
 
 extension RegistrationView {
     
-    private func checkValidation(textField: UITextField) {
+    func checkValidation(stack: UIStackView) {
+        
         var regex: String = ""
-        switch textField.textContentType {
-        case .emailAddress?: regex = regexForEmail
-        case .password?: regex = regexForPassword
-        default: return
-        }
-            
-        if let text = textField.text {
-            if text.matches(regex) {
-            confirmButton.isUserInteractionEnabled = true
-            registrationButton.isUserInteractionEnabled = true
-            } else {
-                confirmButton.isUserInteractionEnabled = false
-                registrationButton.isUserInteractionEnabled = false
+        var massage = ""
+        let titleAlertRegistration = "Ошибка регистрации"
+        
+        
+        stack.arrangedSubviews.forEach{ subvew in
+            if let textField = subvew as? UITextField{
+                
+                switch textField.textContentType {
+                case .emailAddress?:
+                    regex = regexForEmail
+                case .password?:
+                    regex = regexForPassword
+                default:
+                    return
+                }
+                
+                if let text = textField.text {
+                    
+                    switch textField {
+                    case nameTextField:
+                        if textField.text == nil || text == "" {
+                            massage = "Введите имя пользователя"
+                        }
+                        fallthrough
+                    case emailForRegistrationTextField:
+                        if !text.matches(regex) {
+                            massage += "\nПроверьте введенный email"
+                        }
+                        fallthrough
+                    case passwordForRegistrationTextField:
+                        if !text.matches(regex) {
+                            massage += "\nПроверьте введенный пароль"
+                        }
+                        fallthrough
+                    case confirmPasswordTextField:
+                        if text != passwordForRegistrationTextField.text {
+                            massage += "\nНеверный пароль при подтверждении"
+                        }
+                    default :
+                        return
+                    }
+                }
             }
+            getAlert(title: titleAlertRegistration, massage: massage, controller: parentViewController)
         }
+        //        if let text = textField.text {
+        //            if text.matches(regex) {
+        //            confirmButton.isUserInteractionEnabled = true
+        //            registrationButton.isUserInteractionEnabled = true
+        //            } else {
+        ////                confirmButton.isEnabled = false
+        //                confirmButton.isUserInteractionEnabled = false
+        //                registrationButton.isUserInteractionEnabled = false
+        //            }
+        //        }
         
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let text = (textField.text ?? "") + string
-        let res: String
-        
-        if range.length == 1 {
-            let end = text.index(text.startIndex, offsetBy: text.count - 1)
-            res = String(text[text.startIndex..<end])
-        } else {
-            res = text
-        }
-        
-        checkValidation(textField: textField)
-        textField.text = res
-        return false
+    private func getAlert(title: String?, massage: String?, controller: UIViewController?) {
+        let alert = UIAlertController(title: title, message: massage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        controller?.present(alert, animated: true, completion: nil)
     }
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let text = (textField.text ?? "") + string
+//        let res: String
+//
+//        if range.length == 1 {
+//            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+//            res = String(text[text.startIndex..<end])
+//        } else {
+//            res = text
+//        }
+//
+//        checkValidation(textField: textField)
+//        textField.text = res
+//        return false
+//    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()

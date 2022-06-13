@@ -65,6 +65,7 @@ class RegistrationViewController: UIViewController {
                 }
             }
         }
+        registrationView.checkValidation(stack: registrationView.registrationStack)
         
     }
     

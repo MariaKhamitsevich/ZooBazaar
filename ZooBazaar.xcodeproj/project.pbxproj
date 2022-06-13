@@ -18,6 +18,7 @@
 		4C21A8782829555400C47623 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A8772829555400C47623 /* MapsViewController.swift */; };
 		4C21A87A2829556500C47623 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A8792829556500C47623 /* MapsView.swift */; };
 		4C21A87C282BAF0400C47623 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A87B282BAF0400C47623 /* Pets.swift */; };
+		4C30831D28573AB800D4EE8F /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30831C28573AB800D4EE8F /* UIView.swift */; };
 		4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */; };
 		4C37E0BD281F10EA00D393F5 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */; };
 		4C4A3F4128390164005C5F8E /* SomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F4028390164005C5F8E /* SomeViewController.swift */; };
@@ -63,6 +64,7 @@
 		4C21A8772829555400C47623 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		4C21A8792829556500C47623 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
 		4C21A87B282BAF0400C47623 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
+		4C30831C28573AB800D4EE8F /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
 		4C4A3F4028390164005C5F8E /* SomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				4C039B552832D48B001EEDB6 /* UIFont.swift */,
 				4CC3D999284350AA00E7DE51 /* UIButton .swift */,
+				4C30831C28573AB800D4EE8F /* UIView.swift */,
 				4C870F6028520D7100A3677D /* UITextField.swift */,
 			);
 			name = Extentions;
@@ -412,6 +415,7 @@
 				4C54F28B283E9FEA0056E9B7 /* CartManager.swift in Sources */,
 				4C21A87028290EFF00C47623 /* RegistrationViewController.swift in Sources */,
 				4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */,
+				4C30831D28573AB800D4EE8F /* UIView.swift in Sources */,
 				4C21A87C282BAF0400C47623 /* Pets.swift in Sources */,
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
 				4C6F91B1284CF4E400B00B94 /* PopularCollectionViewCell.swift in Sources */,
