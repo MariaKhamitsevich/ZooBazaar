@@ -35,7 +35,7 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(nameLabel)
         contentView.addSubview(productImage)
-        contentView.backgroundColor = ColorsManager.zbzbBackgroundColor
+        contentView.backgroundColor = .clear
         setAllConstraints()
     }
     

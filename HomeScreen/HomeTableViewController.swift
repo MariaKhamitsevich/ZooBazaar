@@ -13,7 +13,7 @@ class HomeTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = ColorsManager.zbzbBackgroundColor
+        tableView.backgroundColor = .clear
         tableView.rowHeight = 220
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
@@ -41,6 +41,7 @@ class HomeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeScreenTableViewCell", for: indexPath) as! HomeScreenTableViewCell
         cell.numberOfSectionInTable = indexPath.section
         cell.controllerDelegate = self
+        cell.backgroundColor = .clear
         return cell
     }
 

@@ -30,7 +30,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     private lazy var productPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.italicSystemFont(ofSize: 11)
+        label.font = UIFont.italicSystemFont(ofSize: 12)
         label.textColor = ColorsManager.zbzbTextColor
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +43,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(productImageView)
         contentView.addSubview(productNameLabel)
         contentView.addSubview(productPriceLabel)
+        contentView.backgroundColor = .clear
         
         setAllConstraints()
     }

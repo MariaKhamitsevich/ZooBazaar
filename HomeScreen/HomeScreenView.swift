@@ -4,6 +4,15 @@ import SnapKit
 
 class HomeScreenView: UIView {
     
+    private lazy var logoImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "launchScreen")
+        image.alpha = 0.3
+        
+        
+        return image
+    }()
+    
     private lazy var wellcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "Добро пожаловать в ZooBazaar!"
@@ -20,6 +29,7 @@ class HomeScreenView: UIView {
         super.init(frame: frame)
         self.backgroundColor = ColorsManager.zbzbBackgroundColor
         
+        addSubview(logoImageView)
         addSubview(wellcomeLabel)
         setAllConstrains()
     }
@@ -39,6 +49,12 @@ class HomeScreenView: UIView {
     }
     
     private func setAllConstrains() {
+        self.logoImageView.snp.updateConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        }
         self.wellcomeLabel.snp.updateConstraints { make in
             make.topMargin.equalToSuperview().offset(40)
             make.leading.equalToSuperview().offset(24)

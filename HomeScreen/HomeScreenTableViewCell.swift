@@ -29,7 +29,7 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         flow.minimumInteritemSpacing = 1
         flow.sectionInset = .init(top: 0, left: 0, bottom: 20, right: 0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: flow)
-        view.backgroundColor = ColorsManager.zbzbBackgroundColor
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         view.delegate = self
         view.dataSource = self
@@ -44,8 +44,8 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
     
     private lazy var dots: UIPageControl = {
         let dots = UIPageControl()
-        dots.backgroundColor = ColorsManager.zbzbBackgroundColor
-        dots.pageIndicatorTintColor = .systemGray5
+        dots.backgroundColor = .clear
+        dots.pageIndicatorTintColor = ColorsManager.unselectedColor
         dots.currentPageIndicatorTintColor = ColorsManager.zbzbTextColor
 //        dots.numberOfPages = 2
        
@@ -58,7 +58,7 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
         contentView.addSubview(dots)
-        contentView.backgroundColor = ColorsManager.zbzbBackgroundColor
+        contentView.backgroundColor = .clear
         
         setAllConstraints()
     }
