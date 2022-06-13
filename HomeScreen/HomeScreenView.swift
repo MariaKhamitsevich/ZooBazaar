@@ -34,7 +34,7 @@ class HomeScreenView: UIView {
             make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
             make.leadingMargin.equalTo(self.layoutMarginsGuide.snp.leading).offset(8)
             make.trailingMargin.equalTo(self.layoutMarginsGuide.snp.trailing).offset(-8)
-            make.bottom.equalTo(self.snp.bottom).offset(-8)
+            make.bottom.equalTo(self.layoutMarginsGuide.snp.bottom).offset(100)
         }
     }
     

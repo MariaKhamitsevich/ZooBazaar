@@ -37,8 +37,10 @@ class RegistrationViewController: UIViewController {
         let controller = ProfileViewController()
         controller.profileView.setEmail(email: email)
         controller.profileView.setName(name: name)
+        if registrationView.passwordForRegistrationTextField.text == registrationView.confirmPasswordTextField.text && registrationView.nameTextField.text != nil {
         self.navigationController?.pushViewController(controller, animated: true)
         self.navigationController?.viewControllers.removeFirst()
+        }
     }
     
     @objc private func registrateProfile(_ sender: UIButton) {
@@ -48,7 +50,7 @@ class RegistrationViewController: UIViewController {
         else {
             return
         }
-        
+        if !registrationView.checkValidation(stack: registrationView.registrationStack) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
             if let error = error {
@@ -65,7 +67,10 @@ class RegistrationViewController: UIViewController {
                 }
             }
         }
-        registrationView.checkValidation(stack: registrationView.registrationStack)
+        } else {
+            registrationView.checkValidation(stack: registrationView.registrationStack)
+        }
+        
         
     }
     
@@ -75,6 +80,7 @@ class RegistrationViewController: UIViewController {
         else {
             return
         }
+        if registrationView.checkValidation(stack: registrationView.emailPasswordStack) {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
           guard let self = self else { return }
             if let error = error {
@@ -83,5 +89,8 @@ class RegistrationViewController: UIViewController {
                 self.goToProfile(email: authResult.user.email ?? "", name: authResult.user.displayName ?? "")
             }
         }
+        } else {
+            registrationView.checkValidation(stack: registrationView.emailPasswordStack)
+    }
     }
 }

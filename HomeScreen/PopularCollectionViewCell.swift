@@ -32,6 +32,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.italicSystemFont(ofSize: 11)
         label.textColor = ColorsManager.zbzbTextColor
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -58,11 +59,11 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     private func setAllConstraints() {
         self.productImageView.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(8)
+            make.top.equalTo(contentView.layoutMarginsGuide.snp.topMargin).offset(16)
             make.leading.equalToSuperview().offset(2)
-            make.bottom.equalToSuperview().offset(-8)
-            make.height.equalTo(102)
-            make.width.equalTo(60)
+            make.bottom.equalTo(contentView.layoutMarginsGuide.snp.bottom)
+//            make.bottom.equalToSuperview().offset(-16)
+            make.width.equalTo(80)
         }
         self.productNameLabel.snp.updateConstraints { make in
             make.top.equalTo(productImageView.snp.top)

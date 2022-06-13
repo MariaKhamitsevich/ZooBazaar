@@ -55,10 +55,11 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
             make.bottom.equalTo(contentView.snp.bottomMargin).offset(-4)
         }
         self.productImage.snp.updateConstraints { make in
-            make.top.equalTo(contentView.snp.topMargin).offset(4)
+            make.top.equalTo(contentView.layoutMarginsGuide.snp.topMargin).offset(16)
             make.leading.equalTo(contentView.snp.leading)
             make.trailing.equalTo(contentView.snp.trailingMargin)
-            make.height.equalTo(154)
+            make.bottom.equalTo(contentView.layoutMarginsGuide.snp.bottom)
+//            make.height.equalTo(154)
             make.width.equalTo(UIScreen.main.bounds.width / 2 - 20)
         }
     }

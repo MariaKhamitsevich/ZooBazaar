@@ -38,12 +38,27 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         view.register(CatalogHomeScreenViewCell.self, forCellWithReuseIdentifier: "CatalogHomeScreenViewCell")
         view.register(PopularCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCollectionViewCell")
         
+        
         return view
+    }()
+    
+    private lazy var dots: UIPageControl = {
+        let dots = UIPageControl()
+        dots.backgroundColor = ColorsManager.zbzbBackgroundColor
+        dots.pageIndicatorTintColor = .systemGray5
+        dots.currentPageIndicatorTintColor = ColorsManager.zbzbTextColor
+//        dots.numberOfPages = 2
+       
+     
+        
+        return dots
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
+        contentView.addSubview(dots)
+        contentView.backgroundColor = ColorsManager.zbzbBackgroundColor
         
         setAllConstraints()
     }
@@ -52,22 +67,32 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         fatalError("init(coder:) has not been implemented")
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dots.currentPage = Int(
+            (collectionView.contentOffset.x / collectionView.frame.width + 0.1)
+                .rounded(.toNearestOrAwayFromZero)
+            )
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch numberOfSectionInTable {
         case 0:
-        return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 210)
+        return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 200)
         default:
-            return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 150)
+            return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 200)
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch numberOfSectionInTable {
         case 0:
-            return arrayOfProducts.count
+            let count = arrayOfProducts.count
+            dots.numberOfPages = Int(round(Double(count) / 2))
+            return count
         default:
-            
-            return allPets.flatMap { $0.getPopularProducts() }.count
+            let count = allPets.flatMap { $0.getPopularProducts() }.count
+            dots.numberOfPages = Int(round(Double(count) / 2))
+            return count
         }
     }
     
@@ -118,6 +143,13 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
+//            make.bottom.equalToSuperview()
+        }
+        self.dots.snp.updateConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+//            make.centerX.equalToSuperview()
+            make.top.equalTo(collectionView.layoutMarginsGuide.snp.bottom)
             make.bottom.equalToSuperview()
         }
     }

@@ -41,6 +41,7 @@ class ProductsTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+//        tabBarController?.tabBar.backgroundColor = ColorsManager.zbzbBackgroundColor
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backItem?.title = "Назад в каталог"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor

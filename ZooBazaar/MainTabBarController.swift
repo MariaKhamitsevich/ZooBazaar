@@ -18,6 +18,7 @@ class MainTabBarController: UITabBarController {
                                 UINavigationController(rootViewController: RegistrationViewController())]
         
         self.tabBar.barTintColor = ColorsManager.zbzbBackgroundColor
+        self.tabBar.backgroundColor = ColorsManager.zbzbBackgroundColor
         self.tabBar.tintColor = ColorsManager.zbzbTextColor
         self.tabBar.unselectedItemTintColor = ColorsManager.unselectedColor
         self.tabBar.items![0].image = UIImage(systemName: "house.fill")

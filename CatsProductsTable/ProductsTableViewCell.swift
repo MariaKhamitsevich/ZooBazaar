@@ -99,7 +99,7 @@ class ProductsTableViewCell: UITableViewCell {
             make.top.equalTo(contentView.snp.topMargin).offset(4)
             make.trailing.equalTo(contentView.snp.trailingMargin).offset(-4)
             make.bottom.lessThanOrEqualTo(contentView.snp.bottom).offset(-12)
-            make.height.equalTo(170)
+            make.height.equalTo(160)
             make.width.equalTo(90)
         }
         self.productStackView.snp.updateConstraints { make in
