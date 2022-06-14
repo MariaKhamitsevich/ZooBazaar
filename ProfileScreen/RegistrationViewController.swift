@@ -50,11 +50,16 @@ class RegistrationViewController: UIViewController {
         else {
             return
         }
-        if !registrationView.checkValidation(stack: registrationView.registrationStack) {
+        if registrationView.checkValidation(stack: registrationView.registrationStack) {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
             if let error = error {
-                print("Registration error: \(error)")
+                if error.localizedDescription == "The email address is already in use by another account." {
+                    self.registrationView.getAlert(title: "Ошибка", message: "Пользователь с таким email уже существует", controller: self)
+                } else
+                { self.registrationView.getAlert(title: "Ошибка", message: "Попробуйте позже", controller: self)
+                }
+                print("Registration error: \(error.localizedDescription)")
             } else if let authResult = authResult {
                 let userChange = authResult.user.createProfileChangeRequest()
                 userChange.displayName = name
@@ -84,7 +89,8 @@ class RegistrationViewController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
           guard let self = self else { return }
             if let error = error {
-                print("Registration error: \(error)")
+                self.registrationView.getAlert(title: "Ошибка входа", message: "Проверьте имя пользователя или пароль", controller: self, completion: ({ self.registrationView.emailTextField.becomeFirstResponder()}))
+                print("Registration error: \(error.localizedDescription)")
             } else if let authResult = authResult {
                 self.goToProfile(email: authResult.user.email ?? "", name: authResult.user.displayName ?? "")
             }
