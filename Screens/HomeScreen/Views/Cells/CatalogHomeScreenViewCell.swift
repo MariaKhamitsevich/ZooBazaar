@@ -28,8 +28,7 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
         
         return image
     }()
-    
-    var controller: UITableViewController?
+
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,15 +51,14 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
         self.nameLabel.snp.updateConstraints { make in
             make.top.equalTo(productImage.snp.bottomMargin).offset(4)
             make.centerX.equalTo(contentView.snp.centerXWithinMargins)
-            make.bottom.equalTo(contentView.snp.bottomMargin).offset(-4)
+            make.bottom.equalTo(contentView.layoutMarginsGuide.snp.bottom)
         }
         self.productImage.snp.updateConstraints { make in
-            make.top.equalTo(contentView.layoutMarginsGuide.snp.topMargin).offset(16)
+            make.centerY.equalToSuperview()
             make.leading.equalTo(contentView.snp.leading)
             make.trailing.equalTo(contentView.snp.trailingMargin)
-            make.bottom.equalTo(contentView.layoutMarginsGuide.snp.bottom)
-//            make.height.equalTo(154)
-            make.width.equalTo(UIScreen.main.bounds.width / 2 - 20)
+            make.height.equalTo(UIScreen.main.bounds.width / 2 - 54)
+            make.width.equalTo(UIScreen.main.bounds.width / 2 - 56)
         }
     }
 }

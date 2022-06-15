@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeScreenTableViewCell: UITableViewCell {
     
     var arrayOfProducts = [HomeScreenCellElements(name: "Кошки", image: UIImage(named: "cats products")),
                            HomeScreenCellElements(name: "Собаки", image: UIImage(named: "dogs")),
@@ -20,8 +20,11 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
     var allPets = [catsProvider, dogsProvider, rodentsProvider]
     
     weak var controllerDelegate: UIViewController?
+    
+    //Номер секции в таблице (передается в таблице в методе cellForRowAt)
     var numberOfSectionInTable: Int = 0
     
+    // MARK: CollectionView
     private lazy var collectionView: UICollectionView = {
         
         let flow = UICollectionViewFlowLayout()
@@ -38,7 +41,6 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         view.register(CatalogHomeScreenViewCell.self, forCellWithReuseIdentifier: "CatalogHomeScreenViewCell")
         view.register(PopularCollectionViewCell.self, forCellWithReuseIdentifier: "PopularCollectionViewCell")
         
-        
         return view
     }()
     
@@ -47,9 +49,6 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         dots.backgroundColor = .clear
         dots.pageIndicatorTintColor = ColorsManager.unselectedColor
         dots.currentPageIndicatorTintColor = ColorsManager.zbzbTextColor
-//        dots.numberOfPages = 2
-       
-     
         
         return dots
     }()
@@ -67,19 +66,39 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: Set all constraints
+    func setAllConstraints() {
+        self.collectionView.snp.updateConstraints { make in
+            make.top.equalTo(contentView.layoutMarginsGuide.snp.top)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        self.dots.snp.updateConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalTo(collectionView.layoutMarginsGuide.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+    }
+}
+
+
+//MARK: Extention
+extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dots.currentPage = Int(
             (collectionView.contentOffset.x / collectionView.frame.width + 0.1)
                 .rounded(.toNearestOrAwayFromZero)
-            )
+        )
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch numberOfSectionInTable {
         case 0:
-        return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 200)
+            return .init(width: UIScreen.main.bounds.width / 2 - 16, height: UIScreen.main.bounds.height / 3.5)
         default:
-            return .init(width: UIScreen.main.bounds.width / 2 - 16, height: 200)
+            return .init(width: UIScreen.main.bounds.width / 2 - 16, height: UIScreen.main.bounds.height / 3.4)
         }
     }
     
@@ -104,53 +123,32 @@ class HomeScreenTableViewCell: UITableViewCell, UICollectionViewDelegate, UIColl
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as! PopularCollectionViewCell
-            
             let popularProducts: [Product] = allPets.flatMap { $0.getPopularProducts()}
-            
             cell.updateValues(product: popularProducts[indexPath.row])
             return cell
         }
     }
     
-     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogHomeScreenViewCell", for: indexPath) as! CatalogHomeScreenViewCell
-         if numberOfSectionInTable == 0 {
-        switch indexPath.item {
-        case 0:
-            controllerDelegate?.navigationController?.pushViewController(cell.controller ?? ProductsTableViewController(pets: cats), animated: true)
-        case 1:
-            controllerDelegate?.navigationController?.pushViewController(cell.controller ?? ProductsTableViewController(pets: dogs), animated: true)
-        case 2:
-            controllerDelegate?.navigationController?.pushViewController(cell.controller ?? ProductsTableViewController(pets: rodents), animated: true)
-        default:
-            controllerDelegate?.navigationController?.pushViewController(cell.controller ?? ProductsTableViewController(pets: cats), animated: true)
-        }
-         } else {
-             let controller = DescroptionViewController()
-             let popularProducts: [Product] = allPets.flatMap { $0.getPopularProducts()}
-             controller.descriprionVeiw.update(product: popularProducts[indexPath.row])
-             controller.descriprionVeiw.currentProduct = popularProducts[indexPath.row]
-             controllerDelegate?.present(controller, animated: true)
-         }
-    }
-//    func update(collectionViewController: UICollectionViewController) {
-//        self.collectionView = collectionViewController.collectionView
-//        
-//    }
-    
-    func setAllConstraints() {
-        self.collectionView.snp.updateConstraints { make in
-            make.top.equalToSuperview()
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-//            make.bottom.equalToSuperview()
-        }
-        self.dots.snp.updateConstraints { make in
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-//            make.centerX.equalToSuperview()
-            make.top.equalTo(collectionView.layoutMarginsGuide.snp.bottom)
-            make.bottom.equalToSuperview()
+    //MARK: CollectionView didSelectItemAt
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if numberOfSectionInTable == 0 {
+            switch indexPath.item {
+            case 0:
+                controllerDelegate?.navigationController?.pushViewController(ProductsTableViewController(pets: cats), animated: true)
+            case 1:
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: dogs), animated: true)
+            case 2:
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: rodents), animated: true)
+            default:
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: cats), animated: true)
+            }
+        } else {
+            let controller = DescroptionViewController()
+            let popularProducts: [Product] = allPets.flatMap { $0.getPopularProducts()}
+            controller.descriprionVeiw.update(product: popularProducts[indexPath.row])
+            controller.descriprionVeiw.currentProduct = popularProducts[indexPath.row]
+            controllerDelegate?.present(controller, animated: true)
         }
     }
 }

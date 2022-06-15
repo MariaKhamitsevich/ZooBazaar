@@ -9,10 +9,6 @@ import UIKit
 import SnapKit
 
 class ProductsTableViewCell: UITableViewCell {
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        productDescription.numberOfLines = 4
-    }
     
     private lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
@@ -20,17 +16,18 @@ class ProductsTableViewCell: UITableViewCell {
                 
         return imageView
     }()
+    
     private lazy var productStackView: UIStackView = {
         let stack = UIStackView()
         stack.addArrangedSubview(productNameLabel)
         stack.addArrangedSubview(productDescription)
-        stack.addArrangedSubview(emptyView)
         stack.addArrangedSubview(productPriceLabel)
         stack.spacing = 4
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
+    
     private lazy var productNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorsManager.zbzbTextColor
@@ -62,13 +59,6 @@ class ProductsTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var emptyView: UIView = {
-        let view = UIView()
-        view.snp.updateConstraints { make in
-            make.height.greaterThanOrEqualTo(0)
-        }
-        return view
-    }()
   
     //MARK: Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

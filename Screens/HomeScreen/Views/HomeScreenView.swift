@@ -41,10 +41,10 @@ class HomeScreenView: UIView {
     func addTableConstraints(tableView: UITableView) {
         addSubview(tableView)
         tableView.snp.updateConstraints { make in
-            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
+            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin)
             make.leadingMargin.equalTo(self.layoutMarginsGuide.snp.leading).offset(8)
             make.trailingMargin.equalTo(self.layoutMarginsGuide.snp.trailing).offset(-8)
-            make.bottom.equalTo(self.layoutMarginsGuide.snp.bottom).offset(100)
+            make.bottom.equalTo(self.layoutMarginsGuide.snp.bottom).offset(90)
         }
     }
     
@@ -56,10 +56,10 @@ class HomeScreenView: UIView {
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
         }
         self.wellcomeLabel.snp.updateConstraints { make in
-            make.topMargin.equalToSuperview().offset(40)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(64)
+            make.height.equalTo(60)
         }
     }
 }

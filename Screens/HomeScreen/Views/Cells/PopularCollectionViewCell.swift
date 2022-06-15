@@ -13,6 +13,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
     private lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.contentMode = .scaleAspectFit
                 
         return imageView
     }()
@@ -60,20 +61,19 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     private func setAllConstraints() {
         self.productImageView.snp.updateConstraints { make in
-            make.top.equalTo(contentView.layoutMarginsGuide.snp.topMargin).offset(16)
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(2)
-            make.bottom.equalTo(contentView.layoutMarginsGuide.snp.bottom)
-//            make.bottom.equalToSuperview().offset(-16)
-            make.width.equalTo(80)
+            make.height.equalTo(UIScreen.main.bounds.width / 2 - 40)
+            make.width.equalTo((UIScreen.main.bounds.width / 2 - 24) / 2)
         }
         self.productNameLabel.snp.updateConstraints { make in
-            make.top.equalTo(productImageView.snp.top)
+            make.top.equalTo(productImageView.snp.top).offset(8)
             make.leading.equalTo(productImageView.snp.trailing).offset(2)
             make.trailing.equalToSuperview().offset(-2)
         }
         self.productPriceLabel.snp.updateConstraints { make in
             make.top.greaterThanOrEqualTo(productNameLabel.snp.bottom).offset(16)
-            make.bottom.equalTo(productImageView.snp.bottom)
+            make.bottom.equalTo(productImageView.snp.bottom).offset(-8)
             make.leading.equalTo(productNameLabel.snp.leading)
             make.trailing.equalTo(productNameLabel.snp.trailing)
         }
