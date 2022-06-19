@@ -45,7 +45,7 @@ class HomeScreenHeaders: UICollectionReusableView {
     
     private func setConstraints() {
         self.headerLabel.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(36)
+            make.top.equalToSuperview().offset(12)
             make.leading.equalToSuperview().offset(8)
             make.trailing.equalToSuperview()
             make.bottom.equalToSuperview()

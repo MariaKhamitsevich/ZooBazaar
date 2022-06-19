@@ -13,6 +13,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
     private lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.contentMode = .scaleAspectFit
                 
         return imageView
     }()
@@ -30,8 +31,9 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     private lazy var productPriceLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.italicSystemFont(ofSize: 11)
+        label.font = UIFont.italicSystemFont(ofSize: 12)
         label.textColor = ColorsManager.zbzbTextColor
+        label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false
         
         return label
@@ -42,6 +44,7 @@ class PopularCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(productImageView)
         contentView.addSubview(productNameLabel)
         contentView.addSubview(productPriceLabel)
+        contentView.backgroundColor = .clear
         
         setAllConstraints()
     }
@@ -58,20 +61,19 @@ class PopularCollectionViewCell: UICollectionViewCell {
     
     private func setAllConstraints() {
         self.productImageView.snp.updateConstraints { make in
-            make.top.equalToSuperview().offset(8)
+            make.centerY.equalToSuperview()
             make.leading.equalToSuperview().offset(2)
-            make.bottom.equalToSuperview().offset(-8)
-            make.height.equalTo(102)
-            make.width.equalTo(60)
+            make.height.equalTo(UIScreen.main.bounds.width / 2 - 40)
+            make.width.equalTo((UIScreen.main.bounds.width / 2 - 24) / 2)
         }
         self.productNameLabel.snp.updateConstraints { make in
-            make.top.equalTo(productImageView.snp.top)
+            make.top.equalTo(productImageView.snp.top).offset(8)
             make.leading.equalTo(productImageView.snp.trailing).offset(2)
             make.trailing.equalToSuperview().offset(-2)
         }
         self.productPriceLabel.snp.updateConstraints { make in
             make.top.greaterThanOrEqualTo(productNameLabel.snp.bottom).offset(16)
-            make.bottom.equalTo(productImageView.snp.bottom)
+            make.bottom.equalTo(productImageView.snp.bottom).offset(-8)
             make.leading.equalTo(productNameLabel.snp.leading)
             make.trailing.equalTo(productNameLabel.snp.trailing)
         }

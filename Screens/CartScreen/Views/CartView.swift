@@ -39,12 +39,23 @@ class CartView: UIView {
         return table
     }()
     
+    private(set) lazy var orderingButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = ColorsManager.zbzbTextColor
+        button.setTitle("Оформить заказ", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.layer.cornerRadius = 8
+        
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorsManager.zbzbBackgroundColor
         addSubview(logoImageView)
         addSubview(totalPriceLabel)
         addSubview(cartTable)
+        addSubview(orderingButton)
         
         setAllConstraints()
     }
@@ -70,6 +81,12 @@ class CartView: UIView {
             make.leading.equalTo(self.snp.leading).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
             make.height.equalTo(UIScreen.main.bounds.height / 3 * 2)
+        }
+        self.orderingButton.snp.updateConstraints { make in
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-24)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(UIScreen.main.bounds.width / 3 * 2)
+            make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
     }
 }

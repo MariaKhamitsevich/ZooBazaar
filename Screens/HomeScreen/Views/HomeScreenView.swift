@@ -4,6 +4,15 @@ import SnapKit
 
 class HomeScreenView: UIView {
     
+    private lazy var logoImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "launchScreen")
+        image.alpha = 0.3
+        
+        
+        return image
+    }()
+    
     private lazy var wellcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "Добро пожаловать в ZooBazaar!"
@@ -20,6 +29,7 @@ class HomeScreenView: UIView {
         super.init(frame: frame)
         self.backgroundColor = ColorsManager.zbzbBackgroundColor
         
+        addSubview(logoImageView)
         addSubview(wellcomeLabel)
         setAllConstrains()
     }
@@ -31,19 +41,25 @@ class HomeScreenView: UIView {
     func addTableConstraints(tableView: UITableView) {
         addSubview(tableView)
         tableView.snp.updateConstraints { make in
-            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin).offset(12)
+            make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin)
             make.leadingMargin.equalTo(self.layoutMarginsGuide.snp.leading).offset(8)
             make.trailingMargin.equalTo(self.layoutMarginsGuide.snp.trailing).offset(-8)
-            make.bottom.equalTo(self.snp.bottom).offset(-8)
+            make.bottom.equalTo(self.layoutMarginsGuide.snp.bottom).offset(90)
         }
     }
     
     private func setAllConstrains() {
+        self.logoImageView.snp.updateConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top)
+            make.trailing.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+        }
         self.wellcomeLabel.snp.updateConstraints { make in
-            make.topMargin.equalToSuperview().offset(40)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(64)
+            make.height.equalTo(60)
         }
     }
 }

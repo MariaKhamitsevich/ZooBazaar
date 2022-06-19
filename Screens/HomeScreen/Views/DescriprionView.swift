@@ -104,7 +104,7 @@ class DescriprionView: UIView {
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(112)
             make.leading.equalTo(self.snp.leading).offset(8)
             make.height.equalTo(UIScreen.main.bounds.height / 3)
-            make.width.equalTo(UIScreen.main.bounds.width / 2.5)
+            make.width.equalTo(UIScreen.main.bounds.height / 5.5)
         }
         self.productName.snp.updateConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
@@ -123,10 +123,11 @@ class DescriprionView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-8)
         }
         self.productDescription.snp.updateConstraints { make in
-            make.top.equalTo(productImage.snp.bottom)
+            make.top.equalTo(productImage.snp.bottom).offset(16)
             make.leading.equalTo(self.snp.leading).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
-            make.height.equalTo(UIScreen.main.bounds.height / 4)
+            make.bottom.lessThanOrEqualTo(addToCartButton.snp.top)
+//            make.height.equalTo(UIScreen.main.bounds.height / 4)
         }
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()

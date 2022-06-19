@@ -8,26 +8,26 @@
 import UIKit
 import SnapKit
 
-//extension UITextField{
-//
-//    var placeHolderColor: UIColor? {
-//        get {
-//            return self.placeHolderColor
-//        }
-//        set {
-//            self.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: newValue ?? self.placeHolderColor ?? ""])
-//        }
-//    }
-//
-//    var placeHolderSize: UIFont? {
-//        get {
-//            return self.placeHolderSize
-//        }
-//        set {
-//            self.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder! : "", attributes: [NSAttributedString.Key.font: newValue ?? self.placeHolderSize ?? ""])
-//        }
-//    }
-//}
+extension UITextField{
+
+    var placeHolderColor: UIColor? {
+        get {
+            return nil
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: newValue ?? self.placeHolderColor ?? ""])
+        }
+    }
+
+    var placeHolderSize: UIFont? {
+        get {
+            return nil
+        }
+        set {
+            self.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder! : "", attributes: [NSAttributedString.Key.font: newValue ?? self.placeHolderSize ?? ""])
+        }
+    }
+}
 
 
 class CustomTextField: UITextField {
