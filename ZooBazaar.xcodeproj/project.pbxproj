@@ -41,6 +41,7 @@
 		4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA88F932850F10400E81986 /* HomeTableViewController.swift */; };
 		4CB7374D285238A1008EC3C7 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7374C285238A1008EC3C7 /* Products.swift */; };
 		4CC3D99A284350AA00E7DE51 /* UIButton+Ex .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */; };
+		4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77C9D285F7ABF00C35344 /* String+Ex.swift */; };
 		4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643528187D250052A2C2 /* AppDelegate.swift */; };
 		4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643728187D250052A2C2 /* SceneDelegate.swift */; };
 		4CED643F28187D290052A2C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CED643E28187D290052A2C2 /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		4CA88F932850F10400E81986 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		4CB7374C285238A1008EC3C7 /* Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ex .swift"; sourceTree = "<group>"; };
+		4CE77C9D285F7ABF00C35344 /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		4CED643228187D250052A2C2 /* ZooBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CED643528187D250052A2C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CED643728187D250052A2C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */,
 				4C30831C28573AB800D4EE8F /* UIView+Ex.swift */,
 				4C870F6028520D7100A3677D /* UITextField+Ex.swift */,
+				4CE77C9D285F7ABF00C35344 /* String+Ex.swift */,
 			);
 			name = Extentions;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */,
 				4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */,
 				4C21A87C282BAF0400C47623 /* Pets.swift in Sources */,
+				4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */,
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
 				4C6F91B1284CF4E400B00B94 /* PopularCollectionViewCell.swift in Sources */,
 				4C71F1692835608F00F1A524 /* DescriprionView.swift in Sources */,

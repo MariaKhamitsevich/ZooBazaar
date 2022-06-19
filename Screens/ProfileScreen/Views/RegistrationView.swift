@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class RegistrationView: UIView, UITextFieldDelegate {
+class RegistrationView: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let image = UIImageView()
@@ -19,7 +19,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return image
     }()
     
-    private lazy var registrationSegmentedControl: UISegmentedControl = {
+    private(set) lazy var registrationSegmentedControl: UISegmentedControl = {
         var segmentedControl = UISegmentedControl()
         segmentedControl.insertSegment(withTitle: "Вход", at: 0, animated: false)
         segmentedControl.insertSegment(withTitle: "Регистрация", at: 1, animated: false)
@@ -146,7 +146,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return textField
     }()
     
-    lazy var confirmButton: UIButton = {
+   private(set) lazy var confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = ColorsManager.zbzbTextColor
         button.setTitle("Вход", for: .normal)
@@ -157,7 +157,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return button
     }()
     
-    private lazy var rememberLabel: UILabel = {
+    private(set) lazy var rememberLabel: UILabel = {
         let label = UILabel()
         label.text = "Забыли пароль?"
         label.textColor = ColorsManager.zbzbTextColor
@@ -166,7 +166,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return label
     }()
     
-    lazy var registrationButton: UIButton = {
+   private(set) lazy var registrationButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = ColorsManager.zbzbTextColor
         button.setTitle("Регистрация", for: .normal)
@@ -177,9 +177,7 @@ class RegistrationView: UIView, UITextFieldDelegate {
         return button
     }()
     
-    private let regexForPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"
-    private let regexForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    //    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{6,}$"
+    
     
     //MARK: Init
     override init(frame: CGRect) {
@@ -192,107 +190,15 @@ class RegistrationView: UIView, UITextFieldDelegate {
         addSubview(confirmButton)
         addSubview(rememberLabel)
         addSubview(registrationButton)
-        
-        
-        
+      
         setAllConstraints()
-        addAllTargets()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Add all targets
-    private func addAllTargets() {
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        nameTextField.delegate = self
-        emailForRegistrationTextField.delegate = self
-        passwordForRegistrationTextField.delegate = self
-        confirmPasswordTextField.delegate = self
-        
-        //Added target on return button
-        registrationStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
-            }
-        })
-        emailPasswordStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
-            }
-        })
-        
-        //Choose textField and change it's placeholder
-        //        NotificationCenter.default.addObserver(self, selector: #selector(startEditing), name: UIResponder.keyboardWillShowNotification, object: nil)
-        //        NotificationCenter.default.addObserver(self, selector: #selector(startEditing), name: UIResponder.keyboardWillHideNotification, object: nil)
-        //        startEditing()
-        
-        //Hide textFields by tap of segmentedControl
-        registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
-    }
-    
-    //    @objc func startEditing() {
-    //
-    //        let attributes = [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5),
-    //                          NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]
-    //
-    //        func setupSubviewsPlaceholder(for stack: UIStackView) {
-    //            stack.arrangedSubviews.forEach( { subview in
-    //                if let subview = subview as? UITextField {
-    //                    if subview.isFirstResponder {
-    //                        subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "", attributes: attributes)
-    //                    } else {
-    //                        subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "")
-    //                    }
-    //                }
-    //            })
-    //        }
-    //
-    //        setupSubviewsPlaceholder(for: emailPasswordStack)
-    //        setupSubviewsPlaceholder(for: registrationStack)
-    //    }
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    @objc func pressReturn() {
-        self.endEditing(true)
-        
-        func setupSubviewsPlaceholder(for stack: UIStackView) {
-            stack.arrangedSubviews.forEach( { subview in
-                if let subview = subview as? UITextField {
-                    subview.attributedPlaceholder = NSAttributedString(string: subview.placeholder ?? "")
-                }
-            })
-        }
-        setupSubviewsPlaceholder(for: emailPasswordStack)
-        setupSubviewsPlaceholder(for: registrationStack)
-    }
-    
-    @objc private func chooseSegmentedControl(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            emailPasswordStack.isHidden = false
-            confirmButton.isHidden = false
-            rememberLabel.isHidden = false
-            registrationStack.isHidden = true
-            registrationButton.isHidden = true
-        case 1:
-            emailPasswordStack.isHidden = true
-            confirmButton.isHidden = true
-            rememberLabel.isHidden = true
-            registrationStack.isHidden = false
-            registrationButton.isHidden = false
-            
-        default:
-            registrationStack.isHidden = true
-        }
-    }
+   
     
     //   MARK: Constraints
     private func setAllConstraints() {
@@ -344,133 +250,6 @@ class RegistrationView: UIView, UITextFieldDelegate {
     
 }
 
-extension RegistrationView {
-    
-    func checkValidation(stack: UIStackView) -> Bool {
-        
-        var regex: String = ""
-        var message = ""
-        let titleAlertRegistration = "Ошибка регистрации"
-        let signInTitle = "Ошибка входа"
-        var title = ""
-        
-        
-        stack.arrangedSubviews.forEach{ subvew in
-            if let textField = subvew as? UITextField {
-                
-                switch textField.textContentType {
-                case .emailAddress?:
-                    regex = regexForEmail
-                case .password?:
-                    regex = regexForPassword
-                default:
-                    break
-                }
-                
-                let text = textField.text ?? ""
-                
-                switch textField {
-                case nameTextField:
-                    if  text == "" {
-                        message = "Введите имя пользователя"
-                        title = titleAlertRegistration
-                    }
-                case emailForRegistrationTextField:
-                    title = titleAlertRegistration
-                    if  text == "" {
-                        message += "\nВведите email"
-                    } else if !text.matches(regex) {
-                        message += "\nПроверьте введенный email"
-                    }
-                case passwordForRegistrationTextField:
-                    title = titleAlertRegistration
-                    if  text == "" {
-                        message += "\nВведите пароль"
-                    } else if !text.matches(regex) {
-                        message += "\nПроверьте введенный пароль"
-                    }
-                case confirmPasswordTextField:
-                    title = titleAlertRegistration
-                    if text != passwordForRegistrationTextField.text && passwordForRegistrationTextField.text != nil {
-                        message += "\nНеверный пароль при подтверждении"
-                    }
-                case emailTextField:
-                    title = signInTitle
-                    if  text == "" {
-                        message = "Введите email"
-                    }
-                case passwordTextField:
-                    title = signInTitle
-                    if  text == "" {
-                        message += "\nВведите пароль"
-                    }
-                default :
-                    return
-                }
-            }
-        }
-        if message != "" {
-            getAlert(title: title, message: message, controller: parentViewController, completion: {
-                switch stack {
-                case self.registrationStack:
-                    if message.contains("Введите имя пользователя") {
-                        self.nameTextField.becomeFirstResponder()
-                    } else if message.contains("Введите email") || message.contains("Проверьте введенный email") {
-                        self.emailForRegistrationTextField.becomeFirstResponder()
-                    } else if message.contains("Введите пароль") || message.contains("Проверьте введенный пароль") {
-                        self.passwordForRegistrationTextField.becomeFirstResponder()
-                    } else if message.contains("Неверный пароль при подтверждении") {
-                        self.confirmPasswordTextField.becomeFirstResponder()
-                    }
-                case self.emailPasswordStack:
-                    if message.contains("Введите email") {
-                        self.emailTextField.becomeFirstResponder()
-                    } else if message.contains("Введите пароль"){
-                        self.passwordTextField.becomeFirstResponder()
-                    }
-                default: break
-                }
-            })
-            return false
-        }
-        return true
-    }
-
-func getAlert(title: String?, message: String?, controller: UIViewController?, completion: (() -> Void)? = nil) {
-    self.endEditing(true)
-    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in
-        completion?()
-    }))
-    
-    controller?.present(alert, animated: true, completion: nil)
-}
-
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let text = (textField.text ?? "") + string
-//        let res: String
-//
-//        if range.length == 1 {
-//            let end = text.index(text.startIndex, offsetBy: text.count - 1)
-//            res = String(text[text.startIndex..<end])
-//        } else {
-//            res = text
-//        }
-//
-//        checkValidation(textField: textField)
-//        textField.text = res
-//        return false
-//    }
-
-func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-}
-}
 
 
-extension String {
-    func matches(_ regex: String) -> Bool {
-        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
-    }
-}
+
