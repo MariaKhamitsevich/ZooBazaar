@@ -10,6 +10,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
     
     let cartManager = CartManager.shared
     var updateTotalCost: (() -> Void)?
+    var checkEmpty: (() -> Void)?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartManager.productCount()
@@ -36,6 +37,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
                     tableView.reloadData()
                 }
                 self.updateTotalCost?()
+                self.checkEmpty?()
             }
         }
         
@@ -78,6 +80,7 @@ class CartViewController: UIViewController {
         cartView.cartTable.separatorStyle = .singleLine
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
         cartTableDelegate.updateTotalCost = updateTotalCost
+        cartTableDelegate.checkEmpty = checkEmpty
         navigationController?.isNavigationBarHidden = true
         
         cartView.orderingButton.addTarget(self, action: #selector(makeOrder), for: .touchUpInside)
@@ -85,6 +88,7 @@ class CartViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
         cartView.cartTable.reloadData()
         cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
         checkEmpty()
@@ -102,10 +106,12 @@ class CartViewController: UIViewController {
     private func checkEmpty() {
         if cartManager.productCount() != 0 {
             cartView.insteadeOfTableLabel.isHidden = true
+            cartView.totalPriceLabel.isHidden = false
             cartView.orderingButton.isEnabled = true
             cartView.orderingButton.alpha = 1
         } else {
             cartView.insteadeOfTableLabel.isHidden = false
+            cartView.totalPriceLabel.isHidden = true
             cartView.orderingButton.isEnabled = false
             cartView.orderingButton.alpha = 0.7
         }

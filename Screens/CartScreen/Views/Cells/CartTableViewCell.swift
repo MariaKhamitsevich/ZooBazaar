@@ -155,7 +155,6 @@ class CartTableViewCell: UITableViewCell {
     }
  
     @objc func deleteFromCart() {
-//        reloadTable?()
         let cartManager = CartManager.shared
         if let currentProduct = currentProduct {
             cartManager.deleteProduct(product: currentProduct)

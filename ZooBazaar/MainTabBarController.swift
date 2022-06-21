@@ -25,6 +25,10 @@ class MainTabBarController: UITabBarController {
         self.tabBar.items![1].image = UIImage(systemName: "cart.fill")
         self.tabBar.items![2].image = UIImage(systemName: "map.fill")
         self.tabBar.items![3].image = UIImage(systemName: "person.fill")
+        self.tabBar.items![0].title = "Магазин"
+        self.tabBar.items![1].title = "Корзина"
+        self.tabBar.items![2].title = "Карта"
+        self.tabBar.items![3].title = "Профиль"
         
     }
 

@@ -12,7 +12,7 @@ class CartView: UIView {
     
     let cartManager = CartManager.shared
     
-    private lazy var logoImageView: UIImageView = {
+    private(set) lazy var logoImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "launchScreen")
         image.alpha = 0.3
