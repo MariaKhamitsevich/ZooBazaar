@@ -9,7 +9,6 @@ class HomeScreenView: UIView {
         image.image = UIImage(named: "launchScreen")
         image.alpha = 0.3
         
-        
         return image
     }()
     

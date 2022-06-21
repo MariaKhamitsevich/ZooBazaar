@@ -49,6 +49,17 @@ class CartView: UIView {
         return button
     }()
     
+    private(set) lazy var insteadeOfTableLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Здесь будут размещены Ваши заказы"
+        label.textColor = ColorsManager.zbzbTextColor
+        label.textAlignment = .center
+        label.font = UIFont.italicSystemFont(ofSize: 22)
+        label.numberOfLines = 2
+        
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorsManager.zbzbBackgroundColor
@@ -56,6 +67,7 @@ class CartView: UIView {
         addSubview(totalPriceLabel)
         addSubview(cartTable)
         addSubview(orderingButton)
+        addSubview(insteadeOfTableLabel)
         
         setAllConstraints()
     }
@@ -87,6 +99,11 @@ class CartView: UIView {
             make.centerX.equalToSuperview()
             make.width.equalTo(UIScreen.main.bounds.width / 3 * 2)
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
+        }
+        self.insteadeOfTableLabel.snp.updateConstraints { make in
+            make.centerY.equalTo(self.snp.centerY)
+            make.leading.equalTo(self.snp.leading).offset(32)
+            make.trailing.equalTo(self.snp.trailing).offset(-32)
         }
     }
 }

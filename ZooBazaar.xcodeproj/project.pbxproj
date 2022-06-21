@@ -27,6 +27,8 @@
 		4C5457AB28223B220043205D /* CatalogHomeScreenViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457AA28223B220043205D /* CatalogHomeScreenViewCell.swift */; };
 		4C5457AD2822CC8D0043205D /* ColorsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5457AC2822CC8D0043205D /* ColorsManager.swift */; };
 		4C54F28B283E9FEA0056E9B7 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C54F28A283E9FEA0056E9B7 /* CartManager.swift */; };
+		4C6B66BB2861BBE200152BF9 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B66BA2861BBE200152BF9 /* OrderViewController.swift */; };
+		4C6B66BD2861BC0100152BF9 /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6B66BC2861BC0100152BF9 /* OrderView.swift */; };
 		4C6F91A9284CABAD00B00B94 /* HomeScreenHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91A8284CABAD00B00B94 /* HomeScreenHeaders.swift */; };
 		4C6F91AD284CB5E400B00B94 /* HomeScreenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91AC284CB5E400B00B94 /* HomeScreenTableViewCell.swift */; };
 		4C6F91B1284CF4E400B00B94 /* PopularCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F91B0284CF4E400B00B94 /* PopularCollectionViewCell.swift */; };
@@ -73,6 +75,8 @@
 		4C5457AA28223B220043205D /* CatalogHomeScreenViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogHomeScreenViewCell.swift; sourceTree = "<group>"; };
 		4C5457AC2822CC8D0043205D /* ColorsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsManager.swift; sourceTree = "<group>"; };
 		4C54F28A283E9FEA0056E9B7 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		4C6B66BA2861BBE200152BF9 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		4C6B66BC2861BC0100152BF9 /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
 		4C6F91A8284CABAD00B00B94 /* HomeScreenHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenHeaders.swift; sourceTree = "<group>"; };
 		4C6F91AC284CB5E400B00B94 /* HomeScreenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewCell.swift; sourceTree = "<group>"; };
 		4C6F91B0284CF4E400B00B94 /* PopularCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 			children = (
 				4C977F4F2859FFE60062C56D /* Cells */,
 				4C21A874282912DB00C47623 /* CartView.swift */,
+				4C6B66BC2861BC0100152BF9 /* OrderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				4C1DAB092819453E0043B08D /* CartViewControllerViewController.swift */,
+				4C6B66BA2861BBE200152BF9 /* OrderViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -481,12 +487,14 @@
 			files = (
 				4C1DAB0A2819453E0043B08D /* CartViewControllerViewController.swift in Sources */,
 				4C71F1672835607200F1A524 /* DescroptionViewController.swift in Sources */,
+				4C6B66BB2861BBE200152BF9 /* OrderViewController.swift in Sources */,
 				4C6F91AD284CB5E400B00B94 /* HomeScreenTableViewCell.swift in Sources */,
 				4C039B562832D48B001EEDB6 /* UIFont+Ex.swift in Sources */,
 				4C21A875282912DB00C47623 /* CartView.swift in Sources */,
 				4CED644A28187E5E0052A2C2 /* HomeScreenViewController.swift in Sources */,
 				4C71F16328355A4500F1A524 /* CartTableViewCell.swift in Sources */,
 				4C5278492820FC6300BACCB8 /* ProductsTableHeaderView.swift in Sources */,
+				4C6B66BD2861BC0100152BF9 /* OrderView.swift in Sources */,
 				4C4A3F4128390164005C5F8E /* SomeViewController.swift in Sources */,
 				4C6F91A9284CABAD00B00B94 /* HomeScreenHeaders.swift in Sources */,
 				4CC3D99A284350AA00E7DE51 /* UIButton+Ex .swift in Sources */,

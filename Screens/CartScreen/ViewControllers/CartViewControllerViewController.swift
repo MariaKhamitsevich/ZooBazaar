@@ -79,16 +79,36 @@ class CartViewController: UIViewController {
         cartView.cartTable.tableFooterView = UIView(frame: .zero)
         cartTableDelegate.updateTotalCost = updateTotalCost
         navigationController?.isNavigationBarHidden = true
+        
+        cartView.orderingButton.addTarget(self, action: #selector(makeOrder), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cartView.cartTable.reloadData()
         cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
+        checkEmpty()
     }
     
     private func updateTotalCost() {
         cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
+    }
+    
+   @objc private func makeOrder() {
+       let controller = OrderViewController()
+       navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    private func checkEmpty() {
+        if cartManager.productCount() != 0 {
+            cartView.insteadeOfTableLabel.isHidden = true
+            cartView.orderingButton.isEnabled = true
+            cartView.orderingButton.alpha = 1
+        } else {
+            cartView.insteadeOfTableLabel.isHidden = false
+            cartView.orderingButton.isEnabled = false
+            cartView.orderingButton.alpha = 0.7
+        }
     }
 }
 
