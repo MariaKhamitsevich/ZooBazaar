@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6AE4A3D573DED275B034E20506596C62"
-               BuildableName = "FirebaseAuth.framework"
-               BlueprintName = "FirebaseAuth"
+               BlueprintIdentifier = "60AA0D64A359A7A753DB349B31DC3D16"
+               BuildableName = "ALRadioButtons.framework"
+               BlueprintName = "ALRadioButtons"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

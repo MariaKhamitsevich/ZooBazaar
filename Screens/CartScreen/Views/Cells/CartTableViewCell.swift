@@ -21,7 +21,6 @@ class CartTableViewCell: UITableViewCell {
     private lazy var productImage: UIImageView = {
         let image = UIImageView()
         
-        
         return image
     }()
     

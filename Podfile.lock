@@ -596,6 +596,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - ALRadioButtons (1.2.2)
   - BoringSSL-GRPC (0.0.24):
     - BoringSSL-GRPC/Implementation (= 0.0.24)
     - BoringSSL-GRPC/Interface (= 0.0.24)
@@ -766,6 +767,7 @@ PODS:
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - ALRadioButtons
   - FirebaseAnalytics
   - FirebaseAuth
   - FirebaseFirestore
@@ -774,6 +776,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - ALRadioButtons
     - BoringSSL-GRPC
     - FirebaseAnalytics
     - FirebaseAuth
@@ -796,6 +799,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: ebe5b5529fb05d93a8bdb7951607be08b7fa71bc
+  ALRadioButtons: 98f9e2d452ea02cf5c3165c4ca5c58d106467dfc
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   FirebaseAnalytics: bf11064790ac96804df1df9ddc0ae45af950d9fc
   FirebaseAuth: eae56c13e1161da89be202b1fae3ca60b4b8d689
@@ -816,6 +820,6 @@ SPEC CHECKSUMS:
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: f0ecf64deaa28fbe506017957ff69cedf86c3059
+PODFILE CHECKSUM: 4843ef5269ce754191a06be64130bb65ce14b2c1
 
 COCOAPODS: 1.11.3

@@ -25,7 +25,6 @@ class RegistrationView: UIView {
         segmentedControl.insertSegment(withTitle: "Регистрация", at: 1, animated: false)
         segmentedControl.selectedSegmentIndex = 0
         
-        
         return segmentedControl
     }()
     
@@ -33,7 +32,6 @@ class RegistrationView: UIView {
         let stack = UIStackView()
         stack.addArrangedSubview(emailTextField)
         stack.addArrangedSubview(passwordTextField)
-        
         stack.axis = .vertical
         stack.spacing = 20
         
@@ -41,28 +39,19 @@ class RegistrationView: UIView {
         return stack
     }()
     
-    private(set) lazy var emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var emailTextField: ZBZTextField = {
+        let textField = ZBZTextField(image: UIImage(systemName: "envelope.circle.fill"), placeholder: "Email")
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.textContentType = .emailAddress
-        //        textField.enablesReturnKeyAutomatically = true
         
         return textField
     }()
     
-    private(set) lazy var passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var passwordTextField: ZBZTextField = {
+        let textField = ZBZTextField(image: UIImage(systemName: "key.fill"), placeholder: "Пароль")
         textField.keyboardType = .numbersAndPunctuation
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true
@@ -85,59 +74,39 @@ class RegistrationView: UIView {
         return stack
     }()
     
-    private(set) lazy var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Имя", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var nameTextField: ZBZTextField = {
+        let textField =  ZBZTextField(image: UIImage(systemName: "person.circle.fill"), placeholder: "Имя")
         textField.keyboardType = .alphabet
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        //        textField.tag = 0
-        //        textField.textContentType = .nickname
         
         return textField
     }()
     
-    private(set) lazy var emailForRegistrationTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var emailForRegistrationTextField: ZBZTextField = {
+        let textField = ZBZTextField(image: UIImage(systemName: "envelope.circle.fill"), placeholder: "Email")
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
-        //        textField.tag = 1
         textField.textContentType = .emailAddress
         
         return textField
     }()
     
-    private(set) lazy var passwordForRegistrationTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var passwordForRegistrationTextField: ZBZTextField = {
+        let textField = ZBZTextField(image: UIImage(systemName: "key.fill"), placeholder: "Пароль")
         textField.keyboardType = .numbersAndPunctuation
         textField.autocapitalizationType = .none
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true
         
-        
         return textField
     }()
     
-    private(set) lazy var confirmPasswordTextField: UITextField = {
-        let textField = UITextField()
-        textField.attributedPlaceholder = NSAttributedString(string: " Подтвердите пароль", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.withAlphaComponent(0.5)])
+    private(set) lazy var confirmPasswordTextField: ZBZTextField = {
+        let textField = ZBZTextField(image: UIImage(systemName: "key.fill"), placeholder: "Подтвердите пароль")
         textField.keyboardType = .numbersAndPunctuation
         textField.autocapitalizationType = .none
-        textField.backgroundColor = .white
-        textField.textColor = ColorsManager.zbzbTextColor
-        textField.layer.cornerRadius = 4
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true

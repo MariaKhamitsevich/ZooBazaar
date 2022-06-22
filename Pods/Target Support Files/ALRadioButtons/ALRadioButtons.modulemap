@@ -1,0 +1,6 @@
+framework module ALRadioButtons {
+  umbrella header "ALRadioButtons-umbrella.h"
+
+  export *
+  module * { export * }
+}

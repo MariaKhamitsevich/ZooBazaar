@@ -10,4 +10,5 @@ target 'ZooBazaar' do
   pod 'FirebaseAnalytics'
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
+  pod 'ALRadioButtons'
 end
