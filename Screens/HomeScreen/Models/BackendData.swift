@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseFirestore
 
 struct BackendData {
     let pet: Pets
@@ -29,8 +30,8 @@ struct BrandProducts {
 
 
 
-enum Pets {
-    case cats
+enum Pets: String {
+    case cats = "catsBackendData"
     case dogs
     case rodents
 }
