@@ -73,21 +73,23 @@ class HomeScreenTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//
-//        self.catsObtainer = BackendObtainer(pet: .cats)
-//        self.dogsObtainer = BackendObtainer(pet: .dogs)
-//        self.rodentsObtainer = BackendObtainer(pet: .rodents)
-        
-       
-        
+
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
         contentView.addSubview(dots)
         contentView.backgroundColor = .clear
         
-        catsObtainer.callBack = self.collectionView.reloadData
-        dogsObtainer.callBack = self.collectionView.reloadData
-        rodentsObtainer.callBack = self.collectionView.reloadData
+        catsObtainer.callBack = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        
+        dogsObtainer.callBack = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        
+        rodentsObtainer.callBack = { [weak self] in
+            self?.collectionView.reloadData()
+        }
         
         setAllConstraints()
     }
