@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseStorageUI
 
 class PopularCollectionViewCell: UICollectionViewCell {
     
@@ -54,9 +57,12 @@ class PopularCollectionViewCell: UICollectionViewCell {
     }
     
     func updateValues(product: Product) {
-        productNameLabel.text = product.name
-        productImageView.image = product.image
+        productNameLabel.text = product.productName
         productPriceLabel.text = product.priceForKg
+        
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child(product.productImageURL)
+        self.productImageView.sd_setImage(with: reference)
     }
     
     private func setAllConstraints() {

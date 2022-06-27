@@ -5,45 +5,73 @@
 //  Created by Maria Khamitsevich on 18.05.22.
 //
 
-import Foundation
+import UIKit
+import FirebaseFirestore
 
-struct BackendObtainer {
-    private let data: BackendData
+
+class BackendObtainer {
     
-    init(data: BackendData) {
-        self.data = data
+    var parsedBackendData: [ProductsForPets] = []
+    var callBack: (() -> Void)?
+    var pet: Pets
+    
+    init(pet: Pets, callBack: (() -> Void)? = nil) {
+        self.pet = pet
+        self.callBack = callBack
+        loadData()
     }
     
     func obtainPet() -> Pet {
-        var products: [ProductsForPets] = []
-        
-        for data in data.backendData {
-            let product = ProductsForPets(title: data.brendName, products: data.brendProducts.compactMap{transformProduct(brandProduct: $0)})
-            products.append(product)
-        }
-        return Pet(pet: data.pet, products: products)
+        return  Pet(pet: pet, products: self.parsedBackendData)
     }
     
     func obtainPopularProducts() -> [Product] {
-        var products: [ProductsForPets] = []
-        
-        for data in data.backendData {
-            let product = ProductsForPets(title: data.brendName, products: data.brendProducts.compactMap{transformProduct(brandProduct: $0)})
-            products.append(product)
+        let popularProducts = parsedBackendData.flatMap {
+            $0.brendProducts.filter { $0.isPopular}
         }
-        let popularProducts = products.flatMap {$0.products.filter { $0.isPopular}}
         return popularProducts
     }
     
-    private func transformProduct(brandProduct: BrandProducts) -> Product {
-        Product(
-            name: brandProduct.productName,
-            description: brandProduct.productDescription,
-            image: brandProduct.productImage,
-            price: brandProduct.productPrice,
-            isPopular: brandProduct.isPopular,
-            productID: String(brandProduct.productID))
+    func obtainAllProducts() -> [Product] {
+        let products = parsedBackendData.flatMap({$0.brendProducts})
+        return products
+    }
+    
+    func loadData() {
         
+        let db = Firestore.firestore()
+        
+        db.collection("BackendData").document(pet.rawValue).collection("backendData").getDocuments{ [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                Swift.debugPrint(error.localizedDescription)
+            } else if let snapshot = snapshot {
+                
+                for i in snapshot.documents {
+                    
+                    let brandName = i.get("brendName") as? String ?? ""
+                    let documentID = i.documentID
+                    db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments { [weak self] (snapshot, error) in
+                        guard let self = self else { return }
+                        if let error = error {
+                            Swift.debugPrint(error.localizedDescription)
+                        } else if let snapshot = snapshot {
+                            
+                            var brendProducts: [Product] = []
+                            
+                            for i in snapshot.documents {
+                                let product = Product.parseBrandProduct(productQuery: i)
+                                brendProducts.append(product)
+                            }
+                            
+                            self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
+                            print("Neded number of sections: \(self.parsedBackendData.count)")
+                            self.callBack?()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -21,21 +21,21 @@ class MapsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        petObtainer = TestBackendObtainer(pet: .catsProducts, callBack: { bool in
-            self.mapsView.addToCartButton.isEnabled = true
-        })
-
-        mapsView.addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+//        petObtainer = TestBackendObtainer(pet: .catsProducts, callBack: {
+//            self.mapsView.addToCartButton.isEnabled = true
+//        })
+//
+//        mapsView.addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
     }
     
-    @objc func addToCart() {
-//        let petObtainer = TestBackendObtainer(pet: .catsProducts)
-        if let petObtainer = petObtainer {
-            let petProvider = TestPetProvider(petObtainer: petObtainer)
-            let controller = TestTableViewController(pets: petProvider)
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
-      
-    }
+//    @objc func addToCart() {
+////        let petObtainer = TestBackendObtainer(pet: .catsProducts)
+//        if let petObtainer = petObtainer {
+//            let petProvider = TestPetProvider(petObtainer: petObtainer)
+//            let controller = TestTableViewController(pets: petProvider)
+//            self.navigationController?.pushViewController(controller, animated: true)
+//        }
+//      
+//    }
     
 }

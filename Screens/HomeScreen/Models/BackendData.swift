@@ -22,7 +22,7 @@ struct BackendProducts {
 struct BrandProducts {
     let productName: String
     let productDescription: String
-    let productImage: UIImage!
+    let productImageURL: UIImage!
     let productPrice: Double
     var isPopular: Bool
     let productID: Int
@@ -30,8 +30,3 @@ struct BrandProducts {
 
 
 
-enum Pets: String {
-    case cats = "catsBackendData"
-    case dogs
-    case rodents
-}

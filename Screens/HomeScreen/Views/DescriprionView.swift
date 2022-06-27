@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseStorageUI
 
 class DescriprionView: UIView {
     
@@ -92,11 +95,14 @@ class DescriprionView: UIView {
     }
     
     func update(product: Product) {
-        self.productName.text = product.name
-        self.productId.text = "Артикул: " + product.productID
+        self.productName.text = product.productName
+        self.productId.text = "Артикул: " + String(product.productID)
         self.productPrice.text = product.priceForKg
-        self.productImage.image = product.image
-        self.productDescription.text = product.description
+        self.productDescription.text = product.productDescription
+        
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child(product.productImageURL)
+        self.productImage.sd_setImage(with: reference)
     }
     
     private func setAllConstraints() {

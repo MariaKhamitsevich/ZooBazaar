@@ -6,42 +6,65 @@
 //
 
 import UIKit
+import FirebaseFirestore
+import FirebaseStorage
 
-//protocol ProductsForPets {
-//    var title: String {get}
-//    var products: [Product] {get}
-//}
 
 struct Pet {
-  
     var pet: Pets
     var products: [ProductsForPets]
-    
 }
 
 
 struct ProductsForPets {
-    var title: String
-    var products: [Product]
+    var brendName: String
+    var brendProducts: [Product]
 }
 
 struct Product {
     
-    
-    let name: String
-    let description: String
-    let image: UIImage!
-    let price: Double
+    var productName: String
+    var productDescription: String
+    var productImageURL: String!
+    var productPrice: Double
     var isPopular: Bool
     var priceForKg: String {
         get {
-            "\(price) рублей за кг"
+            "\(productPrice) рублей за кг"
         }
     }
     var totalCost: Double {
-        price * Double(productAmount)
+        productPrice * Double(productAmount)
     }
     
-    let productID: String
+    var productID: Int
     var productAmount = 1
+    
+    init(productName: String = "", productDescription: String = "", productImageURL: String = "", productPrice: Double = 0, isPopular: Bool = false, productID: Int = 0) {
+        self.productName = productName
+        self.productDescription = productDescription
+        self.productImageURL = productImageURL
+        self.productPrice = productPrice
+        self.isPopular = isPopular
+        self.productID = productID
+    }
+    
+    static func parseBrandProduct(productQuery: QueryDocumentSnapshot) -> Product {
+        var product = Product()
+        product.productName = productQuery.get("productName") as? String ?? ""
+        product.productDescription = productQuery.get("productDescription") as? String ?? ""
+        product.productImageURL = productQuery.get("productImage") as? String ?? ""
+        product.productPrice = productQuery.get("productPrice") as? Double ?? 0
+        product.isPopular = productQuery.get("isPopular") as? Bool ?? false
+        product.productID = productQuery.get("productID") as? Int ?? 0
+        
+        return product
+    }
+}
+
+
+enum Pets: String {
+    case cats = "catsBackendData"
+    case dogs = "dogsBackendData"
+    case rodents = "rodentsBackendData"
 }

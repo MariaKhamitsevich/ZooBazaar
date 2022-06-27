@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseStorageUI
 
 class ProductsTableViewCell: UITableViewCell {
     
@@ -78,10 +81,13 @@ class ProductsTableViewCell: UITableViewCell {
     }
     
     func updateValues(product: Product) {
-        productNameLabel.text = product.name
-        productDescription.text = product.description
-        productImageView.image = product.image
+        productNameLabel.text = product.productName
+        productDescription.text = product.productDescription
         productPriceLabel.text = product.priceForKg
+        
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child(product.productImageURL)
+        self.productImageView.sd_setImage(with: reference)
     }
     
     private func setAllConstraints() {

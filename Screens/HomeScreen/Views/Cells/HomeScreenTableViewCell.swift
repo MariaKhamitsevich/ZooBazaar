@@ -13,11 +13,30 @@ class HomeScreenTableViewCell: UITableViewCell {
     var arrayOfProducts = [HomeScreenCellElements(name: "Кошки", image: UIImage(named: "cats products")),
                            HomeScreenCellElements(name: "Собаки", image: UIImage(named: "dogs")),
                            HomeScreenCellElements(name: "Грызуны", image: UIImage(named: "Mouse"))]
+    var catsObtainer: BackendObtainer = BackendObtainer(pet: .cats)
+    var dogsObtainer: BackendObtainer = BackendObtainer(pet: .dogs)
+    var rodentsObtainer: BackendObtainer = BackendObtainer(pet: .rodents)
     
-    var cats = catsProvider
-    var dogs = dogsProvider
-    var rodents = rodentsProvider
-    var allPets = [catsProvider, dogsProvider, rodentsProvider]
+//    var catsProvider: PetProvider?
+//    var dogsProvider: PetProvider?
+//    var rodentsProvider: PetProvider?
+    
+    
+//    var cats = catsProvider
+//    var dogs = dogsProvider
+//    var rodents = rodentsProvider
+    var allPets: [BackendObtainer] {
+        [catsObtainer, dogsObtainer, rodentsObtainer]
+    }
+    
+//    func getProviders() {
+//        self.catsProvider = PetProvider(petObtainer: catsObtainer)
+//        self.dogsProvider = PetProvider(petObtainer: dogsObtainer)
+//        self.rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
+//
+//        self.allPets = [catsObtainer, dogsObtainer, rodentsObtainer]
+//    }
+    
     
     weak var controllerDelegate: UIViewController?
     
@@ -54,13 +73,25 @@ class HomeScreenTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//
+//        self.catsObtainer = BackendObtainer(pet: .cats)
+//        self.dogsObtainer = BackendObtainer(pet: .dogs)
+//        self.rodentsObtainer = BackendObtainer(pet: .rodents)
+        
+       
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
         contentView.addSubview(dots)
         contentView.backgroundColor = .clear
         
+        catsObtainer.callBack = self.collectionView.reloadData
+        dogsObtainer.callBack = self.collectionView.reloadData
+        rodentsObtainer.callBack = self.collectionView.reloadData
+        
         setAllConstraints()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -109,7 +140,7 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             dots.numberOfPages = Int(round(Double(count) / 2))
             return count
         default:
-            let count = allPets.flatMap { $0.getPopularProducts() }.count
+            let count = allPets.flatMap { $0.obtainPopularProducts() }.count
             dots.numberOfPages = Int(round(Double(count) / 2))
             return count
         }
@@ -123,7 +154,7 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as! PopularCollectionViewCell
-            let popularProducts: [Product] = allPets.flatMap { $0.getPopularProducts()}
+            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
             cell.updateValues(product: popularProducts[indexPath.row])
             return cell
         }
@@ -131,21 +162,25 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: CollectionView didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let catsProvider = PetProvider(petObtainer: catsObtainer)
+        let dogsProvider = PetProvider(petObtainer: dogsObtainer)
+        let rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
+        
         
         if numberOfSectionInTable == 0 {
             switch indexPath.item {
             case 0:
-                controllerDelegate?.navigationController?.pushViewController(ProductsTableViewController(pets: cats), animated: true)
+                controllerDelegate?.navigationController?.pushViewController(ProductsTableViewController(pets: catsProvider), animated: true)
             case 1:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: dogs), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: dogsProvider), animated: true)
             case 2:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: rodents), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: rodentsProvider), animated: true)
             default:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: cats), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: catsProvider), animated: true)
             }
         } else {
             let controller = DescroptionViewController()
-            let popularProducts: [Product] = allPets.flatMap { $0.getPopularProducts()}
+            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
             controller.descriprionVeiw.update(product: popularProducts[indexPath.row])
             controller.descriprionVeiw.currentProduct = popularProducts[indexPath.row]
             controllerDelegate?.present(controller, animated: true)

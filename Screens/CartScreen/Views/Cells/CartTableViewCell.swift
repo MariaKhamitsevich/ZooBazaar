@@ -7,6 +7,9 @@
 
 import UIKit
 import SnapKit
+import FirebaseFirestore
+import FirebaseStorage
+import FirebaseStorageUI
 
 protocol CartTableDataReloading: AnyObject {
     func reload(indexPath: IndexPath?)
@@ -145,11 +148,14 @@ class CartTableViewCell: UITableViewCell {
     
     
     func updateValue(product: Product, indexPath: IndexPath) {
-        productName.text = product.name
-        productImage.image = product.image
+        productName.text = product.productName
         productPrice.text = "Цена: " + String(product.totalCost) + " BYN"
         currentProduct = product
         amount.text = String(product.productAmount)
+        
+        let storageRef = Storage.storage().reference()
+        let reference = storageRef.child(product.productImageURL)
+        self.productImage.sd_setImage(with: reference)
 
     }
  
