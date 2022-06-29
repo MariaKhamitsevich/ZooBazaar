@@ -6,16 +6,26 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseCore
 
 class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var profileController = UIViewController()
+        
+        if let _ = Auth.auth().currentUser {
+            profileController = ProfileViewController()
+        } else {
+            profileController = RegistrationViewController()
+        }
+        
         self.viewControllers = [UINavigationController(rootViewController: HomeScreenViewController()),
                                 UINavigationController(rootViewController: CartViewController()),
                                 UINavigationController(rootViewController: MapsViewController()),
-                                UINavigationController(rootViewController: RegistrationViewController())]
+                                UINavigationController(rootViewController: profileController)]
         
         self.tabBar.barTintColor = ColorsManager.zbzbBackgroundColor
         self.tabBar.backgroundColor = ColorsManager.zbzbBackgroundColor

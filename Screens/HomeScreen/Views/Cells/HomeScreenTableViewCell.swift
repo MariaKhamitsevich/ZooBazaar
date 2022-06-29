@@ -17,27 +17,10 @@ class HomeScreenTableViewCell: UITableViewCell {
     var dogsObtainer: BackendObtainer = BackendObtainer(pet: .dogs)
     var rodentsObtainer: BackendObtainer = BackendObtainer(pet: .rodents)
     
-//    var catsProvider: PetProvider?
-//    var dogsProvider: PetProvider?
-//    var rodentsProvider: PetProvider?
-    
-    
-//    var cats = catsProvider
-//    var dogs = dogsProvider
-//    var rodents = rodentsProvider
     var allPets: [BackendObtainer] {
         [catsObtainer, dogsObtainer, rodentsObtainer]
     }
-    
-//    func getProviders() {
-//        self.catsProvider = PetProvider(petObtainer: catsObtainer)
-//        self.dogsProvider = PetProvider(petObtainer: dogsObtainer)
-//        self.rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
-//
-//        self.allPets = [catsObtainer, dogsObtainer, rodentsObtainer]
-//    }
-    
-    
+ 
     weak var controllerDelegate: UIViewController?
     
     //Номер секции в таблице (передается в таблице в методе cellForRowAt)
@@ -167,7 +150,6 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
         let catsProvider = PetProvider(petObtainer: catsObtainer)
         let dogsProvider = PetProvider(petObtainer: dogsObtainer)
         let rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
-        
         
         if numberOfSectionInTable == 0 {
             switch indexPath.item {

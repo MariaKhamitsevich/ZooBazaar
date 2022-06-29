@@ -21,6 +21,12 @@
 		4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30831C28573AB800D4EE8F /* UIView+Ex.swift */; };
 		4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */; };
 		4C37E0BD281F10EA00D393F5 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */; };
+		4C41E3D8286AF12D0068BF72 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */; };
+		4C41E3DA286B07540068BF72 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3D9286B07540068BF72 /* SettingsTableViewController.swift */; };
+		4C41E3DC286CADD50068BF72 /* SettingsTextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3DB286CADD50068BF72 /* SettingsTextFieldsViewController.swift */; };
+		4C41E3DF286CAE000068BF72 /* SettingsTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3DE286CAE000068BF72 /* SettingsTextFields.swift */; };
+		4C41E3E1286CC8CA0068BF72 /* RegexType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3E0286CC8CA0068BF72 /* RegexType.swift */; };
+		4C41E3E3286CD7FA0068BF72 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3E2286CD7FA0068BF72 /* Alert.swift */; };
 		4C4A3F4128390164005C5F8E /* SomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F4028390164005C5F8E /* SomeViewController.swift */; };
 		4C4A3F4328390280005C5F8E /* SomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A3F4228390280005C5F8E /* SomeView.swift */; };
 		4C5278492820FC6300BACCB8 /* ProductsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5278482820FC6300BACCB8 /* ProductsTableHeaderView.swift */; };
@@ -68,6 +74,12 @@
 		4C30831C28573AB800D4EE8F /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
 		4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
+		4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		4C41E3D9286B07540068BF72 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		4C41E3DB286CADD50068BF72 /* SettingsTextFieldsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextFieldsViewController.swift; sourceTree = "<group>"; };
+		4C41E3DE286CAE000068BF72 /* SettingsTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTextFields.swift; sourceTree = "<group>"; };
+		4C41E3E0286CC8CA0068BF72 /* RegexType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexType.swift; sourceTree = "<group>"; };
+		4C41E3E2286CD7FA0068BF72 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		4C4A3F4028390164005C5F8E /* SomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeViewController.swift; sourceTree = "<group>"; };
 		4C4A3F4228390280005C5F8E /* SomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeView.swift; sourceTree = "<group>"; };
 		4C5278482820FC6300BACCB8 /* ProductsTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableHeaderView.swift; sourceTree = "<group>"; };
@@ -130,6 +142,8 @@
 				4C30831C28573AB800D4EE8F /* UIView+Ex.swift */,
 				4C870F6028520D7100A3677D /* UITextField+Ex.swift */,
 				4CE77C9D285F7ABF00C35344 /* String+Ex.swift */,
+				4C41E3E0286CC8CA0068BF72 /* RegexType.swift */,
+				4C41E3E2286CD7FA0068BF72 /* Alert.swift */,
 			);
 			name = Extentions;
 			sourceTree = "<group>";
@@ -161,6 +175,14 @@
 				4C977F4C2859FFBA0062C56D /* Views */,
 			);
 			path = CartScreen;
+			sourceTree = "<group>";
+		};
+		4C41E3D6286AF1010068BF72 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		4C5143D928677CA2005F4291 /* TestModel */ = {
@@ -288,6 +310,8 @@
 			children = (
 				4C21A872282910C100C47623 /* RegistrationView.swift */,
 				4C039B502832A3C1001EEDB6 /* ProfileView.swift */,
+				4C41E3DE286CAE000068BF72 /* SettingsTextFields.swift */,
+				4C41E3D6286AF1010068BF72 /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -297,6 +321,8 @@
 			children = (
 				4C21A86F28290EFF00C47623 /* RegistrationViewController.swift */,
 				4C039B522832A3D3001EEDB6 /* ProfileViewController.swift */,
+				4C41E3D9286B07540068BF72 /* SettingsTableViewController.swift */,
+				4C41E3DB286CADD50068BF72 /* SettingsTextFieldsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -507,10 +533,13 @@
 				4C5457AB28223B220043205D /* CatalogHomeScreenViewCell.swift in Sources */,
 				4CED644C28187E7F0052A2C2 /* HomeScreenView.swift in Sources */,
 				4C71F15F2835169D00F1A524 /* PetProvider.swift in Sources */,
+				4C41E3DF286CAE000068BF72 /* SettingsTextFields.swift in Sources */,
+				4C41E3E3286CD7FA0068BF72 /* Alert.swift in Sources */,
 				4CB7374D285238A1008EC3C7 /* Products.swift in Sources */,
 				4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */,
 				4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */,
 				4C21A87A2829556500C47623 /* MapsView.swift in Sources */,
+				4C41E3DC286CADD50068BF72 /* SettingsTextFieldsViewController.swift in Sources */,
 				4C21A873282910C100C47623 /* RegistrationView.swift in Sources */,
 				4C71F15D2834D3C800F1A524 /* BackendObtainer.swift in Sources */,
 				4C21A8782829555400C47623 /* MapsViewController.swift in Sources */,
@@ -519,13 +548,16 @@
 				4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */,
 				4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */,
 				4C870F6128520D7100A3677D /* UITextField+Ex.swift in Sources */,
+				4C41E3E1286CC8CA0068BF72 /* RegexType.swift in Sources */,
 				4C4A3F4328390280005C5F8E /* SomeView.swift in Sources */,
 				4C54F28B283E9FEA0056E9B7 /* CartManager.swift in Sources */,
 				4C21A87028290EFF00C47623 /* RegistrationViewController.swift in Sources */,
 				4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */,
+				4C41E3D8286AF12D0068BF72 /* ProfileTableViewCell.swift in Sources */,
 				4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */,
 				4C21A87C282BAF0400C47623 /* Pets.swift in Sources */,
 				4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */,
+				4C41E3DA286B07540068BF72 /* SettingsTableViewController.swift in Sources */,
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
 				4C6F91B1284CF4E400B00B94 /* PopularCollectionViewCell.swift in Sources */,
 				4C71F1692835608F00F1A524 /* DescriprionView.swift in Sources */,

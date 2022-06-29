@@ -15,16 +15,6 @@ protocol ProfileDataSettable: AnyObject {
 
 class ProfileView: UIView, ProfileDataSettable {
     
-    private lazy var profileLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Профиль"
-        label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.italicSystemFont(ofSize: 20)
-        label.textAlignment = .center
-        
-        return label
-    }()
-    
     private lazy var profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "emptyProfile")
@@ -47,9 +37,9 @@ class ProfileView: UIView, ProfileDataSettable {
      private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.italicSystemFont(ofSize: 16)
+        label.font = UIFont.italicSystemFont(ofSize: 22)
         label.textAlignment = .left
-        label.text = UserDefaults.standard.string(forKey: "UserName")
+        label.numberOfLines = 2
         
         return label
     }()
@@ -57,42 +47,29 @@ class ProfileView: UIView, ProfileDataSettable {
     private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.italicSystemFont(ofSize: 16)
+        label.font = UIFont.italicSystemFont(ofSize: 18)
         label.textAlignment = .left
-        label.text = UserDefaults.standard.string(forKey: "UserEmail")
 
         return label
     }()
     
-    lazy var exitButton: UIButton = {
-        let button = UIButton()
-        let title = "Выйти из профиля"
-        button.setTitle(title, for: .normal)
-        button.setTitleColor(ColorsManager.zbzbTextColor, for: .normal)
-        button.backgroundColor = .clear
+    private(set) lazy var profileTable: UITableView = {
+        let table = UITableView()
+        table.backgroundColor = .clear
+        table.showsVerticalScrollIndicator = false
+        table.isScrollEnabled = false
         
-        let font = UIFont.italicSystemFont(ofSize: 16)
-        let attributedSring = NSMutableAttributedString(string: title)
-        let range = NSRange(location: 0, length: title.count)
-
-//        attributedSring.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-//        attributedSring.addAttribute(.font, value: font, range: range)
-        attributedSring.addAttributes([.underlineStyle : NSUnderlineStyle.single.rawValue, .font : font], range: range)
-        button.titleLabel?.attributedText = attributedSring
-
-        return button
+        return table
     }()
-    
-    
+        
 
 //    MARK: Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorsManager.zbzbBackgroundColor
-        addSubview(profileLabel)
         addSubview(profileImage)
         addSubview(nameStack)
-        addSubview(exitButton)
+        addSubview(profileTable)
         
         setAllConstraints()
         
@@ -112,12 +89,9 @@ class ProfileView: UIView, ProfileDataSettable {
     
 //  MARK: Constraints
     private func setAllConstraints() {
-        self.profileLabel.snp.updateConstraints { make in
-            make.top.equalTo(self.snp.topMargin).offset(24)
-            make.centerX.equalTo(self.snp.centerX)
-        }
+
         self.profileImage.snp.updateConstraints { make in
-            make.top.equalTo(profileLabel.snp.bottom).offset(24)
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(24)
             make.leading.equalTo(self.snp.leading).offset(16)
             make.height.equalTo(120)
             make.width.equalTo(120)
@@ -127,9 +101,11 @@ class ProfileView: UIView, ProfileDataSettable {
             make.leading.equalTo(profileImage.snp.trailing).offset(24)
             make.trailing.equalToSuperview().offset(-16)
         }
-        self.exitButton.snp.updateConstraints { make in
+        self.profileTable.snp.updateConstraints { make in
             make.top.equalTo(profileImage.snp.bottom).offset(24)
-            make.leading.equalTo(self.snp.leading).offset(16)
+            make.leading.equalTo(self.snp.leading).offset(4)
+            make.trailing.equalTo(self.snp.trailing).offset(-4)
+            make.bottom.equalToSuperview()
         }
     }
 }

@@ -45,6 +45,7 @@ class RegistrationView: UIView {
         textField.autocapitalizationType = .none
         textField.returnKeyType = .done
         textField.textContentType = .emailAddress
+        textField.text = "1@1.ru"
         
         return textField
     }()
@@ -55,6 +56,7 @@ class RegistrationView: UIView {
         textField.returnKeyType = .done
         textField.textContentType = .password
         textField.isSecureTextEntry = true
+        textField.text = "123qwer"
         
         return textField
     }()

@@ -11,10 +11,6 @@ import FirebaseCore
 
 class RegistrationViewController: UIViewController {
     
-    private let regexForPassword = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$"
-    private let regexForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-    //    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$&*])[A-Za-z\\d!@#$&*]{6,}$"
-    
     private var registrationView: RegistrationView {
         view as! RegistrationView
     }
@@ -122,14 +118,18 @@ extension RegistrationViewController: UITextFieldDelegate {
         registrationView.confirmPasswordTextField.delegate = self
         
         //Added target on return button
-        registrationView.registrationStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
+        registrationView.registrationStack.arrangedSubviews.forEach( { [weak self] subview in
+            if let self = self {
+                if let subview = subview as? UITextField {
+                    subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
+                }
             }
         })
-        registrationView.emailPasswordStack.arrangedSubviews.forEach( { subview in
-            if let subview = subview as? UITextField {
-                subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
+        registrationView.emailPasswordStack.arrangedSubviews.forEach( { [weak self] subview in
+            if let self = self {
+                if let subview = subview as? UITextField {
+                    subview.addTarget(self, action: #selector(pressReturn), for: .primaryActionTriggered)
+                }
             }
         })
         
@@ -138,14 +138,19 @@ extension RegistrationViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        let attributes = [NSAttributedString.Key.foregroundColor: ColorsManager.zbzbTextColor.withAlphaComponent(0.5),
+        let color = ColorsManager.zbzbTextColor.withAlphaComponent(0.5)
+        let attributes = [NSAttributedString.Key.foregroundColor: color,
                           NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]
-        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: attributes)
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "",
+                                                             attributes: attributes)
         return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "")
+        let color = ColorsManager.zbzbTextColor.withAlphaComponent(0.5)
+        let attributes = [NSAttributedString.Key.foregroundColor: color]
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "",
+                                                             attributes: attributes)
         textField.resignFirstResponder()
         return true
     }
@@ -177,7 +182,7 @@ extension RegistrationViewController: UITextFieldDelegate {
     
     func checkValidation(stack: UIStackView) -> Bool {
         
-        var regex: String = ""
+        var regex: RegexType = .password
         var message = ""
         let titleAlertRegistration = "Ошибка регистрации"
         let signInTitle = "Ошибка входа"
@@ -189,9 +194,9 @@ extension RegistrationViewController: UITextFieldDelegate {
                 
                 switch textField.textContentType {
                 case .emailAddress?:
-                    regex = regexForEmail
+                    regex = .email
                 case .password?:
-                    regex = regexForPassword
+                    regex = .password
                 default:
                     break
                 }
@@ -212,7 +217,7 @@ extension RegistrationViewController: UITextFieldDelegate {
                         message += "\nВведите email"
                         textField.layer.borderColor = UIColor.red.cgColor
                         textField.layer.borderWidth = 0.4
-                    } else if !text.matches(regex) {
+                    } else if !text.matches(regex.rawValue) {
                         message += "\nПроверьте введенный email"
                         textField.layer.borderColor = UIColor.red.cgColor
                         textField.layer.borderWidth = 0.4
@@ -223,7 +228,7 @@ extension RegistrationViewController: UITextFieldDelegate {
                         message += "\nВведите пароль"
                         textField.layer.borderColor = UIColor.red.cgColor
                         textField.layer.borderWidth = 0.4
-                    } else if !text.matches(regex) {
+                    } else if !text.matches(regex.rawValue) {
                         message += "\nПароль должен содержать минимум 6 симфолов, 1 латинский символ и 1 цифру."
                         textField.layer.borderColor = UIColor.red.cgColor
                         textField.layer.borderWidth = 0.4

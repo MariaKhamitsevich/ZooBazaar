@@ -39,34 +39,40 @@ class BackendObtainer {
     
     func loadData() {
         
+        let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
+        
         let db = Firestore.firestore()
         
-        db.collection("BackendData").document(pet.rawValue).collection("backendData").getDocuments{ [weak self] (snapshot, error) in
-            guard let self = self else { return }
-            if let error = error {
-                Swift.debugPrint(error.localizedDescription)
-            } else if let snapshot = snapshot {
-                
-                for i in snapshot.documents {
-                    
-                    let brandName = i.get("brendName") as? String ?? ""
-                    let documentID = i.documentID
-                    db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments { [weak self] (snapshot, error) in
-                        guard let self = self else { return }
-                        if let error = error {
-                            Swift.debugPrint(error.localizedDescription)
-                        } else if let snapshot = snapshot {
+        queue.async { [weak self] in
+            if let self = self {
+                db.collection("BackendData").document(self.pet.rawValue).collection("backendData").getDocuments{ (snapshot, error) in
+                   
+                    if let error = error {
+                        Swift.debugPrint(error.localizedDescription)
+                    } else if let snapshot = snapshot {
+                        
+                        for i in snapshot.documents {
                             
-                            var brendProducts: [Product] = []
-                            
-                            for i in snapshot.documents {
-                                let product = Product.parseBrandProduct(productQuery: i)
-                                brendProducts.append(product)
+                            let brandName = i.get("brendName") as? String ?? ""
+                            let documentID = i.documentID
+                            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments { [weak self] (snapshot, error) in
+                                guard let self = self else { return }
+                                if let error = error {
+                                    Swift.debugPrint(error.localizedDescription)
+                                } else if let snapshot = snapshot {
+                                    
+                                    var brendProducts: [Product] = []
+                                    
+                                    for i in snapshot.documents {
+                                        let product = Product.parseBrandProduct(productQuery: i)
+                                        brendProducts.append(product)
+                                    }
+                                    
+                                    self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
+                                    print("Neded number of sections: \(self.parsedBackendData.count)")
+                                    self.callBack?()
+                                }
                             }
-                            
-                            self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
-                            print("Neded number of sections: \(self.parsedBackendData.count)")
-                            self.callBack?()
                         }
                     }
                 }

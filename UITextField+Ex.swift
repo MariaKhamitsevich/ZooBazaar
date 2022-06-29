@@ -32,7 +32,7 @@ extension UITextField {
 
 class ZBZTextField: UITextField {
 
-    let padding = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+    var padding = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
     let leftImage = UIImageView()
 
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
@@ -71,9 +71,11 @@ class ZBZTextField: UITextField {
             make.height.equalTo(UIScreen.main.bounds.height * 0.03)
             make.width.equalTo(UIScreen.main.bounds.height * 0.03)
         }
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
