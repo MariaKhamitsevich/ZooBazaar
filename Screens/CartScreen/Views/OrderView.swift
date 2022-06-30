@@ -8,6 +8,9 @@
 import UIKit
 import SnapKit
 import ALRadioButtons
+import FirebaseAuth
+import FirebaseCore
+import FirebaseFirestore
 
 class OrderView: UIView {
     
@@ -130,6 +133,8 @@ class OrderView: UIView {
         
         addAllSubViews()
         setAllConstraints()
+        
+        addAddress()
     }
     
     required init?(coder: NSCoder) {
@@ -181,6 +186,23 @@ class OrderView: UIView {
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
     }
+    
+    private func addAddress() {
+        let user = Auth.auth().currentUser
+        let uid = user?.uid
+        
+        let db = Firestore.firestore()
+        if let uid = uid {
+            db.collection("UserAddresses").document(uid).getDocument { [weak self] (snapshot, error) in
+                if let error = error {
+                    Swift.debugPrint(error.localizedDescription)
+                } else if let snapshot = snapshot {
+                    let text = snapshot.get("UserAddress")
+                    self?.addressTextField.text = text as? String ?? ""
+                }
+        }
+    }
+}
 }
 
 

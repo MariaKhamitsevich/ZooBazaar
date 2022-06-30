@@ -70,7 +70,12 @@ class SettingsTextFields: UIView {
         textField.layer.cornerRadius = 4
         textField.layer.borderColor = ColorsManager.zbzbTextColor.cgColor
         textField.layer.borderWidth = 0.2
-        textField.isHidden = true
+        textField.placeholder = "Подтвердите пароль"
+        let color = ColorsManager.zbzbTextColor.withAlphaComponent(0.5)
+        let attributes = [NSAttributedString.Key.foregroundColor: color]
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "",
+                                                             attributes: attributes)
+//        textField.isHidden = true
         
         return textField
     }()

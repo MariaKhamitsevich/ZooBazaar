@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
 
 enum TextFieldType {
     case name
@@ -32,7 +33,7 @@ enum TextFieldType {
 class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
     
     var textFieldType: TextFieldType = .name
-    var actionOnTextField: (() -> Void)?
+    @objc var actionOnTextField: (() -> Void)?
     
     private var settingsView: SettingsTextFields {
         view as! SettingsTextFields
@@ -62,10 +63,21 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
         } else {
             settingsView.secondTextField.isHidden = true
         }
+        
+        switch data.textFieldType {
+        case .name:
+            settingsView.confirmButton.addTarget(self, action: #selector(nameTextFieldAction), for: .touchUpInside)
+        case .address:
+            settingsView.confirmButton.addTarget(self, action: #selector(addressTextFieldAction), for: .touchUpInside)
+        case .email:
+            settingsView.confirmButton.addTarget(self, action: #selector(emailTextFieldAction), for: .touchUpInside)
+        case .password:
+            settingsView.confirmButton.addTarget(self, action: #selector(passwordTextFieldAction), for: .touchUpInside)
+        }
     }
     
     func addAllTargets() {
-        settingsView.confirmButton.addTarget(self, action: #selector(nameTextFieldAction), for: .touchUpInside)
+//        settingsView.confirmButton.addTarget(self, action: #selector(nameTextFieldAction), for: .touchUpInside)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -96,13 +108,106 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
             userChange?.commitChanges() { error in
                 if let error = error {
                     print("Name change error: \(error)")
+                    let alert = ZBZAlert(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                    alert.getAlert(controller: self)
                 } else {
-                    self.dismiss(animated: false)
+                    self.dismiss(animated: true)
                 }
             }
         } else {
             let alert = ZBZAlert(title: nil, message: "Введите имя", preferredStyle: .alert)
             alert.getAlert(controller: self)
         }
+    }
+    
+    @objc func addressTextFieldAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        
+        if settingsView.firstTextField.text != "" {
+            let text = settingsView.firstTextField.text ?? ""
+            let db = Firestore.firestore()
+            if let uid = user?.uid {
+                db.collection("UserAddresses").document(uid).setData(["UserAddress" : text]) { [weak self] error in
+                    if let error = error {
+                        Swift.debugPrint(error.localizedDescription)
+                    } else {
+                        self?.dismiss(animated: false)
+                    }
+                }
+            }
+        } else {
+            let alert = ZBZAlert(title: nil, message: "Введите адрес", preferredStyle: .alert)
+            alert.getAlert(controller: self)
+        }
+    }
+    
+    @objc func emailTextFieldAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        
+        if settingsView.firstTextField.text != "" {
+            if checkValidation(regex: .email, text: settingsView.firstTextField.text ?? "") {
+                let text = settingsView.firstTextField.text ?? ""
+                user?.updateEmail(to: text, completion: { error in
+                    if let error = error {
+                        print("Email change error: \(error)")
+                        let alert = ZBZAlert(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                        alert.getAlert(controller: self)
+                    } else {
+                        self.dismiss(animated: false)
+                    }
+                })
+            }
+            else {
+                let alert = ZBZAlert(title: nil, message: "Проверьте введенный email", preferredStyle: .alert)
+                alert.getAlert(controller: self)
+            }
+        }
+        else {
+            let alert = ZBZAlert(title: nil, message: "Введите email", preferredStyle: .alert)
+            alert.getAlert(controller: self)
+        }
+    }
+    
+    @objc func passwordTextFieldAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        
+        if settingsView.firstTextField.text == "" && settingsView.secondTextField.text == "" {
+            let alert = ZBZAlert(title: nil, message: "Введите новый пароль", preferredStyle: .alert)
+            alert.getAlert(controller: self)
+        }
+        else if settingsView.secondTextField.text == "" {
+            let alert = ZBZAlert(title: nil, message: "Подтвердите пароль", preferredStyle: .alert)
+            alert.getAlert(controller: self)}
+        else if settingsView.firstTextField.text != settingsView.secondTextField.text {
+            
+            let alert = ZBZAlert(title: nil, message: "Проверьте введенный пароль", preferredStyle: .alert)
+            alert.getAlert(controller: self)
+        }
+        else if settingsView.firstTextField.text != "" {
+            if checkValidation(regex: .password, text: settingsView.firstTextField.text ?? "") {
+           let text = settingsView.firstTextField.text ?? ""
+           user?.updatePassword(to: text, completion: { error in
+                if let error = error {
+                    print("Password change error: \(error)")
+                    let alert = ZBZAlert(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+                    alert.getAlert(controller: self)
+                } else {
+                    self.dismiss(animated: false)
+                }
+            })
+            } else {
+                let alert = ZBZAlert(title: nil, message: "Проверьте введенный пароль: \nПароль должен содержать минимум 6 симфолов, 1 латинский символ и 1 цифру", preferredStyle: .alert)
+                alert.getAlert(controller: self)
+            }
+       }
+        
+    }
+    
+    func checkValidation(regex: RegexType, text: String) -> Bool {
+        let regex: RegexType = regex
+        if text.matches(regex.rawValue) {
+            return true
+        }
+        return false
     }
 }
