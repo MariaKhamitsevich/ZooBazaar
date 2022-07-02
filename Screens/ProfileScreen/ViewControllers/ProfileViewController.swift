@@ -34,11 +34,15 @@ class ProfileViewController: UIViewController {
         profileView.profileTable.separatorStyle = .none
         tableDelegate.returnToRegistration = self.returnToRegistration
         tableDelegate.goToSettings = self.goTosettings
+        
+        tableDelegate.selfController = self
         getUserData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        let controller = OrdersTableViewController(orderProvider: OrderProvider())
+        tableDelegate.tableController = controller
         getUserData()
     }
     
@@ -68,6 +72,8 @@ class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource
     
     var returnToRegistration: (() -> Void)?
     var goToSettings: (() -> Void)?
+    var selfController: UIViewController?
+    var tableController: UITableViewController?
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -95,7 +101,10 @@ class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource
         case 1:
             goToSettings?()
         default:
-            print("Do nothing")
+            
+            if let tableController = tableController {
+                selfController?.navigationController?.pushViewController(tableController, animated: true)
+            }
         }
     }
 }

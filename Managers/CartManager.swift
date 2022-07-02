@@ -9,7 +9,7 @@ import UIKit
 
 class CartManager {
     
-    private var cartProducts: [Product] = []
+    private(set) var cartProducts: [Product] = []
     
     static var shared = CartManager()
     
@@ -95,6 +95,10 @@ class CartManager {
         }
         
         return totalPrice
+    }
+    
+    func cleanCart() {
+        cartProducts.removeAll()
     }
 }
 

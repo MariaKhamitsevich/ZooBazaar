@@ -28,7 +28,6 @@ class SettingsTableViewController: UITableViewController {
         navigationController?.navigationBar.barTintColor = ColorsManager.zbzbBackgroundColor
         
         self.title = "Настройки"
-//        navigationController?.navigationBar.topItem?.title = "Настройки"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22).boldItalic(), NSAttributedString.Key.foregroundColor : ColorsManager.zbzbTextColor]
     }
 

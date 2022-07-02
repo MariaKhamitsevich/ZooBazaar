@@ -58,6 +58,7 @@ class SettingsTextFields: UIView {
         textField.layer.cornerRadius = 4
         textField.layer.borderColor = ColorsManager.zbzbTextColor.cgColor
         textField.layer.borderWidth = 0.2
+        textField.autocapitalizationType = .none
         textField.becomeFirstResponder()
         
         
@@ -70,6 +71,7 @@ class SettingsTextFields: UIView {
         textField.layer.cornerRadius = 4
         textField.layer.borderColor = ColorsManager.zbzbTextColor.cgColor
         textField.layer.borderWidth = 0.2
+        textField.autocapitalizationType = .none
         textField.placeholder = "Подтвердите пароль"
         let color = ColorsManager.zbzbTextColor.withAlphaComponent(0.5)
         let attributes = [NSAttributedString.Key.foregroundColor: color]

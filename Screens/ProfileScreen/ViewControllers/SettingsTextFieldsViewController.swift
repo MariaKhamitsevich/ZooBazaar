@@ -33,7 +33,6 @@ enum TextFieldType {
 class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
     
     var textFieldType: TextFieldType = .name
-    @objc var actionOnTextField: (() -> Void)?
     
     private var settingsView: SettingsTextFields {
         view as! SettingsTextFields
@@ -56,6 +55,7 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
         settingsView.titleLabel.text = data.labelTitle
         settingsView.firstTextField.placeholder = data.firstTextFieldPlaceholder
         self.textFieldType = data.textFieldType
+        settingsView.firstTextField.keyboardType = data.textFieldType.keyboardType
         
         if let secondPlaceholder = data.secondTextFieldPlaceholder {
             settingsView.secondTextField.isHidden = false
