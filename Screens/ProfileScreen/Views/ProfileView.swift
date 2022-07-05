@@ -15,10 +15,17 @@ protocol ProfileDataSettable: AnyObject {
 
 class ProfileView: UIView, ProfileDataSettable {
     
-    private lazy var profileImage: UIImageView = {
+    let profileAvatarPlaceholder: UIImage = UIImage(named: "emptyProfile") ?? UIImage()
+    let imageSize = CGSize(width: 120, height: 120)
+  
+    
+    private(set) lazy var profileImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "emptyProfile")
+        image.image = profileAvatarPlaceholder
         image.backgroundColor = ColorsManager.zbzbBackgroundColor
+        image.clipsToBounds = true
+        image.isUserInteractionEnabled = true
+        image.layer.cornerRadius = imageSize.height / 2
         
         return image
     }()
@@ -93,8 +100,8 @@ class ProfileView: UIView, ProfileDataSettable {
         self.profileImage.snp.updateConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(24)
             make.leading.equalTo(self.snp.leading).offset(16)
-            make.height.equalTo(120)
-            make.width.equalTo(120)
+            make.height.equalTo(imageSize.height)
+            make.width.equalTo(imageSize.width)
         }
         self.nameStack.snp.updateConstraints { make in
             make.top.equalTo(profileImage.snp.top).offset(16)

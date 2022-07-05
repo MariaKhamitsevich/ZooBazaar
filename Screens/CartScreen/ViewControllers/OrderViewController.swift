@@ -57,7 +57,7 @@ class OrderViewController: UIViewController, UITextFieldDelegate {
             orderView.deliveryStack.isHidden = true
         }
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

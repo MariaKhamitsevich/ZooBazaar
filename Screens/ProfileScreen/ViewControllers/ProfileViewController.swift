@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseCore
+import FirebaseStorageUI
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -37,13 +39,16 @@ class ProfileViewController: UIViewController {
         
         tableDelegate.selfController = self
         getUserData()
+        
+        
+        profileView.profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPhotoFromGallery)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let controller = OrdersTableViewController(orderProvider: OrderProvider())
         tableDelegate.tableController = controller
-        getUserData()
+//        getUserData()
     }
     
     private func returnToRegistration() {
@@ -59,7 +64,82 @@ class ProfileViewController: UIViewController {
         if let user = Auth.auth().currentUser {
             self.profileView.setName(name: user.displayName ?? "")
             self.profileView.setEmail(email: user.email ?? "")
+            profileView.profileImage.sd_setImage(with: user.photoURL)
         }
+    }
+}
+
+extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @objc private func addPhotoFromGallery() {
+        
+        let alert = UIAlertController(title: "Выберите изображение", message: nil, preferredStyle: .actionSheet)
+        
+        let gallery = UIAlertAction(title: "Открыть галерею", style: .default, handler: { action in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.mediaTypes = ["public.image"]
+            picker.sourceType = .photoLibrary
+            picker.allowsEditing = false
+            self.present(picker, animated: true)
+        })
+        
+        let camera = UIAlertAction(title: "Сделать фото", style: .default, handler: { action in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType = .camera
+            picker.mediaTypes = ["public.image"]
+            picker.allowsEditing = false
+            self.present(picker, animated: true)
+        })
+        
+        let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        
+        alert.addAction(gallery)
+        alert.addAction(camera)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true)
+    }
+        
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+
+        guard let user = Auth.auth().currentUser,
+              let image = info[.originalImage] as? UIImage,
+              let data = image.jpegData(compressionQuality: 0.5) else {
+            return
+        }
+
+        let metadata = StorageMetadata()
+
+        let storageReference = Storage.storage().reference().child("users/\(user.uid)")
+        storageReference.putData(data, metadata: metadata) { [weak self] (metadata, error) in
+            if error == nil {
+                storageReference.downloadURL { (url, error) in
+                    let changeRequest = user.createProfileChangeRequest()
+                    changeRequest.photoURL = url
+                    changeRequest.commitChanges { (error) in
+                        if let error = error {
+                            if let self = self {
+                            let alert = ZBZAlert(title: "Загрузка", message: error.localizedDescription, preferredStyle: .alert)
+                            alert.getAlert(controller: self)
+                            }
+                        } else {
+                            Swift.debugPrint("Изображение загружено, Url: \(String(describing: url))")
+                        }
+                    }
+                }
+            } else {
+                Swift.debugPrint("Ошибка \(String(describing: error))")
+            }
+        }
+
+        profileView.profileImage.image = image
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -108,3 +188,5 @@ class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource
         }
     }
 }
+
+
