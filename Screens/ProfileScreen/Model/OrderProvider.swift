@@ -17,7 +17,6 @@ struct OrderProvider {
     
     func headerInSection(numberOfSection section: Int) -> String {
         "\(orderObtainer.parsedProducts[section].currentDate)\n\(orderObtainer.parsedProducts[section].totalCost) BYN"
-//        "\(orderObtainer.parsedProducts[section].totalCost)"
     }
     
     func numberOfRowsInSection(numberOfSection section: Int) -> Int {

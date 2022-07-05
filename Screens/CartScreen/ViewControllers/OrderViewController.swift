@@ -81,7 +81,6 @@ class OrderViewController: UIViewController, UITextFieldDelegate {
         
         let date = Date()
         let calendar = NSCalendar.current
-        
         let year = calendar.component(.year, from: date)
         let month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)

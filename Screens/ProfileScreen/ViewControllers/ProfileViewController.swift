@@ -40,7 +40,6 @@ class ProfileViewController: UIViewController {
         tableDelegate.selfController = self
         getUserData()
         
-        
         profileView.profileImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addPhotoFromGallery)))
     }
     
@@ -48,7 +47,7 @@ class ProfileViewController: UIViewController {
         super.viewWillAppear(animated)
         let controller = OrdersTableViewController(orderProvider: OrderProvider())
         tableDelegate.tableController = controller
-//        getUserData()
+        getUserData()
     }
     
     private func returnToRegistration() {
@@ -64,7 +63,12 @@ class ProfileViewController: UIViewController {
         if let user = Auth.auth().currentUser {
             self.profileView.setName(name: user.displayName ?? "")
             self.profileView.setEmail(email: user.email ?? "")
-            profileView.profileImage.sd_setImage(with: user.photoURL)
+            
+            let queue = DispatchQueue(label: "com.ZooBazaar.ProfileViewController.getUserData", qos: .userInitiated)
+            
+            queue.async { [weak self] in
+                self?.profileView.profileImage.sd_setImage(with: user.photoURL)
+            }
         }
     }
 }
@@ -75,22 +79,22 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
         
         let alert = UIAlertController(title: "Выберите изображение", message: nil, preferredStyle: .actionSheet)
         
-        let gallery = UIAlertAction(title: "Открыть галерею", style: .default, handler: { action in
+        let gallery = UIAlertAction(title: "Открыть галерею", style: .default, handler: { [weak self] action in
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.mediaTypes = ["public.image"]
             picker.sourceType = .photoLibrary
             picker.allowsEditing = false
-            self.present(picker, animated: true)
+            self?.present(picker, animated: true)
         })
         
-        let camera = UIAlertAction(title: "Сделать фото", style: .default, handler: { action in
+        let camera = UIAlertAction(title: "Сделать фото", style: .default, handler: { [weak self] action in
             let picker = UIImagePickerController()
             picker.delegate = self
             picker.sourceType = .camera
             picker.mediaTypes = ["public.image"]
             picker.allowsEditing = false
-            self.present(picker, animated: true)
+            self?.present(picker, animated: true)
         })
         
         let cancel = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
