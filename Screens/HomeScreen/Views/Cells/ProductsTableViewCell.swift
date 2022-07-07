@@ -34,7 +34,7 @@ class ProductsTableViewCell: UITableViewCell {
     private lazy var productNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 19)
         label.textAlignment = .left
         label.numberOfLines = 2
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -59,22 +59,21 @@ class ProfileViewController: UIViewController {
         navigationController?.pushViewController(SettingsTableViewController(), animated: true)
     }
     
-  private func getUserData() {
+    private func getUserData() {
         if let user = Auth.auth().currentUser {
             self.profileView.setName(name: user.displayName ?? "")
             self.profileView.setEmail(email: user.email ?? "")
             
-            let queue = DispatchQueue(label: "com.ZooBazaar.ProfileViewController.getUserData", qos: .userInitiated)
+            profileView.profileImage.sd_setImage(with: user.photoURL)
             
-            queue.async { [weak self] in
-                self?.profileView.profileImage.sd_setImage(with: user.photoURL)
-            }
         }
     }
 }
 
 extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+ 
     
+    //MARK: Add photo
     @objc private func addPhotoFromGallery() {
         
         let alert = UIAlertController(title: "Выберите изображение", message: nil, preferredStyle: .actionSheet)
@@ -105,7 +104,8 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
         
         present(alert, animated: true)
     }
-        
+   
+    //MARK: ImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
         guard let user = Auth.auth().currentUser,

@@ -14,6 +14,8 @@ class BackendObtainer {
     var callBack: (() -> Void)?
     var pet: Pets
     
+    let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
+    
     init(pet: Pets, callBack: (() -> Void)? = nil) {
         self.pet = pet
         self.callBack = callBack
@@ -37,9 +39,7 @@ class BackendObtainer {
     }
     
     func loadData() {
-        
-        let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
-        
+                
         let db = Firestore.firestore()
         
         queue.async { [weak self] in
@@ -54,8 +54,8 @@ class BackendObtainer {
                             
                             let brandName = i.get("brendName") as? String ?? ""
                             let documentID = i.documentID
-                            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments { [weak self] (snapshot, error) in
-                                guard let self = self else { return }
+                            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments {  (snapshot, error) in
+                               
                                 if let error = error {
                                     Swift.debugPrint(error.localizedDescription)
                                 } else if let snapshot = snapshot {

@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseStorage
-
+import FirebaseStorageUI
 
 struct Pet {
     var pet: Pets
@@ -39,7 +39,7 @@ struct Product {
     
     var productID: Int
     var productAmount = 1
-    
+        
     init(productName: String = "", productDescription: String = "", productImageURL: String = "", productPrice: Double = 0, isPopular: Bool = false, productID: Int = 0) {
         self.productName = productName
         self.productDescription = productDescription
@@ -60,6 +60,7 @@ struct Product {
         
         return product
     }
+    
 }
 
 

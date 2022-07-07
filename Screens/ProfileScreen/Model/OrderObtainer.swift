@@ -62,7 +62,7 @@ class OrderObtainer {
                                     }
                                 }
                             }
-                            self?.parsedProducts.append(orderModel)
+                            self?.parsedProducts.insert(orderModel, at: 0)
                         }
                     }
                 }

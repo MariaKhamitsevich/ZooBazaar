@@ -23,9 +23,9 @@ class DescriprionView: UIView {
     private lazy var productName: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         label.textColor = ColorsManager.zbzbTextColor
-        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 26))()
+        label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 20))()
         
         return label
     }()
@@ -109,8 +109,8 @@ class DescriprionView: UIView {
         self.productImage.snp.updateConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(112)
             make.leading.equalTo(self.snp.leading).offset(8)
-            make.height.equalTo(UIScreen.main.bounds.height / 3)
-            make.width.equalTo(UIScreen.main.bounds.height / 5.5)
+            make.height.equalTo(UIScreen.main.bounds.height / 3.6)
+            make.width.equalTo(UIScreen.main.bounds.height / 6.6)
         }
         self.productName.snp.updateConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
@@ -133,7 +133,6 @@ class DescriprionView: UIView {
             make.leading.equalTo(self.snp.leading).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
             make.bottom.lessThanOrEqualTo(addToCartButton.snp.top)
-//            make.height.equalTo(UIScreen.main.bounds.height / 4)
         }
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()

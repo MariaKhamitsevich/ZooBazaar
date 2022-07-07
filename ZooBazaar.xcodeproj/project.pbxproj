@@ -51,7 +51,6 @@
 		4C870F6128520D7100A3677D /* UITextField+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C870F6028520D7100A3677D /* UITextField+Ex.swift */; };
 		4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */; };
 		4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA88F932850F10400E81986 /* HomeTableViewController.swift */; };
-		4CB7374D285238A1008EC3C7 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB7374C285238A1008EC3C7 /* Products.swift */; };
 		4CC3D99A284350AA00E7DE51 /* UIButton+Ex .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */; };
 		4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77C9D285F7ABF00C35344 /* String+Ex.swift */; };
 		4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643528187D250052A2C2 /* AppDelegate.swift */; };
@@ -109,7 +108,6 @@
 		4C870F6028520D7100A3677D /* UITextField+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ex.swift"; sourceTree = "<group>"; };
 		4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		4CA88F932850F10400E81986 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
-		4CB7374C285238A1008EC3C7 /* Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ex .swift"; sourceTree = "<group>"; };
 		4CE77C9D285F7ABF00C35344 /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		4CED643228187D250052A2C2 /* ZooBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				4C21A87B282BAF0400C47623 /* Pets.swift */,
-				4CB7374C285238A1008EC3C7 /* Products.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -566,7 +563,6 @@
 				4C71F15F2835169D00F1A524 /* PetProvider.swift in Sources */,
 				4C41E3DF286CAE000068BF72 /* SettingsTextFields.swift in Sources */,
 				4C41E3E3286CD7FA0068BF72 /* Alert.swift in Sources */,
-				4CB7374D285238A1008EC3C7 /* Products.swift in Sources */,
 				4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */,
 				4C41E3E9287047DF0068BF72 /* OrdersTableViewCell.swift in Sources */,
 				4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */,
