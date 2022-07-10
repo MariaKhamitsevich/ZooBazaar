@@ -12,18 +12,37 @@ struct OrderProvider {
     private var orderObtainer = OrderObtainer()
     
     var numberOfSections: Int {
-        orderObtainer.parsedProducts.count
+        let products = orderObtainer.parsedProducts.sorted(by: {
+            $0.dateFromString.compare($1.dateFromString) == .orderedDescending
+        })
+        return products.count
     }
     
     func headerInSection(numberOfSection section: Int) -> String {
-        "\(orderObtainer.parsedProducts[section].currentDate)\n\(orderObtainer.parsedProducts[section].totalCost) BYN"
+        let products = orderObtainer.parsedProducts.sorted(by: {
+            $0.dateFromString.timeIntervalSince1970 > $1.dateFromString.timeIntervalSince1970
+        })
+      return "\(products[section].currentDate)\n\(products[section].totalCost) BYN"
     }
     
     func numberOfRowsInSection(numberOfSection section: Int) -> Int {
-        orderObtainer.parsedProducts[section].products.count
+        let products = orderObtainer.parsedProducts.sorted(by: {
+            $0.dateFromString.timeIntervalSince1970 > $1.dateFromString.timeIntervalSince1970
+        })
+       return products[section].products.count
     }
     
     func getProduct(numberOfSection IndexPath: IndexPath) -> Product {
-        orderObtainer.parsedProducts[IndexPath.section].products[IndexPath.row]
+        let products = orderObtainer.parsedProducts.sorted(by: {
+            $0.dateFromString.timeIntervalSince1970 > $1.dateFromString.timeIntervalSince1970
+        })
+        print("data: \(products[IndexPath.section].dateFromString)")
+       return products[IndexPath.section].products[IndexPath.row]
     }
+    
+//    func sortOrders(completion: (() -> Void)? = nil) {
+//        orderObtainer.parsedProducts.sort(by: {
+//            $0.dateFromString.timeIntervalSince1970 < $1.dateFromString.timeIntervalSince1970
+//        })
+//    }
 }

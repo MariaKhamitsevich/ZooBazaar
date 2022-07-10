@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class DescroptionViewController: UIViewController {
+    
+    var productCount: Int = 1
 
     var descriprionVeiw: DescriprionView {
         view as! DescriprionView
@@ -21,14 +23,18 @@ class DescroptionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        descriprionVeiw.amount.text = String(productCount)
         descriprionVeiw.addToCartButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        descriprionVeiw.increaseButton.addTarget(self, action: #selector(increaseAmount), for: .touchUpInside)
+        descriprionVeiw.decreaseButton.addTarget(self, action: #selector(decreaseAmount), for: .touchUpInside)
     }
     
     @objc func addToCart() {
         let controller = CartViewController()
         let cartManager = CartManager.shared
         
-        if let currentProduct = descriprionVeiw.currentProduct {
+        if var currentProduct = descriprionVeiw.currentProduct {
+            currentProduct.productAmount = productCount
             cartManager.addProduct(product: currentProduct)
         }
         if let view = controller.view as? CartView {
@@ -40,5 +46,17 @@ class DescroptionViewController: UIViewController {
 
         }
         
+    }
+    
+    @objc func decreaseAmount() {
+        if productCount != 1 {
+            productCount -= 1
+            descriprionVeiw.amount.text = String(productCount)
+        }
+    }
+    
+    @objc func increaseAmount() {
+        productCount += 1
+        descriprionVeiw.amount.text = String(productCount)
     }
 }

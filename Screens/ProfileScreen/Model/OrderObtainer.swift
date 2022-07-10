@@ -18,11 +18,18 @@ class OrderModel {
     var products: [Product] = []
     
     init(totalCost: Double = 0, currentDate: String = "", deliveryMethod: String = "", products: [Product] = []) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yy"
         self.totalCost = totalCost
         self.currentDate = currentDate
         self.deliveryMethod = deliveryMethod
         self.products = products
+        self.dateFromString = dateFormatter.date(from: self.currentDate) ?? Date()
     }
+    
+    var dateFromString: Date
+        
+    
 }
 
 class OrderObtainer {
@@ -52,6 +59,9 @@ class OrderObtainer {
                             orderModel.totalCost = document.get("TotalCost") as? Double ?? 0
                             orderModel.deliveryMethod = document.get("deliveryMethod") as? String ?? ""
                             orderModel.currentDate = document.get("CurrentDate") as? String ?? ""
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "dd.MM.yy"
+                            orderModel.dateFromString = dateFormatter.date(from: orderModel.currentDate) ?? Date()
                             
                             let productDictionary = document.get("Products") as? [String : [String : Any]]
                             
@@ -62,7 +72,7 @@ class OrderObtainer {
                                     }
                                 }
                             }
-                            self?.parsedProducts.insert(orderModel, at: 0)
+                            self?.parsedProducts.append(orderModel)
                         }
                     }
                 }

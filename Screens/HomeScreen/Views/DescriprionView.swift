@@ -13,6 +13,7 @@ import FirebaseStorageUI
 
 class DescriprionView: UIView {
     
+        
     private lazy var productImage: UIImageView = {
         let image = UIImageView()
         
@@ -32,7 +33,7 @@ class DescriprionView: UIView {
     
     private lazy var productId: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.textColor = ColorsManager.zbzbTextColor
         label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 16))()
         
@@ -41,9 +42,53 @@ class DescriprionView: UIView {
     
     private lazy var productPrice: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.textColor = ColorsManager.zbzbTextColor
         label.font = UIFont.boldItalic(UIFont.systemFont(ofSize: 16))()
+        
+        return label
+    }()
+    
+    private lazy var amountManagerStack: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [decreaseButton, amount, increaseButton])
+        stack.axis = .horizontal
+        stack.alignment = .center
+        stack.spacing = 8
+        
+        return stack
+    }()
+    
+    private(set) lazy var decreaseButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrowtriangle.backward.fill"), for: .normal)
+        button.tintColor = ColorsManager.zbzbTextColor
+        button.imageView?.snp.updateConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(24)
+        }
+        button.clipsToBounds = true
+        
+        
+        return button
+    }()
+    
+    private(set) lazy var increaseButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
+        button.tintColor = ColorsManager.zbzbTextColor
+        button.imageView?.snp.updateConstraints { make in
+            make.height.equalTo(24)
+            make.width.equalTo(24)
+        }
+        
+        return button
+    }()
+    
+    private(set) lazy var amount: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = ColorsManager.zbzbTextColor
         
         return label
     }()
@@ -81,6 +126,7 @@ class DescriprionView: UIView {
         addSubview(productName)
         addSubview(productId)
         addSubview(productPrice)
+        addSubview(amountManagerStack)
         addSubview(productDescription)
         addSubview(addToCartButton)
 
@@ -119,7 +165,7 @@ class DescriprionView: UIView {
             make.trailing.equalTo(self.snp.trailing).offset(-8)
         }
         self.productId.snp.updateConstraints { make in
-            make.top.equalTo(productName.snp.bottom).offset(16)
+            make.top.equalTo(productName.snp.bottom).offset(24)
             make.leading.equalTo(productImage.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
         }
@@ -127,6 +173,13 @@ class DescriprionView: UIView {
             make.top.equalTo(productId.snp.bottom).offset(16)
             make.leading.equalTo(productImage.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing).offset(-8)
+        }
+        self.amountManagerStack.snp.updateConstraints { make in
+            make.top.equalTo(productPrice.snp.bottom).offset(20)
+            make.centerX.equalTo(productPrice.snp.centerX)
+        }
+        self.amount.snp.updateConstraints { make in
+            make.width.equalTo(24)
         }
         self.productDescription.snp.updateConstraints { make in
             make.top.equalTo(productImage.snp.bottom).offset(16)

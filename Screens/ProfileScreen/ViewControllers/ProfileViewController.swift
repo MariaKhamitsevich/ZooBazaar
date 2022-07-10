@@ -46,8 +46,9 @@ class ProfileViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let controller = OrdersTableViewController(orderProvider: OrderProvider())
+//        controller.orderProvider.callBack = controller.tableView.reloadData
         tableDelegate.tableController = controller
-        getUserData()
+        reloadUserData()
     }
     
     private func returnToRegistration() {
@@ -66,6 +67,13 @@ class ProfileViewController: UIViewController {
             
             profileView.profileImage.sd_setImage(with: user.photoURL)
             
+        }
+    }
+    
+    private func reloadUserData() {
+        if let user = Auth.auth().currentUser {
+            self.profileView.setName(name: user.displayName ?? "")
+            self.profileView.setEmail(email: user.email ?? "")
         }
     }
 }

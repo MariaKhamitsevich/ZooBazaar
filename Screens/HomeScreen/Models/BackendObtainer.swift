@@ -68,7 +68,6 @@ class BackendObtainer {
                                     }
                                     
                                     self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
-                                    print("Neded number of sections: \(self.parsedBackendData.count)")
                                     self.callBack?()
                                 }
                             }
