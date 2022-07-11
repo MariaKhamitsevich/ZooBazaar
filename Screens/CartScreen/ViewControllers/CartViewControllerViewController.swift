@@ -83,7 +83,7 @@ class CartViewController: UIViewController {
         cartTableDelegate.checkEmpty = checkEmpty
         navigationController?.isNavigationBarHidden = true
         
-        cartView.orderingButton.addTarget(self, action: #selector(makeOrder), for: .touchUpInside)
+        cartView.orderingButton.addTarget(self, action: #selector(makeOrderOrReturn), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,22 +98,25 @@ class CartViewController: UIViewController {
         cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
     }
     
-   @objc private func makeOrder() {
+   @objc private func makeOrderOrReturn() {
+       if cartManager.productCount() != 0 {
        let controller = OrderViewController()
        navigationController?.pushViewController(controller, animated: true)
+       } else {
+           self.tabBarController?.selectedIndex = 0
+       }
     }
     
     private func checkEmpty() {
         if cartManager.productCount() != 0 {
             cartView.insteadeOfTableLabel.isHidden = true
             cartView.totalPriceLabel.isHidden = false
-            cartView.orderingButton.isEnabled = true
+            cartView.orderingButton.setTitle("Оформить заказ", for: .normal)
             cartView.orderingButton.alpha = 1
         } else {
             cartView.insteadeOfTableLabel.isHidden = false
             cartView.totalPriceLabel.isHidden = true
-            cartView.orderingButton.isEnabled = false
-            cartView.orderingButton.alpha = 0.7
+            cartView.orderingButton.setTitle("Вернуться к выбору товаров", for: .normal)
         }
     }
 }

@@ -97,7 +97,7 @@ class CartView: UIView {
         self.orderingButton.snp.updateConstraints { make in
             make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-24)
             make.centerX.equalToSuperview()
-            make.width.equalTo(UIScreen.main.bounds.width / 3 * 2)
+            make.width.equalTo(UIScreen.main.bounds.width / 3 * 2.25)
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }
         self.insteadeOfTableLabel.snp.updateConstraints { make in

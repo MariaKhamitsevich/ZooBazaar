@@ -16,6 +16,7 @@ class DescroptionViewController: UIViewController {
         view as! DescriprionView
     }
     
+    weak var parentVC: UIViewController?
     
     override func loadView() {
         view = DescriprionView()
@@ -30,22 +31,17 @@ class DescroptionViewController: UIViewController {
     }
     
     @objc func addToCart() {
-        let controller = CartViewController()
         let cartManager = CartManager.shared
         
         if var currentProduct = descriprionVeiw.currentProduct {
             currentProduct.productAmount = productCount
             cartManager.addProduct(product: currentProduct)
         }
-        if let view = controller.view as? CartView {
-            view.cartTable.reloadData()
-        }
         
         self.descriprionVeiw.addToCartButton.animateButtonTap(startWidth: 240, startHeight: 32) { _ in
             self.dismiss(animated: true)
 
         }
-        
     }
     
     @objc func decreaseAmount() {
