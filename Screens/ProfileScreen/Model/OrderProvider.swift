@@ -36,13 +36,6 @@ struct OrderProvider {
         let products = orderObtainer.parsedProducts.sorted(by: {
             $0.dateFromString.timeIntervalSince1970 > $1.dateFromString.timeIntervalSince1970
         })
-        print("data: \(products[IndexPath.section].dateFromString)")
        return products[IndexPath.section].products[IndexPath.row]
     }
-    
-//    func sortOrders(completion: (() -> Void)? = nil) {
-//        orderObtainer.parsedProducts.sort(by: {
-//            $0.dateFromString.timeIntervalSince1970 < $1.dateFromString.timeIntervalSince1970
-//        })
-//    }
 }

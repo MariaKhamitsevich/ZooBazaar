@@ -148,7 +148,13 @@ class DescriprionView: UIView {
         
         let storageRef = Storage.storage().reference()
         let reference = storageRef.child(product.productImageURL)
-        self.productImage.sd_setImage(with: reference)
+        reference.downloadURL { url, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            } else {
+                self.productImage.sd_setImage(with: url)
+            }
+          }
     }
     
     private func setAllConstraints() {
