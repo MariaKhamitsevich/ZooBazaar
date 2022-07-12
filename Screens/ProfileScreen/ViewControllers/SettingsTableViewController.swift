@@ -11,6 +11,7 @@ class SettingsTableViewController: UITableViewController {
     
     var settingsData: [ProfileTableData] = [
         .init(title: "Изменить адрес", image: .init(systemName: "house.circle.fill") ?? UIImage()),
+        .init(title: "Изменить номер телефона", image: .init(systemName: "phone.circle.fill") ?? UIImage()),
         .init(title: "Изменить имя", image: .init(systemName: "person.circle.fill") ?? UIImage()),
         .init(title: "Изменить почту", image: .init(systemName: "envelope.circle.fill") ?? UIImage()),
         .init(title: "Изменить пароль", image: .init(systemName: "key.fill") ?? UIImage())
@@ -59,9 +60,12 @@ class SettingsTableViewController: UITableViewController {
             let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый адрес", firstTextFieldPlaceholder: "Новый адрес", textFieldType: .address))
             present(controller, animated: true)
         case 1:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новое имя", firstTextFieldPlaceholder: "Новое имя", textFieldType: .name))
+            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый номер телефона", firstTextFieldPlaceholder: "+37529 111 11 11", textFieldType: .phone))
             present(controller, animated: true)
         case 2:
+            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новое имя", firstTextFieldPlaceholder: "Новое имя", textFieldType: .name))
+            present(controller, animated: true)
+        case 3:
             let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новую почту", firstTextFieldPlaceholder: "Новая почта", textFieldType: .email))
             present(controller, animated: true)
         default:

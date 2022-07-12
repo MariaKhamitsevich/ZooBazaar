@@ -78,6 +78,7 @@ class OrderViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func sendOrder() {
+        orderView.orderingButton.isEnabled = false
         let user = Auth.auth().currentUser
         
         let deliveryControl = orderView.delivaryMethodSegmentedControl
@@ -128,9 +129,12 @@ class OrderViewController: UIViewController, UITextFieldDelegate {
                  "Products" : productsDictionary
                 ]){ [weak self] error in
                     if let error = error {
+                        let alert = ZBZAlert(title: "Ошибка", message: "\(error.localizedDescription)\nПожалуйста, попробуйте позже", preferredStyle: .alert)
+                        alert.getAlert(controller: self)
                         Swift.debugPrint(error.localizedDescription)
                     } else {
                         self?.cartManager.cleanCart()
+                        self?.orderView.orderingButton.isEnabled = true
                         self?.navigationController?.popViewController(animated: true)
                     }
                 }

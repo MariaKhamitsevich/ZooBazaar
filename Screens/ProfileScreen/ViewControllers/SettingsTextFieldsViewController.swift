@@ -15,6 +15,7 @@ enum TextFieldType {
     case address
     case email
     case password
+    case phone
     
     var keyboardType: UIKeyboardType {
         switch self {
@@ -26,6 +27,8 @@ enum TextFieldType {
             return .emailAddress
         case .password:
             return .numbersAndPunctuation
+        case .phone:
+            return .phonePad
         }
     }
 }
@@ -73,6 +76,8 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
             settingsView.confirmButton.addTarget(self, action: #selector(emailTextFieldAction), for: .touchUpInside)
         case .password:
             settingsView.confirmButton.addTarget(self, action: #selector(passwordTextFieldAction), for: .touchUpInside)
+        case .phone:
+            settingsView.confirmButton.addTarget(self, action: #selector(phoneTextFieldAction), for: .touchUpInside)
         }
     }
     
@@ -201,6 +206,37 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
             }
        }
         
+    }
+    
+    @objc func phoneTextFieldAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+
+        if settingsView.firstTextField.text != "" {
+            if checkValidation(regex: .phone, text: settingsView.firstTextField.text ?? "") {
+                let text = settingsView.firstTextField.text ?? ""
+
+//                let phoneNumberCredential = PhoneAuthCredential.
+//                user?.updatePhoneNumber(<#T##phoneNumberCredential: PhoneAuthCredential##PhoneAuthCredential#>)
+//                user?.updateEmail(to: text, completion: { error in
+//                    if let error = error {
+//                        print("Email change error: \(error)")
+//                        let alert = ZBZAlert(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+//                        alert.getAlert(controller: self)
+//                    } else {
+//                        self.dismiss(animated: false)
+//                    }
+//                })
+//            }
+//            else {
+//                let alert = ZBZAlert(title: nil, message: "Проверьте введенный email", preferredStyle: .alert)
+//                alert.getAlert(controller: self)
+//            }
+//        }
+//        else {
+//            let alert = ZBZAlert(title: nil, message: "Введите email", preferredStyle: .alert)
+//            alert.getAlert(controller: self)
+            }
+        }
     }
     
     func checkValidation(regex: RegexType, text: String) -> Bool {
