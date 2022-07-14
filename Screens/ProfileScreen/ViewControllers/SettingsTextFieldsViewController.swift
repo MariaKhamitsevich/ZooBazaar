@@ -33,7 +33,7 @@ enum TextFieldType {
     }
 }
 
-class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
+final class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
     
     var textFieldType: TextFieldType = .name
     
@@ -49,7 +49,6 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         settingsView.firstTextField.delegate = self
         settingsView.secondTextField.delegate = self
-        // Do any additional setup after loading the view.
         
         addAllTargets()
     }
@@ -81,7 +80,7 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func addAllTargets() {
+  private func addAllTargets() {
 //        settingsView.confirmButton.addTarget(self, action: #selector(nameTextFieldAction), for: .touchUpInside)
     }
     
@@ -239,7 +238,7 @@ class SettingsTextFieldsViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func checkValidation(regex: RegexType, text: String) -> Bool {
+  private func checkValidation(regex: RegexType, text: String) -> Bool {
         let regex: RegexType = regex
         if text.matches(regex.rawValue) {
             return true

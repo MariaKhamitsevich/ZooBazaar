@@ -7,9 +7,9 @@
 
 import UIKit
 
-class OrdersTableViewController: UITableViewController {
+final class OrdersTableViewController: UITableViewController {
     
-    var orderProvider: OrderProvider
+   private var orderProvider: OrderProvider
     
     init(orderProvider: OrderProvider) {
         self.orderProvider = orderProvider
@@ -23,10 +23,20 @@ class OrdersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setTableProperties()
+        setNavigatinBar()
+    }
+   
+    //MARK: Table Properties
+    private func setTableProperties() {
         tableView.separatorStyle = .singleLine
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(OrdersTableViewCell.self, forCellReuseIdentifier: "OrdersTableViewCell")
         tableView.backgroundColor = ColorsManager.zbzbBackgroundColor
+    }
+    
+    //MARK: NavigationBar
+    private func setNavigatinBar() {
         navigationController?.isNavigationBarHidden = false
         let backButton = UIBarButtonItem()
         backButton.title = "Профиль"
@@ -37,9 +47,8 @@ class OrdersTableViewController: UITableViewController {
         self.title = "История заказов"
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22).boldItalic(), NSAttributedString.Key.foregroundColor : ColorsManager.zbzbTextColor]
     }
-   
+    
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         orderProvider.numberOfSections
     }

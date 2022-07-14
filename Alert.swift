@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class ZBZAlert: UIAlertController {
+final class ZBZAlert: UIAlertController {
     
     func getAlert(controller: UIViewController?, completion: (() -> Void)? = nil) {
         controller?.view.endEditing(true)

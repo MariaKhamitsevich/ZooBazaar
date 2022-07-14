@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class CartView: UIView {
+final class CartView: UIView {
     
     let cartManager = CartManager.shared
     
@@ -63,12 +63,8 @@ class CartView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorsManager.zbzbBackgroundColor
-        addSubview(logoImageView)
-        addSubview(totalPriceLabel)
-        addSubview(cartTable)
-        addSubview(orderingButton)
-        addSubview(insteadeOfTableLabel)
         
+        addAllSubvews()
         setAllConstraints()
     }
     
@@ -76,6 +72,13 @@ class CartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func addAllSubvews() {
+        addSubview(logoImageView)
+        addSubview(totalPriceLabel)
+        addSubview(cartTable)
+        addSubview(orderingButton)
+        addSubview(insteadeOfTableLabel)
+    }
     
     private func setAllConstraints() {
         self.logoImageView.snp.updateConstraints { make in

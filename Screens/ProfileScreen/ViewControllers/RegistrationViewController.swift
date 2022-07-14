@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import FirebaseCore
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     
     private var registrationView: RegistrationView {
         view as! RegistrationView
@@ -180,7 +180,7 @@ extension RegistrationViewController: UITextFieldDelegate {
         }
     }
     
-    func checkValidation(stack: UIStackView) -> Bool {
+    private func checkValidation(stack: UIStackView) -> Bool {
         
         var regex: RegexType = .password
         var message = ""
@@ -286,7 +286,7 @@ extension RegistrationViewController: UITextFieldDelegate {
         return true
     }
     
-    func getAlert(title: String?, message: String?, controller: UIViewController?, completion: (() -> Void)? = nil) {
+   private func getAlert(title: String?, message: String?, controller: UIViewController?, completion: (() -> Void)? = nil) {
         registrationView.endEditing(true)
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { _ in

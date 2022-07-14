@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MapsViewController: UIViewController {
+final class MapsViewController: UIViewController {
     
     var mapsView: MapsView {
         view as! MapsView

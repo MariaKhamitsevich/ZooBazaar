@@ -39,7 +39,7 @@ extension UIButton {
 
 
 
-class ButtonWithTouchSize: UIButton {
+final class ButtonWithTouchSize: UIButton {
     var touchAreaPadding: UIEdgeInsets?
     override func point(inside point: CGPoint,
                         with event: UIEvent?) -> Bool

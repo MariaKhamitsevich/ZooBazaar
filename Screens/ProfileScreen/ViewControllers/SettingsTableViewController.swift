@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
+final class SettingsTableViewController: UITableViewController {
     
-    var settingsData: [ProfileTableData] = [
+    private var settingsData: [ProfileTableData] = [
         .init(title: "Изменить адрес", image: .init(systemName: "house.circle.fill") ?? UIImage()),
         .init(title: "Изменить номер телефона", image: .init(systemName: "phone.circle.fill") ?? UIImage()),
         .init(title: "Изменить имя", image: .init(systemName: "person.circle.fill") ?? UIImage()),
@@ -19,10 +19,18 @@ class SettingsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableProperties()
+        setNavigationBar()
+    }
+    
+    private func setTableProperties() {
         tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         tableView.backgroundColor = ColorsManager.zbzbBackgroundColor
+    }
+    
+    private func setNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backItem?.title = "Профиль"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor

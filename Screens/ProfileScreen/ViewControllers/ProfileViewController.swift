@@ -12,7 +12,7 @@ import FirebaseCore
 import FirebaseStorageUI
 import FirebaseStorage
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     var profileView: ProfileView {
         view as! ProfileView
@@ -155,9 +155,9 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     }
 }
 
-class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
-    var profileData: [ProfileTableData] = [
+   private var profileData: [ProfileTableData] = [
         .init(title: "Выйти из профиля", image: .init(systemName: "arrowshape.turn.up.backward.fill") ?? UIImage()),
         .init(title: "Настройки", image: .init(systemName: "slider.horizontal.3") ?? UIImage()), .init(title: "История заказов", image: .init(systemName: "magazine.fill") ?? UIImage())
     ]
