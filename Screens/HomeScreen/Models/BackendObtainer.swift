@@ -8,11 +8,11 @@
 import UIKit
 import FirebaseFirestore
 
-class BackendObtainer {
+final class BackendObtainer {
     
     var parsedBackendData: [ProductsForPets] = []
     var callBack: (() -> Void)?
-    var pet: Pets
+    private let pet: Pets
     
     let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
     
@@ -23,7 +23,7 @@ class BackendObtainer {
     }
     
     func obtainPet() -> Pet {
-        return  Pet(pet: pet, products: self.parsedBackendData)
+        Pet(pet: pet, products: self.parsedBackendData)
     }
     
     func obtainPopularProducts() -> [Product] {
@@ -38,38 +38,35 @@ class BackendObtainer {
         return products
     }
     
-    func loadData() {
-                
+    private func loadData() {
+        
         let db = Firestore.firestore()
         
         queue.async { [weak self] in
-            if let self = self {
-                db.collection("BackendData").document(self.pet.rawValue).collection("backendData").getDocuments{ (snapshot, error) in
-                   
-                    if let error = error {
-                        Swift.debugPrint(error.localizedDescription)
-                    } else if let snapshot = snapshot {
-                        
-                        for i in snapshot.documents {
+            guard let self = self else {return}
+            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").getDocuments{ (snapshot, error) in
+                if let error = error {
+                    Swift.debugPrint(error.localizedDescription)
+                } else if let snapshot = snapshot {
+                    
+                    for document in snapshot.documents {
+                        let brandName = document.get("brendName") as? String ?? ""
+                        let documentID = document.documentID
+                        db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments {  (snapshot, error) in
                             
-                            let brandName = i.get("brendName") as? String ?? ""
-                            let documentID = i.documentID
-                            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments {  (snapshot, error) in
-                               
-                                if let error = error {
-                                    Swift.debugPrint(error.localizedDescription)
-                                } else if let snapshot = snapshot {
-                                    
-                                    var brendProducts: [Product] = []
-                                    
-                                    for i in snapshot.documents {
-                                        let product = Product.parseBrandProduct(productQuery: i)
-                                        brendProducts.append(product)
-                                    }
-                                    
-                                    self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
-                                    self.callBack?()
+                            if let error = error {
+                                Swift.debugPrint(error.localizedDescription)
+                            } else if let snapshot = snapshot {
+                                
+                                var brendProducts: [Product] = []
+                                
+                                for snapshotProduct in snapshot.documents {
+                                    let product = Product.parseBrandProduct(productQuery: snapshotProduct)
+                                    brendProducts.append(product)
                                 }
+                                
+                                self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
+                                self.callBack?()
                             }
                         }
                     }

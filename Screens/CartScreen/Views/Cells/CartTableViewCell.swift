@@ -15,7 +15,7 @@ protocol CartTableDataReloading: AnyObject {
     func reload(indexPath: IndexPath?)
 }
 
-class CartTableViewCell: UITableViewCell {
+final class CartTableViewCell: UITableViewCell {
     
     var callBack: (() -> Void)?
     var reloadCell: (() -> Void)?
@@ -27,7 +27,7 @@ class CartTableViewCell: UITableViewCell {
         return image
     }()
     
-    lazy var deleteProductButton: UIButton = {
+    private(set) lazy var deleteProductButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "deleteButton"), for: .normal)
         button.imageView?.tintColor = ColorsManager.zbzbTextColor
@@ -128,18 +128,9 @@ class CartTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = ColorsManager.unselectedBackgroundColor.withAlphaComponent(0.5)
 
-        
-        contentView.addSubview(productImage)
-        contentView.addSubview(productName)
-        contentView.addSubview(productPrice)
-        contentView.addSubview(deleteProductButton)
-        contentView.addSubview(amountStack)
-        
+        addAllSubviews()
         setAllConstraints()
-       
-        deleteProductButton.addTarget(self, action: #selector(deleteFromCart), for: .touchUpInside)
-        decreaseButton.addTarget(self, action: #selector(decreaseAmount), for: .touchUpInside)
-        increaseButton.addTarget(self, action: #selector(increaseAmount), for: .touchUpInside)
+        addAllTargets()
     }
     
     required init?(coder: NSCoder) {
@@ -181,6 +172,20 @@ class CartTableViewCell: UITableViewCell {
             cartManager.increaseAmount(product: currentProduct)
         }
         reloadCell?()
+    }
+    
+    private func addAllTargets() {
+        deleteProductButton.addTarget(self, action: #selector(deleteFromCart), for: .touchUpInside)
+        decreaseButton.addTarget(self, action: #selector(decreaseAmount), for: .touchUpInside)
+        increaseButton.addTarget(self, action: #selector(increaseAmount), for: .touchUpInside)
+    }
+    
+    private func addAllSubviews() {
+        contentView.addSubview(productImage)
+        contentView.addSubview(productName)
+        contentView.addSubview(productPrice)
+        contentView.addSubview(deleteProductButton)
+        contentView.addSubview(amountStack)
     }
     
     private func setAllConstraints() {

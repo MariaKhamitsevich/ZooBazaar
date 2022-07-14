@@ -8,26 +8,33 @@
 import UIKit
 import SnapKit
 
-class HomeScreenTableViewCell: UITableViewCell {
+final class HomeScreenTableViewCell: UITableViewCell {
     
-    var arrayOfProducts = [HomeScreenCellElements(name: "Кошки", image: UIImage(named: "cats products")),
-                           HomeScreenCellElements(name: "Собаки", image: UIImage(named: "dogs")),
-                           HomeScreenCellElements(name: "Грызуны", image: UIImage(named: "Mouse"))]
-    var catsObtainer: BackendObtainer = BackendObtainer(pet: .cats)
-    var dogsObtainer: BackendObtainer = BackendObtainer(pet: .dogs)
-    var rodentsObtainer: BackendObtainer = BackendObtainer(pet: .rodents)
+    private var arrayOfProducts = [HomeScreenCellElements(name: "Кошки", image: UIImage(named: "cats products")),
+                                   HomeScreenCellElements(name: "Собаки", image: UIImage(named: "dogs")),
+                                   HomeScreenCellElements(name: "Грызуны", image: UIImage(named: "Mouse"))]
     
-    var allPets: [BackendObtainer] {
-        [catsObtainer, dogsObtainer, rodentsObtainer]
+     var catsObtainer: BackendObtainer?
+     var dogsObtainer: BackendObtainer?
+     var rodentsObtainer: BackendObtainer?
+    
+    private var allPets: [BackendObtainer] {
+        guard let catsObtainer = catsObtainer,
+              let dogsObtainer = dogsObtainer,
+              let rodentsObtainer = rodentsObtainer else {
+            return []
+        }
+
+       return [catsObtainer, dogsObtainer, rodentsObtainer]
     }
- 
+    
     weak var controllerDelegate: UIViewController?
     
     //Номер секции в таблице (передается в таблице в методе cellForRowAt)
     var numberOfSectionInTable: Int = 0
     
     // MARK: CollectionView
-    private lazy var collectionView: UICollectionView = {
+    private(set) lazy var collectionView: UICollectionView = {
         
         let flow = UICollectionViewFlowLayout()
         flow.scrollDirection = .horizontal
@@ -56,23 +63,11 @@ class HomeScreenTableViewCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(collectionView)
         contentView.addSubview(dots)
         contentView.backgroundColor = .clear
-        
-        catsObtainer.callBack = { [weak self] in
-            self?.collectionView.reloadData()
-        }
-        
-        dogsObtainer.callBack = { [weak self] in
-            self?.collectionView.reloadData()
-        }
-        
-        rodentsObtainer.callBack = { [weak self] in
-            self?.collectionView.reloadData()
-        }
         
         setAllConstraints()
     }
@@ -147,6 +142,10 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: CollectionView didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let catsObtainer = catsObtainer,
+              let dogsObtainer = dogsObtainer,
+              let rodentsObtainer = rodentsObtainer else { return }
+        
         let catsProvider = PetProvider(petObtainer: catsObtainer)
         let dogsProvider = PetProvider(petObtainer: dogsObtainer)
         let rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
@@ -163,10 +162,10 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
                 controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: catsProvider), animated: true)
             }
         } else {
-            let controller = DescroptionViewController()
+            let controller = DescriptionViewController()
             let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
-            controller.descriprionVeiw.update(product: popularProducts[indexPath.row])
-            controller.descriprionVeiw.currentProduct = popularProducts[indexPath.row]
+            controller.descriptionVeiw.update(product: popularProducts[indexPath.row])
+            controller.descriptionVeiw.currentProduct = popularProducts[indexPath.row]
             controllerDelegate?.present(controller, animated: true)
         }
     }

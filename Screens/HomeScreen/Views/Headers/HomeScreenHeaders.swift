@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HomeScreenHeaders: UICollectionReusableView {
+final class HomeScreenHeaders: UICollectionReusableView {
 
     private lazy var headerLabel: UILabel = {
         let label = UILabel()

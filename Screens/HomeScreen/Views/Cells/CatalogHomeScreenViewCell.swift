@@ -8,7 +8,7 @@ struct HomeScreenCellElements {
     
 }
 
-class CatalogHomeScreenViewCell: UICollectionViewCell {
+final class CatalogHomeScreenViewCell: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = ColorsManager.zbzbTextColor
@@ -32,9 +32,8 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(productImage)
         contentView.backgroundColor = .clear
+        addAllSubviews()
         setAllConstraints()
     }
     
@@ -45,6 +44,11 @@ class CatalogHomeScreenViewCell: UICollectionViewCell {
     func updateValues(element: HomeScreenCellElements) {
         nameLabel.text = element.name
         productImage.image = element.image
+    }
+    
+    private func addAllSubviews() {
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(productImage)
     }
     
     private func setAllConstraints() {

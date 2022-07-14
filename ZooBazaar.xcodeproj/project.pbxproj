@@ -46,7 +46,7 @@
 		4C71F15D2834D3C800F1A524 /* BackendObtainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F15C2834D3C800F1A524 /* BackendObtainer.swift */; };
 		4C71F15F2835169D00F1A524 /* PetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F15E2835169D00F1A524 /* PetProvider.swift */; };
 		4C71F16328355A4500F1A524 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F16228355A4500F1A524 /* CartTableViewCell.swift */; };
-		4C71F1672835607200F1A524 /* DescroptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F1662835607200F1A524 /* DescroptionViewController.swift */; };
+		4C71F1672835607200F1A524 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F1662835607200F1A524 /* DescriptionViewController.swift */; };
 		4C71F1692835608F00F1A524 /* DescriprionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C71F1682835608F00F1A524 /* DescriprionView.swift */; };
 		4C870F6128520D7100A3677D /* UITextField+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C870F6028520D7100A3677D /* UITextField+Ex.swift */; };
 		4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */; };
@@ -103,7 +103,7 @@
 		4C71F15C2834D3C800F1A524 /* BackendObtainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendObtainer.swift; sourceTree = "<group>"; };
 		4C71F15E2835169D00F1A524 /* PetProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetProvider.swift; sourceTree = "<group>"; };
 		4C71F16228355A4500F1A524 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
-		4C71F1662835607200F1A524 /* DescroptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescroptionViewController.swift; sourceTree = "<group>"; };
+		4C71F1662835607200F1A524 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		4C71F1682835608F00F1A524 /* DescriprionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriprionView.swift; sourceTree = "<group>"; };
 		4C870F6028520D7100A3677D /* UITextField+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ex.swift"; sourceTree = "<group>"; };
 		4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -266,7 +266,7 @@
 				4CED644928187E5E0052A2C2 /* HomeScreenViewController.swift */,
 				4CA88F932850F10400E81986 /* HomeTableViewController.swift */,
 				4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */,
-				4C71F1662835607200F1A524 /* DescroptionViewController.swift */,
+				4C71F1662835607200F1A524 /* DescriptionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -545,7 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C1DAB0A2819453E0043B08D /* CartViewControllerViewController.swift in Sources */,
-				4C71F1672835607200F1A524 /* DescroptionViewController.swift in Sources */,
+				4C71F1672835607200F1A524 /* DescriptionViewController.swift in Sources */,
 				4C6B66BB2861BBE200152BF9 /* OrderViewController.swift in Sources */,
 				4C6F91AD284CB5E400B00B94 /* HomeScreenTableViewCell.swift in Sources */,
 				4C039B562832D48B001EEDB6 /* UIFont+Ex.swift in Sources */,

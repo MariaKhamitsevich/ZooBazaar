@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ProductsTableHeaderView: UIView {
+final class ProductsTableHeaderView: UIView {
 
     private lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -20,6 +20,7 @@ class ProductsTableHeaderView: UIView {
         
         return label
     }()
+    
     var title: String? {
         get {
             headerLabel.text

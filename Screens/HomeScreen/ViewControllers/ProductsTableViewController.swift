@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ProductsTableViewController: UITableViewController {
+final class ProductsTableViewController: UITableViewController {
    
-    var pets: PetProvider
+    private(set)  var pets: PetProvider
     
     init(pets: PetProvider) {
         self.pets = pets
@@ -22,25 +22,32 @@ class ProductsTableViewController: UITableViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableProperties()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
+    private func setTableProperties() {
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(ProductsTableViewCell.self, forCellReuseIdentifier: "ProductsTableViewCell")
         tableView.backgroundColor = ColorsManager.zbzbBackgroundColor
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private func setNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backItem?.title = "Назад в каталог"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor
         navigationController?.navigationBar.barTintColor = ColorsManager.zbzbBackgroundColor
     }
     
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return pets.numberOfSections
+         pets.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -63,9 +70,8 @@ class ProductsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = DescroptionViewController()
-        controller.descriprionVeiw.update(product: pets.getProduct(numberOfSection: indexPath))
-        controller.descriprionVeiw.currentProduct = pets.getProduct(numberOfSection: indexPath)
+        let controller = DescriptionViewController()
+        controller.prepareForPresent(product: pets.getProduct(numberOfSection: indexPath))
         present(controller, animated: true)
     }
 }

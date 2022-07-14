@@ -11,7 +11,7 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseStorageUI
 
-class PopularCollectionViewCell: UICollectionViewCell {
+final class PopularCollectionViewCell: UICollectionViewCell {
     
     private lazy var productImageView: UIImageView = {
         let imageView = UIImageView()
@@ -61,13 +61,14 @@ class PopularCollectionViewCell: UICollectionViewCell {
         
         let storageRef = Storage.storage().reference()
         let reference = storageRef.child(product.productImageURL)
-        reference.downloadURL { url, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            } else {
-                self.productImageView.sd_setImage(with: url)
-            }
-          }
+        self.productImageView.sd_setImage(with: reference)
+//        reference.downloadURL { url, error in
+//            if let error = error {
+//                print("Error: \(error.localizedDescription)")
+//            } else {
+//                self.productImageView.sd_setImage(with: url)
+//            }
+//          }
     }
     
     private func setAllConstraints() {

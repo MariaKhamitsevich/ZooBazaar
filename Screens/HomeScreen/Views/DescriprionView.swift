@@ -11,13 +11,16 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseStorageUI
 
-class DescriprionView: UIView {
+final class DescriprionView: UIView {
     
-        
+    var productCount: Int = 1 {
+        didSet {
+            amount.text = String(productCount)
+        }
+    }
+    
     private lazy var productImage: UIImageView = {
         let image = UIImageView()
-        
-        
         return image
     }()
     
@@ -122,18 +125,8 @@ class DescriprionView: UIView {
         super.init(frame: frame)
         backgroundColor = ColorsManager.unselectedBackgroundColor
         
-        addSubview(productImage)
-        addSubview(productName)
-        addSubview(productId)
-        addSubview(productPrice)
-        addSubview(amountManagerStack)
-        addSubview(productDescription)
-        addSubview(addToCartButton)
-
-        
+        addAllSubviews()
         setAllConstraints()
-        
-
     }
   
     required init?(coder: NSCoder) {
@@ -155,6 +148,16 @@ class DescriprionView: UIView {
                 self.productImage.sd_setImage(with: url)
             }
           }
+    }
+    
+    private func addAllSubviews() {
+        addSubview(productImage)
+        addSubview(productName)
+        addSubview(productId)
+        addSubview(productPrice)
+        addSubview(amountManagerStack)
+        addSubview(productDescription)
+        addSubview(addToCartButton)
     }
     
     private func setAllConstraints() {

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class HomeScreenViewController: UIViewController {
+final class HomeScreenViewController: UIViewController {
     
     private var homeView: HomeScreenView {
         view as! HomeScreenView
@@ -15,7 +15,6 @@ class HomeScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
         addTableController()
     }
     
@@ -26,7 +25,7 @@ class HomeScreenViewController: UIViewController {
     
     private func addTableController() {
         addChild(tableViewController)
-        homeView.addTableConstraints(tableView: tableViewController.tableView)
+        homeView.setChildTable(tableView: tableViewController.tableView)
         tableViewController.didMove(toParent: self)
     }
 }

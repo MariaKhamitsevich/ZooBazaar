@@ -7,17 +7,12 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
+final class HomeTableViewController: UITableViewController {
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.backgroundColor = .clear
-        tableView.rowHeight = UIScreen.main.bounds.height / 3.4
-        tableView.separatorStyle = .none
-        tableView.showsVerticalScrollIndicator = false
-        tableView.isScrollEnabled = false
-        tableView.register(HomeScreenTableViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
+        setTableProperties()
     }
 
     // MARK: - Table view data source
@@ -29,11 +24,11 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+         2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,6 +37,20 @@ class HomeTableViewController: UITableViewController {
         cell.numberOfSectionInTable = indexPath.section
         cell.controllerDelegate = self
         cell.backgroundColor = .clear
+        
+        cell.catsObtainer = BackendObtainer(pet: .cats, callBack: cell.collectionView.reloadData)
+        cell.dogsObtainer = BackendObtainer(pet: .dogs, callBack: cell.collectionView.reloadData)
+        cell.rodentsObtainer = BackendObtainer(pet: .rodents, callBack: cell.collectionView.reloadData)
+        
         return cell
+    }
+    
+    private func setTableProperties() {
+        tableView.backgroundColor = .clear
+        tableView.rowHeight = UIScreen.main.bounds.height / 3.4
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.isScrollEnabled = false
+        tableView.register(HomeScreenTableViewCell.self, forCellReuseIdentifier: "HomeScreenTableViewCell")
     }
 }

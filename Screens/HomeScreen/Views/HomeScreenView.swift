@@ -2,7 +2,7 @@
 import UIKit
 import SnapKit
 
-class HomeScreenView: UIView {
+final class HomeScreenView: UIView {
     
     private lazy var logoImageView: UIImageView = {
         let image = UIImageView()
@@ -37,7 +37,7 @@ class HomeScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func addTableConstraints(tableView: UITableView) {
+    func setChildTable(tableView: UITableView) {
         addSubview(tableView)
         tableView.snp.updateConstraints { make in
             make.topMargin.equalTo(wellcomeLabel.snp.bottomMargin)

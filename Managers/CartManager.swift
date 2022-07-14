@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartManager {
+final class CartManager {
     
     private(set) var cartProducts: [Product] = []
     
@@ -62,7 +62,6 @@ class CartManager {
                     products.remove(at: i)
                 }
             }
-            
             cartProducts = products
         }
     }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSource {
+final class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     let cartManager = CartManager.shared
     var updateTotalCost: (() -> Void)?
@@ -15,9 +15,11 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cartManager.productCount()
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CartTableViewCell") as! CartTableViewCell
         
@@ -59,7 +61,7 @@ class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDataSourc
     
 }
 
-class CartViewController: UIViewController {
+final class CartViewController: UIViewController {
     
     let cartManager = CartManager.shared
     var cartTableDelegate = CartTableViewSettings()
@@ -75,14 +77,7 @@ class CartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cartView.cartTable.rowHeight = UITableView.automaticDimension
-        cartView.cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: "CartTableViewCell")
-        cartView.cartTable.separatorStyle = .singleLine
-        cartView.cartTable.tableFooterView = UIView(frame: .zero)
-        cartTableDelegate.updateTotalCost = updateTotalCost
-        cartTableDelegate.checkEmpty = checkEmpty
-        navigationController?.isNavigationBarHidden = true
-        
+        setCartTable()
         cartView.orderingButton.addTarget(self, action: #selector(makeOrderOrReturn), for: .touchUpInside)
     }
     
@@ -96,6 +91,15 @@ class CartViewController: UIViewController {
     
     private func updateTotalCost() {
         cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
+    }
+    
+    private func setCartTable() {
+        cartView.cartTable.rowHeight = UITableView.automaticDimension
+        cartView.cartTable.register(CartTableViewCell.self, forCellReuseIdentifier: "CartTableViewCell")
+        cartView.cartTable.separatorStyle = .singleLine
+        cartView.cartTable.tableFooterView = UIView(frame: .zero)
+        cartTableDelegate.updateTotalCost = updateTotalCost
+        cartTableDelegate.checkEmpty = checkEmpty
     }
     
    @objc private func makeOrderOrReturn() {

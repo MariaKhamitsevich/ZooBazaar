@@ -8,8 +8,8 @@
 import Foundation
 
 struct PetProvider {
-    private var petObtainer: BackendObtainer
-    private var pet: Pet
+    private let petObtainer: BackendObtainer
+    private let pet: Pet
     
     init(petObtainer: BackendObtainer) {
         self.petObtainer = petObtainer
@@ -17,23 +17,23 @@ struct PetProvider {
     }
     
     var numberOfSections: Int {
-        self.pet.products.count
+        pet.products.count
     }
     
     func headerInSection(numberOfSection section: Int) -> String {
-        self.pet.products[section].brendName
+        pet.products[section].brendName
     }
     
     func numberOfRowsInSection(numberOfSection section: Int) -> Int {
-        self.pet.products[section].brendProducts.count
+        pet.products[section].brendProducts.count
     }
     
     func getProduct(numberOfSection IndexPath: IndexPath) -> Product {
-        self.pet.products[IndexPath.section].brendProducts[IndexPath.row]
+        pet.products[IndexPath.section].brendProducts[IndexPath.row]
     }
     
     func getPopularProducts() -> [Product] {
-        self.petObtainer.obtainPopularProducts()
+        petObtainer.obtainPopularProducts()
     }
 }
  

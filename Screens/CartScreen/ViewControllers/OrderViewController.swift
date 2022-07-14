@@ -10,10 +10,9 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 
-class OrderViewController: UIViewController, UITextFieldDelegate {
+final class OrderViewController: UIViewController, UITextFieldDelegate {
     
     let cartManager = CartManager.shared
-//    var navigationBarHeight: CGFloat?
     
     private var orderView: OrderView {
         view as! OrderView
@@ -33,10 +32,14 @@ class OrderViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setNavigationBar()
+        orderView.orderPriceLabel.text = "Сумма заказа: \(cartManager.countTotalPrice()) руб."
+    }
+    
+    private func setNavigationBar() {
         navigationController?.isNavigationBarHidden = false
         navigationController?.navigationBar.backItem?.title = "Назад в корзину"
         navigationController?.navigationBar.tintColor = ColorsManager.zbzbTextColor
-        orderView.orderPriceLabel.text = "Сумма заказа: \(cartManager.countTotalPrice()) руб."
     }
     
     private func addAllTargets() {
