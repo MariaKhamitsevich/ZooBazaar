@@ -23,18 +23,6 @@ final class CartManager {
         cartProducts[indexPath.row]
     }
     
-    func checkProductAmount(product: Product) -> Int {
-        guard !cartProducts.isEmpty
-        else {
-            return 0
-        }
-        for i in 0...(cartProducts.count - 1) {
-            if product.productID == cartProducts[i].productID {
-                return cartProducts[i].productAmount
-            }
-        }
-        return 0
-    }
     func addProduct(product: Product) {
         guard !cartProducts.isEmpty
         else {
