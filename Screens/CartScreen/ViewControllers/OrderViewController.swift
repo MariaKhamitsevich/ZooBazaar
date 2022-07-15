@@ -85,9 +85,12 @@ final class OrderViewController: UIViewController, UITextFieldDelegate {
         orderView.addressTextField.layer.borderWidth = 0
         orderView.telephoneTextField.layer.borderWidth = 0
         
-        if checkAddressAndPhone() {
-            sendOrder()
-        }
+        orderView.orderingButton.animateButtonTap(startWidth: UIScreen.main.bounds.width / 3 * 2, startHeight: UIScreen.main.bounds.height * 0.05, completion: { [weak self] _ in
+            guard let self = self else { return }
+            if self.checkAddressAndPhone() {
+                self.sendOrder()
+            }
+        })
     }
     
     private func sendOrder() {

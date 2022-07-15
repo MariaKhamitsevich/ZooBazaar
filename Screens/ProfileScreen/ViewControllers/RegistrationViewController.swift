@@ -75,6 +75,7 @@ final class RegistrationViewController: UIViewController {
                 }
             }
         }
+        sender.animateButtonTap(startWidth: UIScreen.main.bounds.width / 3 * 2, startHeight: UIScreen.main.bounds.height * 0.05, completion: nil)
     }
     
     @objc private func signIn(_ sender: UIButton) {
@@ -103,6 +104,7 @@ final class RegistrationViewController: UIViewController {
                 }
             }
         }
+        sender.animateButtonTap(startWidth: UIScreen.main.bounds.width / 3 * 2, startHeight: UIScreen.main.bounds.height * 0.05, completion: nil)
     }
 }
 

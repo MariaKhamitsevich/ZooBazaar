@@ -101,12 +101,14 @@ final class CartViewController: UIViewController {
     }
     
    @objc private func makeOrderOrReturn() {
-       if cartManager.productCount() != 0 {
-       let controller = OrderViewController()
-       navigationController?.pushViewController(controller, animated: true)
-       } else {
-           self.tabBarController?.selectedIndex = 0
-       }
+       cartView.orderingButton.animateButtonTap(startWidth: UIScreen.main.bounds.width / 3 * 2.25, startHeight: UIScreen.main.bounds.height * 0.05, completion: { [weak self] _ in
+           if self?.cartManager.productCount() != 0 {
+               let controller = OrderViewController()
+               self?.navigationController?.pushViewController(controller, animated: true)
+           } else {
+               self?.tabBarController?.selectedIndex = 0
+           }
+       })
     }
     
     private func checkEmpty() {
