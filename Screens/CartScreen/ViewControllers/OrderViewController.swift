@@ -12,8 +12,8 @@ import FirebaseFirestore
 
 final class OrderViewController: UIViewController, UITextFieldDelegate {
     
-    let cartManager = CartManager.shared
-    
+    private let cartManager = CartManager.shared
+    private var orderSender: OrderSender
     
     private var orderView: OrderView {
         view as! OrderView
@@ -28,8 +28,17 @@ final class OrderViewController: UIViewController, UITextFieldDelegate {
         
         addAllTargets()
         addAddress()
+        addPhoneNumber()
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        self.orderSender = OrderSender(products: cartManager.cartProducts)
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -84,7 +93,6 @@ final class OrderViewController: UIViewController, UITextFieldDelegate {
     private func sendOrder() {
         orderView.orderingButton.isEnabled = false
         
-        let orderSender = OrderSender(products: cartManager.cartProducts)
         let deliveryControl = orderView.delivaryMethodSegmentedControl
         
         var delivaryMethod = ""
@@ -157,6 +165,23 @@ final class OrderViewController: UIViewController, UITextFieldDelegate {
                 } else if let snapshot = snapshot {
                     let text = snapshot.get("UserAddress")
                     self?.orderView.addressTextField.text = text as? String ?? ""
+                }
+            }
+        }
+    }
+    
+    private func addPhoneNumber() {
+        let user = Auth.auth().currentUser
+        let uid = user?.uid
+        
+        let db = Firestore.firestore()
+        if let uid = uid {
+            db.collection("UserPhone").document(uid).getDocument { [weak self] (snapshot, error) in
+                if let error = error {
+                    Swift.debugPrint(error.localizedDescription)
+                } else if let snapshot = snapshot {
+                    let text = snapshot.get("UserPhoneNumber")
+                    self?.orderView.telephoneTextField.text = text as? String ?? ""
                 }
             }
         }

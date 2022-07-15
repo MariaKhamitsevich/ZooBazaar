@@ -140,7 +140,7 @@ final class CartTableViewCell: UITableViewCell {
     
     func updateValue(product: Product, indexPath: IndexPath) {
         productName.text = product.productName
-        productPrice.text = "Цена: " + String(product.totalCost) + " BYN"
+        productPrice.text = "Цена: " + String(Double(round(100 * product.totalCost) / 100) ) + " BYN"
         currentProduct = product
         amount.text = String(product.productAmount)
         

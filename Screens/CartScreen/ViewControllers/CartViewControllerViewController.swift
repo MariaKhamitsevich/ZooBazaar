@@ -57,8 +57,6 @@ final class CartTableViewSettings: NSObject, UITableViewDelegate, UITableViewDat
         
         return cell
     }
-    
-    
 }
 
 final class CartViewController: UIViewController {
@@ -90,7 +88,7 @@ final class CartViewController: UIViewController {
     }
     
     private func updateTotalCost() {
-        cartView.totalPriceLabel.text = "Итого: " + String(cartManager.countTotalPrice()) + " BYN"
+        cartView.totalPriceLabel.text = "Итого: " + String(Double(round(100 * cartManager.countTotalPrice()) / 100) ) + " BYN"
     }
     
     private func setCartTable() {

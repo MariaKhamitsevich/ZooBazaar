@@ -145,6 +145,33 @@ final class SettingsTextFieldsViewController: UIViewController, UITextFieldDeleg
         }
     }
     
+    @objc func phoneTextFieldAction(_ sender: UIButton) {
+        let user = Auth.auth().currentUser
+        
+        if settingsView.firstTextField.text != "" {
+            if checkValidation(regex: .phone, text: settingsView.firstTextField.text ?? "") {
+                let text = settingsView.firstTextField.text ?? ""
+                let db = Firestore.firestore()
+                if let uid = user?.uid {
+                    db.collection("UserPhone").document(uid).setData(
+                        ["UserPhoneNumber" : text]) { [weak self] error in
+                            if let error = error {
+                                Swift.debugPrint(error.localizedDescription)
+                            } else {
+                                self?.dismiss(animated: false)
+                            }
+                        }
+                    }
+                } else {
+                    let alert = ZBZAlert(title: nil, message: "Проверьте введенный номер", preferredStyle: .alert)
+                    alert.getAlert(controller: self)
+                }
+            }  else {
+                let alert = ZBZAlert(title: nil, message: "Введите номер телефона", preferredStyle: .alert)
+                alert.getAlert(controller: self)
+            }
+    }
+    
     @objc func emailTextFieldAction(_ sender: UIButton) {
         let user = Auth.auth().currentUser
         
@@ -205,37 +232,6 @@ final class SettingsTextFieldsViewController: UIViewController, UITextFieldDeleg
             }
        }
         
-    }
-    
-    @objc func phoneTextFieldAction(_ sender: UIButton) {
-        let user = Auth.auth().currentUser
-
-        if settingsView.firstTextField.text != "" {
-            if checkValidation(regex: .phone, text: settingsView.firstTextField.text ?? "") {
-                let text = settingsView.firstTextField.text ?? ""
-
-//                let phoneNumberCredential = PhoneAuthCredential.
-//                user?.updatePhoneNumber(<#T##phoneNumberCredential: PhoneAuthCredential##PhoneAuthCredential#>)
-//                user?.updateEmail(to: text, completion: { error in
-//                    if let error = error {
-//                        print("Email change error: \(error)")
-//                        let alert = ZBZAlert(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-//                        alert.getAlert(controller: self)
-//                    } else {
-//                        self.dismiss(animated: false)
-//                    }
-//                })
-//            }
-//            else {
-//                let alert = ZBZAlert(title: nil, message: "Проверьте введенный email", preferredStyle: .alert)
-//                alert.getAlert(controller: self)
-//            }
-//        }
-//        else {
-//            let alert = ZBZAlert(title: nil, message: "Введите email", preferredStyle: .alert)
-//            alert.getAlert(controller: self)
-            }
-        }
     }
     
   private func checkValidation(regex: RegexType, text: String) -> Bool {
