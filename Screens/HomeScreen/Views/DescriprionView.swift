@@ -66,8 +66,8 @@ final class DescriprionView: UIView {
         button.setImage(UIImage(systemName: "arrowtriangle.backward.fill"), for: .normal)
         button.tintColor = ColorsManager.zbzbTextColor
         button.imageView?.snp.updateConstraints { make in
-            make.height.equalTo(24)
-            make.width.equalTo(24)
+            make.height.equalTo(28)
+            make.width.equalTo(28)
         }
         button.clipsToBounds = true
         
@@ -80,8 +80,8 @@ final class DescriprionView: UIView {
         button.setImage(UIImage(systemName: "arrowtriangle.right.fill"), for: .normal)
         button.tintColor = ColorsManager.zbzbTextColor
         button.imageView?.snp.updateConstraints { make in
-            make.height.equalTo(24)
-            make.width.equalTo(24)
+            make.height.equalTo(28)
+            make.width.equalTo(28)
         }
         
         return button
@@ -94,6 +94,15 @@ final class DescriprionView: UIView {
         label.textColor = ColorsManager.zbzbTextColor
         
         return label
+    }()
+    
+    private lazy var descriptionScrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.addSubview(productDescription)
+        scroll.showsVerticalScrollIndicator = false
+//        scroll.isScrollEnabled = true
+        
+        return scroll
     }()
     
     private lazy var productDescription: UILabel = {
@@ -156,7 +165,7 @@ final class DescriprionView: UIView {
         addSubview(productId)
         addSubview(productPrice)
         addSubview(amountManagerStack)
-        addSubview(productDescription)
+        addSubview(descriptionScrollView)
         addSubview(addToCartButton)
     }
     
@@ -190,11 +199,18 @@ final class DescriprionView: UIView {
         self.amount.snp.updateConstraints { make in
             make.width.equalTo(24)
         }
-        self.productDescription.snp.updateConstraints { make in
+        self.descriptionScrollView.snp.updateConstraints { make in
             make.top.equalTo(productImage.snp.bottom).offset(16)
             make.leading.equalTo(self.snp.leading).offset(16)
             make.trailing.equalTo(self.snp.trailing).offset(-16)
-            make.bottom.lessThanOrEqualTo(addToCartButton.snp.top)
+            make.bottom.equalTo(addToCartButton.snp.top)
+        }
+        self.productDescription.snp.updateConstraints { make in
+            make.top.equalTo(descriptionScrollView.snp.top)
+            make.leading.equalTo(descriptionScrollView.snp.leading)
+            make.trailing.equalTo(descriptionScrollView.snp.trailing)
+            make.bottom.equalTo(descriptionScrollView.snp.bottom)
+            make.width.equalTo(descriptionScrollView.snp.width)
         }
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()
