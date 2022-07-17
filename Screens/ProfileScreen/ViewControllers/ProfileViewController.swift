@@ -91,7 +91,7 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
             picker.delegate = self
             picker.mediaTypes = ["public.image"]
             picker.sourceType = .photoLibrary
-            picker.allowsEditing = false
+            picker.allowsEditing = true
             self?.present(picker, animated: true)
         })
         
@@ -100,7 +100,7 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
             picker.delegate = self
             picker.sourceType = .camera
             picker.mediaTypes = ["public.image"]
-            picker.allowsEditing = false
+            picker.allowsEditing = true
             self?.present(picker, animated: true)
         })
         
@@ -117,8 +117,9 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 
         guard let user = Auth.auth().currentUser,
-              let image = info[.originalImage] as? UIImage,
+              let image = info[.editedImage] as? UIImage,
               let data = image.jpegData(compressionQuality: 0.5) else {
+            profileView.profileImage.image = info[.originalImage] as? UIImage
             return
         }
 
