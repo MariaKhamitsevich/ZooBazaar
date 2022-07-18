@@ -103,7 +103,11 @@ class OrderView: UIView {
     }()
     
     private(set) lazy var pickupAddressControl: ALRadioGroup = {
-        let control = ALRadioGroup(items: [.init(title: "Адрес 1"), .init(title: "Адрес 2"), .init(title: "Адрес 3"), .init(title: "Адрес 4")], style: .standard)
+        let firstMarket = ALRadioItem(title: "ТЦ Замок", subtitle: "проспект Победителей, 65")
+        let secondMarket = ALRadioItem(title: "Парниковая", subtitle: "ул. Парниковая, 11")
+        let thirdMarket = ALRadioItem(title: "Севастопольский парк", subtitle: "ул. Севастопольская, 75")
+        let fourthMarket = ALRadioItem(title: "Центральный ботанический сад", subtitle: "ул. Академическая, 24к13")
+        let control = ALRadioGroup(items: [firstMarket, secondMarket, thirdMarket, fourthMarket], style: .standard)
         control.selectedIndex = 0
         control.axis = .vertical
         control.unselectedTitleColor = ColorsManager.unselectedColor
