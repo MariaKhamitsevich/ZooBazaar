@@ -19,6 +19,7 @@
 		4C21A87A2829556500C47623 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A8792829556500C47623 /* MapsView.swift */; };
 		4C21A87C282BAF0400C47623 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A87B282BAF0400C47623 /* Pets.swift */; };
 		4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30831C28573AB800D4EE8F /* UIView+Ex.swift */; };
+		4C35FD612885D2D100E0B267 /* ZBZMarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35FD602885D2D100E0B267 /* ZBZMarket.swift */; };
 		4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */; };
 		4C37E0BD281F10EA00D393F5 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */; };
 		4C41E3D8286AF12D0068BF72 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */; };
@@ -77,6 +78,8 @@
 		4C21A8792829556500C47623 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
 		4C21A87B282BAF0400C47623 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
 		4C30831C28573AB800D4EE8F /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
+		4C35FD5928859DD600E0B267 /* ZooBazaar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZooBazaar-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C35FD602885D2D100E0B267 /* ZBZMarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBZMarket.swift; sourceTree = "<group>"; };
 		4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
 		4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,7 +174,7 @@
 		4C21A8762829550400C47623 /* MapsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				4C5143D928677CA2005F4291 /* TestModel */,
+				4C5143D928677CA2005F4291 /* Model */,
 				4C977F51285A00060062C56D /* ViewControllers */,
 				4C977F502859FFFF0062C56D /* Views */,
 			);
@@ -215,11 +218,12 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		4C5143D928677CA2005F4291 /* TestModel */ = {
+		4C5143D928677CA2005F4291 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4C35FD602885D2D100E0B267 /* ZBZMarket.swift */,
 			);
-			path = TestModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4C71F16A28356BBF00F1A524 /* Models */ = {
@@ -409,6 +413,7 @@
 				4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */,
 				4C4A3F4028390164005C5F8E /* SomeViewController.swift */,
 				4C4A3F4228390280005C5F8E /* SomeView.swift */,
+				4C35FD5928859DD600E0B267 /* ZooBazaar-Bridging-Header.h */,
 			);
 			path = ZooBazaar;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				4CED642F28187D250052A2C2 /* Frameworks */,
 				4CED643028187D250052A2C2 /* Resources */,
 				2E6A83984E3A915BD4C4A94E /* [CP] Embed Pods Frameworks */,
+				9ECA33F7877D03957A45EAAA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -466,6 +472,7 @@
 				TargetAttributes = {
 					4CED643128187D250052A2C2 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -540,6 +547,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9ECA33F7877D03957A45EAAA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -591,6 +615,7 @@
 				4C41E3F128706A1A0068BF72 /* OrderHeader.swift in Sources */,
 				4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */,
 				4C21A87C282BAF0400C47623 /* Pets.swift in Sources */,
+				4C35FD612885D2D100E0B267 /* ZBZMarket.swift in Sources */,
 				4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */,
 				4C41E3DA286B07540068BF72 /* SettingsTableViewController.swift in Sources */,
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
@@ -736,6 +761,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQC9F7HZZ3;
@@ -754,6 +780,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.ZooBazaar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZooBazaar/ZooBazaar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -765,6 +793,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQC9F7HZZ3;
@@ -783,6 +812,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.ZooBazaar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZooBazaar/ZooBazaar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

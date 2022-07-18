@@ -13,6 +13,7 @@ target 'ZooBazaar' do
   pod 'Firebase/Storage'
   pod 'FirebaseUI/Storage'
   pod 'ALRadioButtons'
+  pod 'GoogleMaps'
 
 end
 
