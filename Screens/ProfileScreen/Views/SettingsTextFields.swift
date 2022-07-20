@@ -93,8 +93,7 @@ class SettingsTextFields: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ColorsManager.zbzbBackgroundColor
-        backgroundColor = backgroundColor?.withAlphaComponent(0.2)
+        backgroundColor = ColorsManager.zbzbBackgroundColor.withAlphaComponent(0.5)
         
         addAllSubviews()
         setAllConstraints()

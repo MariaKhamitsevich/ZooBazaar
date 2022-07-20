@@ -62,23 +62,40 @@ final class SettingsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var data: SettingsContainerView?
         
         switch indexPath.row {
         case 0:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый адрес", firstTextFieldPlaceholder: "Новый адрес", textFieldType: .address))
-            present(controller, animated: true)
+            data = SettingsContainerView(labelTitle: "Введите новый адрес",
+                                         firstTextFieldPlaceholder: "Новый адрес",
+                                         textFieldType: .address)
+            
         case 1:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый номер телефона", firstTextFieldPlaceholder: "+37529 111 11 11", textFieldType: .phone))
-            present(controller, animated: true)
+            data =  SettingsContainerView(labelTitle: "Введите новый номер телефона",
+                                          firstTextFieldPlaceholder: "+37529 111 11 11",
+                                          textFieldType: .phone)
+            
         case 2:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новое имя", firstTextFieldPlaceholder: "Новое имя", textFieldType: .name))
-            present(controller, animated: true)
+            data = SettingsContainerView(labelTitle: "Введите новое имя",
+                                         firstTextFieldPlaceholder: "Новое имя",
+                                         textFieldType: .name)
+            
         case 3:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новую почту", firstTextFieldPlaceholder: "Новая почта", textFieldType: .email))
-            present(controller, animated: true)
+            data = SettingsContainerView(labelTitle: "Введите новую почту",
+                                         firstTextFieldPlaceholder: "Новая почта",
+                                         textFieldType: .email)
             
         default:
-            let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый пароль", firstTextFieldPlaceholder: "Новый пароль", secondTextFieldPlaceholder: "Подтвердите пароль", textFieldType: .password))
+            data = SettingsContainerView(labelTitle: "Введите новый пароль",
+                                         firstTextFieldPlaceholder: "Новый пароль",
+                                         secondTextFieldPlaceholder: "Подтвердите пароль",
+                                         textFieldType: .password)
+        }
+        
+        if let data = data {
+            let controller = presentSettings(data: data)
+            controller.modalPresentationStyle = .overCurrentContext
+            controller.modalTransitionStyle = .crossDissolve
             present(controller, animated: true)
         }
     }
