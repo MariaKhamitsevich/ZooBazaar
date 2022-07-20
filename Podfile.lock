@@ -779,6 +779,7 @@ PODS:
     - Libuv-gRPC (= 0.0.10)
   - gRPC-Core/Interface (1.44.0)
   - GTMSessionFetcher/Core (1.7.2)
+  - ImageAlertAction (3.2.0)
   - leveldb-library (1.22.1)
   - Libuv-gRPC (0.0.10):
     - Libuv-gRPC/Implementation (= 0.0.10)
@@ -805,6 +806,7 @@ DEPENDENCIES:
   - FirebaseFirestore
   - FirebaseUI/Storage
   - GoogleMaps
+  - ImageAlertAction
   - SnapKit
 
 SPEC REPOS:
@@ -834,6 +836,7 @@ SPEC REPOS:
     - "gRPC-C++"
     - gRPC-Core
     - GTMSessionFetcher
+    - ImageAlertAction
     - leveldb-library
     - Libuv-gRPC
     - nanopb
@@ -867,6 +870,7 @@ SPEC CHECKSUMS:
   "gRPC-C++": 9675f953ace2b3de7c506039d77be1f2e77a8db2
   gRPC-Core: 943e491cb0d45598b0b0eb9e910c88080369290b
   GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
+  ImageAlertAction: 5556758a632c531172c5b2afcc4a25417df9f5a2
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   Libuv-gRPC: 55e51798e14ef436ad9bc45d12d43b77b49df378
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
@@ -874,6 +878,6 @@ SPEC CHECKSUMS:
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: dfa7d38786835e116f37213c8c8372c1e3c653f0
+PODFILE CHECKSUM: 2a896f4ed4ba2a98f37aef84d5ba82d137dacc4c
 
 COCOAPODS: 1.11.3

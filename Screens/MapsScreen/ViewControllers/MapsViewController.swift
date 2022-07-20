@@ -10,6 +10,8 @@ import GoogleMaps
 
 final class MapsViewController: UIViewController {
     
+   
+    
     private let locationManager = CLLocationManager()
     private var zbzMarkets: [ZBZMarket] = []
     private var markers: [GMSMarker] = []
@@ -28,6 +30,14 @@ final class MapsViewController: UIViewController {
         loadMarkets()
         createMarketsMarkers()
         centerCamera()
+    }
+    
+    //MARK: ConfigureMap
+    private func configureMap() {
+        mapsView.mapView.delegate = self
+        mapsView.mapView.isMyLocationEnabled = true
+        mapsView.mapView.settings.compassButton = true
+        locationManager.requestWhenInUseAuthorization()
     }
 
     private func loadMarkets() {
@@ -64,14 +74,46 @@ extension MapsViewController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         guard let market = marker.userData as? ZBZMarket else { return false }
         
-        if let description = market.description,
+        if let latitude = market.latitude,
+           let longitude = market.longitude,
+           let description = market.description,
            let name = market.name,
            let workingHours = market.workingHours {
             
             let message = "\(description)\nВремя работы: \(workingHours)"
             let title = name
-            let alert = ZBZAlert(title: title, message: message, preferredStyle: .actionSheet)
-            alert.getAlert(controller: self)
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            let backAction = UIAlertAction(title: "Отменить", style: .cancel)
+            
+            
+            let yandexmaps = DeviceAppCaller.Maps.yandexmaps(latitude: latitude, longitude: longitude)
+            let yandexnavi = DeviceAppCaller.Maps.yandexnavi(latitude: latitude, longitude: longitude)
+            let googlemaps = DeviceAppCaller.Maps.googlemaps(latitude: latitude, longitude: longitude)
+            
+            if DeviceAppCaller.canOpenMap(yandexmaps) {
+                let yandexMapsAction = UIAlertAction(title: "Яндекс.Карты", style: .default) { _ in
+                    DeviceAppCaller.openMap(with: yandexmaps)
+                }
+                alert.addAction(yandexMapsAction)
+            }
+
+            if DeviceAppCaller.canOpenMap(yandexnavi) {
+                let yandexNavigatorAction = UIAlertAction(title: "Яндекс.Навигатор", style: .default) { _ in
+                    DeviceAppCaller.openMap(with: yandexnavi)
+                }
+                alert.addAction(yandexNavigatorAction)
+            }
+
+            if DeviceAppCaller.canOpenMap(googlemaps) {
+                let googleMapsAction = UIAlertAction(title: "Google Maps", style: .default) { _ in
+                    DeviceAppCaller.openMap(with: googlemaps)
+                }
+                alert.addAction(googleMapsAction)
+            }
+
+            alert.addAction(backAction)
+
+            self.present(alert, animated: true, completion: nil)
         }
             
         return true
@@ -79,13 +121,7 @@ extension MapsViewController: GMSMapViewDelegate {
     
    
 
-    //MARK: ConfigureMap
-    private func configureMap() {
-        mapsView.mapView.delegate = self
-        mapsView.mapView.isMyLocationEnabled = true
-        mapsView.mapView.settings.compassButton = true
-        locationManager.requestWhenInUseAuthorization()
-    }
+    
     
     //MARK: CenterCamera
     private func centerCamera() {
@@ -95,7 +131,7 @@ extension MapsViewController: GMSMapViewDelegate {
                 let currentBounds = GMSCoordinateBounds(coordinate: marker.position, coordinate: marker.position)
                 bounds = bounds.includingBounds(currentBounds)
             }
-            let positionUpdate = GMSCameraUpdate.fit(bounds, withPadding: 150)
+            let positionUpdate = GMSCameraUpdate.fit(bounds, withPadding: 100)
             mapsView.mapView.animate(with: positionUpdate)
         }
     }

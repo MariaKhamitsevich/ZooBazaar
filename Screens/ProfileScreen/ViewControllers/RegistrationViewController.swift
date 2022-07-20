@@ -137,6 +137,11 @@ extension RegistrationViewController: UITextFieldDelegate {
         
         //Hide textFields by tap of segmentedControl
         registrationView.registrationSegmentedControl.addTarget(self, action: #selector(chooseSegmentedControl), for: .valueChanged)
+        registrationView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewDidTapped)))
+    }
+    
+    @objc private func viewDidTapped() {
+        self.view.endEditing(true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

@@ -76,6 +76,7 @@ final class SettingsTableViewController: UITableViewController {
         case 3:
             let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новую почту", firstTextFieldPlaceholder: "Новая почта", textFieldType: .email))
             present(controller, animated: true)
+            
         default:
             let controller = presentSettings(data: SettingsContainerView(labelTitle: "Введите новый пароль", firstTextFieldPlaceholder: "Новый пароль", secondTextFieldPlaceholder: "Подтвердите пароль", textFieldType: .password))
             present(controller, animated: true)

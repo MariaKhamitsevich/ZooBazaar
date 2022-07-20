@@ -2,8 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Please, give us your location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Please, give us your location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Please, give us your location</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>telprompt</string>
+		<string>tg</string>
+		<string>tel</string>
+		<string>yandexnavi</string>
+		<string>yandexmaps</string>
 		<string>comgooglemaps</string>
 		<string>googlechromes</string>
 	</array>

@@ -14,6 +14,7 @@ target 'ZooBazaar' do
   pod 'FirebaseUI/Storage'
   pod 'ALRadioButtons'
   pod 'GoogleMaps'
+  pod 'ImageAlertAction'
 
 end
 

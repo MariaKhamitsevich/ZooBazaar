@@ -214,7 +214,7 @@ final class DescriprionView: UIView {
         }
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-24)
             make.width.equalTo(UIScreen.main.bounds.width / 4 * 3)
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }

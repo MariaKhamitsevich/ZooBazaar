@@ -81,7 +81,11 @@ final class SettingsTextFieldsViewController: UIViewController, UITextFieldDeleg
     }
     
   private func addAllTargets() {
-//        settingsView.confirmButton.addTarget(self, action: #selector(nameTextFieldAction), for: .touchUpInside)
+      self.settingsView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewDidTapped)))
+    }
+    
+    @objc private func viewDidTapped() {
+        self.dismiss(animated: true)
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
