@@ -32,7 +32,7 @@ struct OrderProvider {
        return products[section].products.count
     }
     
-    func getProduct(numberOfSection IndexPath: IndexPath) -> Product {
+    func getProduct(numberOfSection IndexPath: IndexPath) -> ProductSettable {
         let products = orderObtainer.parsedProducts.sorted(by: {
             $0.dateFromString.timeIntervalSince1970 > $1.dateFromString.timeIntervalSince1970
         })

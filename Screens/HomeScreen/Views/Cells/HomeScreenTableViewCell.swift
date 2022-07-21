@@ -134,7 +134,7 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as! PopularCollectionViewCell
-            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
+            let popularProducts: [ProductSettable] = allPets.flatMap { $0.obtainPopularProducts() }
             cell.updateValues(product: popularProducts[indexPath.row])
             return cell
         }
@@ -163,7 +163,7 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             }
         } else {
             let controller = DescriptionViewController()
-            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
+            let popularProducts: [ProductSettable] = allPets.flatMap { $0.obtainPopularProducts() }
             controller.descriptionVeiw.update(product: popularProducts[indexPath.row])
             controller.descriptionVeiw.currentProduct = popularProducts[indexPath.row]
             controllerDelegate?.present(controller, animated: true)

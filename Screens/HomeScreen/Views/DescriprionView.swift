@@ -128,7 +128,7 @@ final class DescriprionView: UIView {
         return button
     }()
     
-    var currentProduct: Product?
+    var currentProduct: ProductSettable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -142,7 +142,7 @@ final class DescriprionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(product: Product) {
+    func update(product: ProductSettable) {
         self.productName.text = product.productName
         self.productId.text = "Артикул: " + String(product.productID)
         self.productPrice.text = product.priceForKg

@@ -55,7 +55,7 @@ final class PopularCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateValues(product: Product) {
+    func updateValues(product: ProductSettable) {
         productNameLabel.text = product.productName
         productPriceLabel.text = product.priceForKg
         
