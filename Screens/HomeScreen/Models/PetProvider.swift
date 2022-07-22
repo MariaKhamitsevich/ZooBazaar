@@ -17,7 +17,7 @@ struct PetProvider {
         self.pet = self.petObtainer.obtainPet()
         
         //products sorted alphabetically by brandName
-        self.products = self.pet.products.sorted { $0.brendName < $1.brendName }
+        self.products = self.pet.products.sorted { $0.brandName < $1.brandName }
     }
     
     var numberOfSections: Int {
@@ -25,15 +25,15 @@ struct PetProvider {
     }
     
     func headerInSection(numberOfSection section: Int) -> String {
-        products[section].brendName
+        products[section].brandName
     }
     
     func numberOfRowsInSection(numberOfSection section: Int) -> Int {
-        products[section].brendProducts.count
+        products[section].brandProducts.count
     }
     
     func getProduct(numberOfSection IndexPath: IndexPath) -> ProductSettable {
-        products[IndexPath.section].brendProducts[IndexPath.row]
+        products[IndexPath.section].brandProducts[IndexPath.row]
     }
     
     func getPopularProducts() -> [ProductSettable] {

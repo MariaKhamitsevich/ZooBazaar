@@ -14,27 +14,31 @@ final class BackendObtainer {
     var callBack: (() -> Void)?
     private let pet: Pets
     
+    var allPets: [Pet] = []
+    
     let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
     
     init(pet: Pets, callBack: (() -> Void)? = nil) {
         self.pet = pet
         self.callBack = callBack
         loadData()
+        loadPets()
     }
     
     func obtainPet() -> Pet {
-        Pet(pet: pet, products: self.parsedBackendData)
+//        Pet(pet: pet, products: self.parsedBackendData)
+        allPets.first(where: { $0.pet  == pet }) ?? Pet(pet: .cats, products: [])
     }
     
     func obtainPopularProducts() -> [Product] {
         let popularProducts = parsedBackendData.flatMap {
-            $0.brendProducts.filter { $0.isPopular}
+            $0.brandProducts.filter { $0.isPopular}
         }
         return popularProducts
     }
     
     func obtainAllProducts() -> [Product] {
-        let products = parsedBackendData.flatMap({$0.brendProducts})
+        let products = parsedBackendData.flatMap({$0.brandProducts})
         return products
     }
     
@@ -65,7 +69,7 @@ final class BackendObtainer {
                                     brendProducts.append(product)
                                 }
                                 
-                                self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
+                                self.parsedBackendData.append(ProductsForPets(brandName: brandName, brandProducts: brendProducts))
                                 self.callBack?()
                             }
                         }
@@ -74,6 +78,67 @@ final class BackendObtainer {
             }
         }
     }
+    
+    private func loadPets() {
+        let db = Firestore.firestore()
+        
+        queue.async { [weak self] in
+            guard let self = self else {return}
+            db.collection("Pets").getDocuments { (snapshot, error) in
+                if let error = error {
+                    Swift.debugPrint(error.localizedDescription)
+                } else if let snapshot = snapshot {
+                    
+                    
+                    for document in snapshot.documents {
+                        let petRawValue = document.get("pet") as? String ?? ""
+                        let brandName = document.get("brandName") as? String ?? ""
+                        let productName = document.get("productName") as? String ?? ""
+                        let productDescription = document.get("productDescription") as? String ?? ""
+                        let productImageURL = document.get("productImageURL") as? String ?? ""
+                        let productPrice = document.get("productPrice") as? Double ?? 0
+                        let isPopular = document.get("isPopular") as? Bool ?? false
+                        let productID = document.get("productID") as? Int ?? 0
+                        
+                        let product = Product(productName: productName, productDescription: productDescription, productImageURL: productImageURL, productPrice: productPrice, isPopular: isPopular, productID: productID)
+                        let productForPets = ProductsForPets(brandName: brandName, brandProducts: [product])
+                        
+                        if let petIndex = self.allPets.firstIndex(where: { $0.pet.rawValue == petRawValue }) {
+                            
+                            if let productsForPetsIndex = self.allPets[petIndex].products.firstIndex(where: { $0.brandName == brandName }) {
+                                
+                                self.allPets[petIndex].products[productsForPetsIndex].brandProducts.append(product)
+                            } else {
+                                self.allPets[petIndex].products.append(productForPets)
+                            }
+                        } else {
+                            self.allPets.append(Pet(pet: Pets(rawValue: petRawValue) ?? .cats, products: [productForPets]))
+                        }
+                       
+                    }
+                    
+                    self.callBack?()
+                }
+            }
+
+        }
+    }
+    
+    private func transform(value: [String : Any]) -> Product {
+        var product = Product()
+        
+        product.productName = value["productName"] as? String ?? ""
+        product.productDescription = value["productDescription"] as? String ?? ""
+        product.productImageURL = value["productImageURL"] as? String ?? ""
+        product.productPrice = value["productPrice"] as? Double ?? 0
+        product.isPopular = value["isPopular"] as? Bool ?? false
+        product.productID = value["productID"] as? Int ?? 0
+        product.productAmount = value["productAmount"] as? Int ?? 1
+        
+        return product
+    }
+    
+   
 }
 
 

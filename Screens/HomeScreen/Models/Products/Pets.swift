@@ -30,8 +30,8 @@ struct Pet {
 
 
 struct ProductsForPets {
-    var brendName: String
-    var brendProducts: [Product]
+    var brandName: String
+    var brandProducts: [Product]
 }
 
 struct Product: ProductSettable {
@@ -78,7 +78,7 @@ struct Product: ProductSettable {
 
 
 enum Pets: String {
-    case cats = "catsBackendData"
+    case cats = "cats"
     case dogs = "dogsBackendData"
     case rodents = "rodentsBackendData"
 }
