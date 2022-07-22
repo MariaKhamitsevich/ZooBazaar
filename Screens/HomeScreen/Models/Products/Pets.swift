@@ -79,6 +79,6 @@ struct Product: ProductSettable {
 
 enum Pets: String {
     case cats = "cats"
-    case dogs = "dogsBackendData"
-    case rodents = "rodentsBackendData"
+    case dogs = "dogs"
+    case rodents = "rodents"
 }

@@ -10,9 +10,11 @@ import UIKit
 final class ProductsTableViewController: UITableViewController {
    
     private(set)  var pets: PetProvider
+    let petType: Pets
     
-    init(pets: PetProvider) {
+    init(pets: PetProvider, petType: Pets) {
         self.pets = pets
+        self.petType = petType
         super.init(style: UITableView.Style.grouped)
     }
     
@@ -47,23 +49,23 @@ final class ProductsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-         pets.numberOfSections
+         pets.numberOfSections(petType: petType)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = ProductsTableHeaderView()
-        view.title = pets.headerInSection(numberOfSection: section)
+        view.title = pets.headerInSection(petType: petType, numberOfSection: section)
         return view
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        pets.numberOfRowsInSection(numberOfSection: section)
+        pets.numberOfRowsInSection(petType: petType, numberOfSection: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductsTableViewCell") as! ProductsTableViewCell
-        cell.updateValues(product: pets.getProduct(numberOfSection: indexPath))
+        cell.updateValues(product: pets.getProduct(petType: petType, numberOfSection: indexPath))
         return cell
     }
     
@@ -71,7 +73,7 @@ final class ProductsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let controller = DescriptionViewController()
-        controller.prepareForPresent(product: pets.getProduct(numberOfSection: indexPath))
+        controller.prepareForPresent(product: pets.getProduct(petType: petType, numberOfSection: indexPath))
         present(controller, animated: true)
     }
 }
