@@ -9,35 +9,39 @@ import Foundation
 
 struct PetProvider {
     private let petObtainer: BackendObtainer
-    private let pet: Pet
-    private let products: [ProductsForPets]
+    private let pets: [Pet]
     
     init(petObtainer: BackendObtainer) {
         self.petObtainer = petObtainer
-        self.pet = self.petObtainer.obtainPet()
-        
-        //products sorted alphabetically by brandName
-        self.products = self.pet.products.sorted { $0.brendName < $1.brendName }
+        self.pets = self.petObtainer.obtainPets()
     }
     
-    var numberOfSections: Int {
-        products.count
+    func numberOfSections(petType: Pets) -> Int {
+        guard let petType = pets.first(where: { $0.pet == petType }) else { return 0}
+        return  petType.products.count
     }
     
-    func headerInSection(numberOfSection section: Int) -> String {
-        products[section].brendName
+    func headerInSection(petType: Pets, numberOfSection section: Int) -> String {
+        guard let petType = pets.first(where: { $0.pet == petType }) else { return ""}
+        return  petType.products[section].brandName
     }
     
-    func numberOfRowsInSection(numberOfSection section: Int) -> Int {
-        products[section].brendProducts.count
+    func numberOfRowsInSection(petType: Pets, numberOfSection section: Int) -> Int {
+        guard let petType = pets.first(where: { $0.pet == petType }) else { return 0}
+        return  petType.products[section].brandProducts.count
     }
     
-    func getProduct(numberOfSection IndexPath: IndexPath) -> Product {
-        products[IndexPath.section].brendProducts[IndexPath.row]
+    func getProduct(petType: Pets, numberOfSection IndexPath: IndexPath) -> ProductSettable {
+        guard let petType = pets.first(where: { $0.pet == petType }) else { return Product()}
+        return  petType.products[IndexPath.section].brandProducts[IndexPath.row]
     }
     
-    func getPopularProducts() -> [Product] {
+    func getPopularProducts() -> [ProductSettable] {
         petObtainer.obtainPopularProducts()
+    }
+    
+    private func sortProducts(products: [ProductsForPets]) -> [ProductsForPets] {
+        products.sorted(by: { $0.brandName < $1.brandName })
     }
 }
  

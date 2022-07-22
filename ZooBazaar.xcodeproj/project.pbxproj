@@ -19,6 +19,7 @@
 		4C21A87A2829556500C47623 /* MapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A8792829556500C47623 /* MapsView.swift */; };
 		4C21A87C282BAF0400C47623 /* Pets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C21A87B282BAF0400C47623 /* Pets.swift */; };
 		4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C30831C28573AB800D4EE8F /* UIView+Ex.swift */; };
+		4C35FD612885D2D100E0B267 /* ZBZMarket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35FD602885D2D100E0B267 /* ZBZMarket.swift */; };
 		4C37E0BA281F057E00D393F5 /* ProductsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */; };
 		4C37E0BD281F10EA00D393F5 /* ProductsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */; };
 		4C41E3D8286AF12D0068BF72 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */; };
@@ -53,6 +54,9 @@
 		4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA88F932850F10400E81986 /* HomeTableViewController.swift */; };
 		4CABD7BF28818B8F00FB559D /* OrderSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CABD7BE28818B8F00FB559D /* OrderSender.swift */; };
 		4CC3D99A284350AA00E7DE51 /* UIButton+Ex .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */; };
+		4CDEEFEB2887DC12004A7BE0 /* DeviceAppCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEEFEA2887DC12004A7BE0 /* DeviceAppCaller.swift */; };
+		4CDEEFED2887F598004A7BE0 /* MapsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDEEFEC2887F598004A7BE0 /* MapsViewController.xib */; };
+		4CDEEFF128882EE6004A7BE0 /* UIImage+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEEFF028882EE6004A7BE0 /* UIImage+Ex.swift */; };
 		4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77C9D285F7ABF00C35344 /* String+Ex.swift */; };
 		4CED643628187D250052A2C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643528187D250052A2C2 /* AppDelegate.swift */; };
 		4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CED643728187D250052A2C2 /* SceneDelegate.swift */; };
@@ -77,6 +81,8 @@
 		4C21A8792829556500C47623 /* MapsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsView.swift; sourceTree = "<group>"; };
 		4C21A87B282BAF0400C47623 /* Pets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pets.swift; sourceTree = "<group>"; };
 		4C30831C28573AB800D4EE8F /* UIView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ex.swift"; sourceTree = "<group>"; };
+		4C35FD5928859DD600E0B267 /* ZooBazaar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZooBazaar-Bridging-Header.h"; sourceTree = "<group>"; };
+		4C35FD602885D2D100E0B267 /* ZBZMarket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBZMarket.swift; sourceTree = "<group>"; };
 		4C37E0B9281F057E00D393F5 /* ProductsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewController.swift; sourceTree = "<group>"; };
 		4C37E0BC281F10EA00D393F5 /* ProductsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsTableViewCell.swift; sourceTree = "<group>"; };
 		4C41E3D7286AF12D0068BF72 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 		4CA88F932850F10400E81986 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		4CABD7BE28818B8F00FB559D /* OrderSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSender.swift; sourceTree = "<group>"; };
 		4CC3D999284350AA00E7DE51 /* UIButton+Ex .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ex .swift"; sourceTree = "<group>"; };
+		4CDEEFEA2887DC12004A7BE0 /* DeviceAppCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceAppCaller.swift; sourceTree = "<group>"; };
+		4CDEEFEC2887F598004A7BE0 /* MapsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapsViewController.xib; sourceTree = "<group>"; };
+		4CDEEFF028882EE6004A7BE0 /* UIImage+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ex.swift"; sourceTree = "<group>"; };
 		4CE77C9D285F7ABF00C35344 /* String+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ex.swift"; sourceTree = "<group>"; };
 		4CED643228187D250052A2C2 /* ZooBazaar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZooBazaar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CED643528187D250052A2C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +163,7 @@
 				4CE77C9D285F7ABF00C35344 /* String+Ex.swift */,
 				4C41E3E0286CC8CA0068BF72 /* RegexType.swift */,
 				4C41E3E2286CD7FA0068BF72 /* Alert.swift */,
+				4CDEEFF028882EE6004A7BE0 /* UIImage+Ex.swift */,
 			);
 			name = Extentions;
 			sourceTree = "<group>";
@@ -171,7 +181,7 @@
 		4C21A8762829550400C47623 /* MapsScreen */ = {
 			isa = PBXGroup;
 			children = (
-				4C5143D928677CA2005F4291 /* TestModel */,
+				4C5143D928677CA2005F4291 /* Model */,
 				4C977F51285A00060062C56D /* ViewControllers */,
 				4C977F502859FFFF0062C56D /* Views */,
 			);
@@ -215,11 +225,12 @@
 			path = Headers;
 			sourceTree = "<group>";
 		};
-		4C5143D928677CA2005F4291 /* TestModel */ = {
+		4C5143D928677CA2005F4291 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4C35FD602885D2D100E0B267 /* ZBZMarket.swift */,
 			);
-			path = TestModel;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		4C71F16A28356BBF00F1A524 /* Models */ = {
@@ -323,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				4C21A8792829556500C47623 /* MapsView.swift */,
+				4CDEEFEC2887F598004A7BE0 /* MapsViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -372,6 +384,7 @@
 			children = (
 				4C5457AC2822CC8D0043205D /* ColorsManager.swift */,
 				4C54F28A283E9FEA0056E9B7 /* CartManager.swift */,
+				4CDEEFEA2887DC12004A7BE0 /* DeviceAppCaller.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -409,6 +422,7 @@
 				4CA247F22830232A00D8D8B6 /* MainTabBarController.swift */,
 				4C4A3F4028390164005C5F8E /* SomeViewController.swift */,
 				4C4A3F4228390280005C5F8E /* SomeView.swift */,
+				4C35FD5928859DD600E0B267 /* ZooBazaar-Bridging-Header.h */,
 			);
 			path = ZooBazaar;
 			sourceTree = "<group>";
@@ -444,6 +458,7 @@
 				4CED642F28187D250052A2C2 /* Frameworks */,
 				4CED643028187D250052A2C2 /* Resources */,
 				2E6A83984E3A915BD4C4A94E /* [CP] Embed Pods Frameworks */,
+				9ECA33F7877D03957A45EAAA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -466,6 +481,7 @@
 				TargetAttributes = {
 					4CED643128187D250052A2C2 = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -493,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CED644228187D290052A2C2 /* LaunchScreen.storyboard in Resources */,
+				4CDEEFED2887F598004A7BE0 /* MapsViewController.xib in Resources */,
 				4CED643F28187D290052A2C2 /* Assets.xcassets in Resources */,
 				4CFEE0752855FCE800DE7EEF /* GoogleService-Info.plist in Resources */,
 			);
@@ -540,6 +557,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9ECA33F7877D03957A45EAAA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ZooBazaar/Pods-ZooBazaar-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -565,6 +599,7 @@
 				4C5457AB28223B220043205D /* CatalogHomeScreenViewCell.swift in Sources */,
 				4CED644C28187E7F0052A2C2 /* HomeScreenView.swift in Sources */,
 				4C71F15F2835169D00F1A524 /* PetProvider.swift in Sources */,
+				4CDEEFF128882EE6004A7BE0 /* UIImage+Ex.swift in Sources */,
 				4C41E3DF286CAE000068BF72 /* SettingsTextFields.swift in Sources */,
 				4C41E3E3286CD7FA0068BF72 /* Alert.swift in Sources */,
 				4CA247F32830232A00D8D8B6 /* MainTabBarController.swift in Sources */,
@@ -580,6 +615,7 @@
 				4CA88F942850F10400E81986 /* HomeTableViewController.swift in Sources */,
 				4CED643828187D250052A2C2 /* SceneDelegate.swift in Sources */,
 				4C870F6128520D7100A3677D /* UITextField+Ex.swift in Sources */,
+				4CDEEFEB2887DC12004A7BE0 /* DeviceAppCaller.swift in Sources */,
 				4C41E3E7287047CB0068BF72 /* OrdersTableViewController.swift in Sources */,
 				4C41E3E1286CC8CA0068BF72 /* RegexType.swift in Sources */,
 				4C4A3F4328390280005C5F8E /* SomeView.swift in Sources */,
@@ -591,6 +627,7 @@
 				4C41E3F128706A1A0068BF72 /* OrderHeader.swift in Sources */,
 				4C30831D28573AB800D4EE8F /* UIView+Ex.swift in Sources */,
 				4C21A87C282BAF0400C47623 /* Pets.swift in Sources */,
+				4C35FD612885D2D100E0B267 /* ZBZMarket.swift in Sources */,
 				4CE77C9E285F7ABF00C35344 /* String+Ex.swift in Sources */,
 				4C41E3DA286B07540068BF72 /* SettingsTableViewController.swift in Sources */,
 				4C039B512832A3C1001EEDB6 /* ProfileView.swift in Sources */,
@@ -736,6 +773,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQC9F7HZZ3;
@@ -754,6 +792,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.ZooBazaar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZooBazaar/ZooBazaar-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -765,6 +805,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GQC9F7HZZ3;
@@ -783,6 +824,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.ZooBazaar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ZooBazaar/ZooBazaar-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

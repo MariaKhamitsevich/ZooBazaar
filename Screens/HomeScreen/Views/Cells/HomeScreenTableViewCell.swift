@@ -14,19 +14,7 @@ final class HomeScreenTableViewCell: UITableViewCell {
                                    HomeScreenCellElements(name: "Собаки", image: UIImage(named: "dogs")),
                                    HomeScreenCellElements(name: "Грызуны", image: UIImage(named: "Mouse"))]
     
-     var catsObtainer: BackendObtainer?
-     var dogsObtainer: BackendObtainer?
-     var rodentsObtainer: BackendObtainer?
-    
-    private var allPets: [BackendObtainer] {
-        guard let catsObtainer = catsObtainer,
-              let dogsObtainer = dogsObtainer,
-              let rodentsObtainer = rodentsObtainer else {
-            return []
-        }
-
-       return [catsObtainer, dogsObtainer, rodentsObtainer]
-    }
+    var backendObtainer: BackendObtainer?
     
     weak var controllerDelegate: UIViewController?
     
@@ -120,13 +108,14 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             dots.numberOfPages = Int(round(Double(count) / 2))
             return count
         default:
-            let count = allPets.flatMap { $0.obtainPopularProducts() }.count
+            let count = backendObtainer?.obtainPopularProducts().count ?? 0
             dots.numberOfPages = Int(round(Double(count) / 2))
             return count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         switch numberOfSectionInTable {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatalogHomeScreenViewCell", for: indexPath) as! CatalogHomeScreenViewCell
@@ -134,7 +123,7 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
             return cell
         default:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopularCollectionViewCell", for: indexPath) as! PopularCollectionViewCell
-            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
+            let popularProducts: [ProductSettable] = backendObtainer?.obtainPopularProducts() as? [Product] ?? []
             cell.updateValues(product: popularProducts[indexPath.row])
             return cell
         }
@@ -142,28 +131,23 @@ extension HomeScreenTableViewCell: UICollectionViewDelegate, UICollectionViewDat
     
     //MARK: CollectionView didSelectItemAt
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let catsObtainer = catsObtainer,
-              let dogsObtainer = dogsObtainer,
-              let rodentsObtainer = rodentsObtainer else { return }
-        
-        let catsProvider = PetProvider(petObtainer: catsObtainer)
-        let dogsProvider = PetProvider(petObtainer: dogsObtainer)
-        let rodentsProvider = PetProvider(petObtainer: rodentsObtainer)
+        guard let backendObtainer = backendObtainer else { return }
+        let petProvider: PetProvider = PetProvider(petObtainer: backendObtainer)
         
         if numberOfSectionInTable == 0 {
             switch indexPath.item {
             case 0:
-                controllerDelegate?.navigationController?.pushViewController(ProductsTableViewController(pets: catsProvider), animated: true)
+                controllerDelegate?.navigationController?.pushViewController(ProductsTableViewController(pets: petProvider, petType: .cats), animated: true)
             case 1:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: dogsProvider), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: petProvider, petType: .dogs), animated: true)
             case 2:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: rodentsProvider), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: petProvider, petType: .rodents), animated: true)
             default:
-                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: catsProvider), animated: true)
+                controllerDelegate?.navigationController?.pushViewController( ProductsTableViewController(pets: petProvider, petType: .cats), animated: true)
             }
         } else {
             let controller = DescriptionViewController()
-            let popularProducts: [Product] = allPets.flatMap { $0.obtainPopularProducts() }
+            let popularProducts: [ProductSettable] = backendObtainer.obtainPopularProducts()
             controller.descriptionVeiw.update(product: popularProducts[indexPath.row])
             controller.descriptionVeiw.currentProduct = popularProducts[indexPath.row]
             controllerDelegate?.present(controller, animated: true)

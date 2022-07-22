@@ -10,68 +10,76 @@ import FirebaseFirestore
 
 final class BackendObtainer {
     
-    var parsedBackendData: [ProductsForPets] = []
     var callBack: (() -> Void)?
-    private let pet: Pets
+    
+    private var allPets: [Pet] = []
     
     let queue = DispatchQueue(label: "com.Zoobazaar.BackendObtainer", qos: .userInitiated)
     
-    init(pet: Pets, callBack: (() -> Void)? = nil) {
-        self.pet = pet
+    init(callBack: (() -> Void)? = nil) {
         self.callBack = callBack
-        loadData()
+        loadPets()
     }
     
-    func obtainPet() -> Pet {
-        Pet(pet: pet, products: self.parsedBackendData)
+    func obtainPets() -> [Pet] {
+        allPets
     }
     
     func obtainPopularProducts() -> [Product] {
-        let popularProducts = parsedBackendData.flatMap {
-            $0.brendProducts.filter { $0.isPopular}
+        let popularProducts: [Product] = allPets.flatMap {
+            $0.products.flatMap {
+                $0.brandProducts.filter { $0.isPopular}
+            }
         }
         return popularProducts
     }
     
-    func obtainAllProducts() -> [Product] {
-        let products = parsedBackendData.flatMap({$0.brendProducts})
-        return products
-    }
-    
-    private func loadData() {
-        
+    private func loadPets() {
         let db = Firestore.firestore()
         
         queue.async { [weak self] in
             guard let self = self else {return}
-            db.collection("BackendData").document(self.pet.rawValue).collection("backendData").getDocuments{ (snapshot, error) in
+            db.collection("Pets").getDocuments { (snapshot, error) in
                 if let error = error {
                     Swift.debugPrint(error.localizedDescription)
                 } else if let snapshot = snapshot {
                     
+                    
                     for document in snapshot.documents {
-                        let brandName = document.get("brendName") as? String ?? ""
-                        let documentID = document.documentID
-                        db.collection("BackendData").document(self.pet.rawValue).collection("backendData").document(documentID).collection("brendProducts").getDocuments {  (snapshot, error) in
+                        guard let petRawValue = document.get("pet") as? String,
+                              let brandName = document.get("brandName") as? String,
+                              let productName = document.get("productName") as? String,
+                              let productDescription = document.get("productDescription") as? String,
+                              let productImageURL = document.get("productImageURL") as? String,
+                              let productPrice = document.get("productPrice") as? Double,
+                              let productID = document.get("productID") as? Int
+                        else { return }
+                        
+                        let isPopular = document.get("isPopular") as? Bool ?? false
+                       
+                        
+                        let product = Product(productName: productName, productDescription: productDescription, productImageURL: productImageURL, productPrice: productPrice, isPopular: isPopular, productID: productID)
+                        let productForPets = ProductsForPets(brandName: brandName, brandProducts: [product])
+                        
+                        if let petIndex = self.allPets.firstIndex(where: { $0.pet.rawValue == petRawValue }) {
                             
-                            if let error = error {
-                                Swift.debugPrint(error.localizedDescription)
-                            } else if let snapshot = snapshot {
+                            if let productsForPetsIndex = self.allPets[petIndex].products.firstIndex(where: { $0.brandName == brandName }) {
                                 
-                                var brendProducts: [Product] = []
-                                
-                                for snapshotProduct in snapshot.documents {
-                                    let product = Product.parseBrandProduct(productQuery: snapshotProduct)
-                                    brendProducts.append(product)
-                                }
-                                
-                                self.parsedBackendData.append(ProductsForPets(brendName: brandName, brendProducts: brendProducts))
-                                self.callBack?()
+                                self.allPets[petIndex].products[productsForPetsIndex].brandProducts.append(product)
+                            } else {
+                                self.allPets[petIndex].products.append(productForPets)
                             }
+                            
+                        } else {
+                            self.allPets.append(Pet(pet: Pets(rawValue: petRawValue) ?? .cats, products: [productForPets]))
                         }
+                        
+                        self.callBack?()
                     }
+                    
                 }
             }
+            
         }
     }
 }

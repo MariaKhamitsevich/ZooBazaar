@@ -32,7 +32,12 @@ final class OrderViewController: UIViewController, UITextFieldDelegate {
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.orderSender = OrderSender(products: cartManager.cartProducts)
+        
+        if let products = cartManager.cartProducts as? [Product] {
+        self.orderSender = OrderSender(products: products)
+        } else {
+            self.orderSender = OrderSender(products: [])
+        }
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     

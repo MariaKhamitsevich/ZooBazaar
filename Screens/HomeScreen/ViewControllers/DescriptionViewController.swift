@@ -28,7 +28,7 @@ final class DescriptionViewController: UIViewController {
         setViewProperties()
     }
     
-    func prepareForPresent(product: Product) {
+    func prepareForPresent(product: ProductSettable) {
         descriptionVeiw.update(product: product)
         descriptionVeiw.currentProduct = product
     }

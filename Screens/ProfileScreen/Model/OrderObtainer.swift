@@ -81,7 +81,7 @@ class OrderObtainer {
     }
     
     
-    func transform(value: [String : Any]) -> Product {
+    private func transform(value: [String : Any]) -> Product {
         var product = Product()
         
         product.productName = value["productName"] as? String ?? ""

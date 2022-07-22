@@ -10,6 +10,19 @@ import FirebaseFirestore
 import FirebaseStorage
 import FirebaseStorageUI
 
+
+protocol ProductSettable {
+    var productName: String { get }
+    var productDescription: String { get }
+    var productImageURL: String! { get }
+    var productPrice: Double { get }
+    var isPopular: Bool { get }
+    var priceForKg: String { get }
+    var totalCost: Double { get }
+    var productID: Int { get }
+    var productAmount: Int { get set }
+}
+
 struct Pet {
     var pet: Pets
     var products: [ProductsForPets]
@@ -17,11 +30,11 @@ struct Pet {
 
 
 struct ProductsForPets {
-    var brendName: String
-    var brendProducts: [Product]
+    var brandName: String
+    var brandProducts: [Product]
 }
 
-struct Product {
+struct Product: ProductSettable {
     
     var productName: String
     var productDescription: String
@@ -65,7 +78,7 @@ struct Product {
 
 
 enum Pets: String {
-    case cats = "catsBackendData"
-    case dogs = "dogsBackendData"
-    case rodents = "rodentsBackendData"
+    case cats = "cats"
+    case dogs = "dogs"
+    case rodents = "rodents"
 }

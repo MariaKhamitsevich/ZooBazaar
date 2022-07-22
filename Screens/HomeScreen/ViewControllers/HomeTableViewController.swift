@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeTableViewController: UITableViewController {
 
-    
+    private let petObtainer = BackendObtainer()
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableProperties()
@@ -38,9 +38,8 @@ final class HomeTableViewController: UITableViewController {
         cell.controllerDelegate = self
         cell.backgroundColor = .clear
         
-        cell.catsObtainer = BackendObtainer(pet: .cats, callBack: cell.collectionView.reloadData)
-        cell.dogsObtainer = BackendObtainer(pet: .dogs, callBack: cell.collectionView.reloadData)
-        cell.rodentsObtainer = BackendObtainer(pet: .rodents, callBack: cell.collectionView.reloadData)
+        cell.backendObtainer = self.petObtainer
+        cell.backendObtainer?.callBack = cell.collectionView.reloadData
         
         return cell
     }

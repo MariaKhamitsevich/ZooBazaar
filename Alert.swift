@@ -20,4 +20,9 @@ final class ZBZAlert: UIAlertController {
         
         controller?.present(self, animated: true, completion: nil)
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.tintColor = ColorsManager.zbzbTextColor
+        
+    }
 }

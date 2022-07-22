@@ -128,7 +128,7 @@ final class DescriprionView: UIView {
         return button
     }()
     
-    var currentProduct: Product?
+    var currentProduct: ProductSettable?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -142,7 +142,7 @@ final class DescriprionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(product: Product) {
+    func update(product: ProductSettable) {
         self.productName.text = product.productName
         self.productId.text = "Артикул: " + String(product.productID)
         self.productPrice.text = product.priceForKg
@@ -214,7 +214,7 @@ final class DescriprionView: UIView {
         }
         self.addToCartButton.snp.updateConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-24)
             make.width.equalTo(UIScreen.main.bounds.width / 4 * 3)
             make.height.equalTo(UIScreen.main.bounds.height * 0.05)
         }

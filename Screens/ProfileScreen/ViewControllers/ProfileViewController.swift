@@ -11,6 +11,9 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseStorageUI
 import FirebaseStorage
+import ImageAlertAction
+
+
 
 final class ProfileViewController: UIViewController {
     
@@ -153,13 +156,17 @@ extension ProfileViewController: UINavigationControllerDelegate, UIImagePickerCo
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
+    
+
 }
 
 final class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewDataSource {
     
    private var profileData: [ProfileTableData] = [
         .init(title: "Выйти из профиля", image: .init(systemName: "arrowshape.turn.up.backward.fill") ?? UIImage()),
-        .init(title: "Настройки", image: .init(systemName: "slider.horizontal.3") ?? UIImage()), .init(title: "История заказов", image: .init(systemName: "magazine.fill") ?? UIImage())
+        .init(title: "Настройки", image: .init(systemName: "slider.horizontal.3") ?? UIImage()),
+        .init(title: "История заказов", image: .init(systemName: "magazine.fill") ?? UIImage()),
+        .init(title: "Связаться с нами", image: .init(systemName: "envelope.circle.fill") ?? UIImage()),
     ]
     
     var returnToRegistration: (() -> Void)?
@@ -188,16 +195,57 @@ final class ProfileTableDelegate: NSObject, UITableViewDelegate, UITableViewData
         
         switch indexPath.row {
         case 0:
-                try? Auth.auth().signOut()
+            try? Auth.auth().signOut()
             returnToRegistration?()
         case 1:
             goToSettings?()
-        default:
-            
+        case 2:
             if let tableController = tableController {
                 selfController?.navigationController?.pushViewController(tableController, animated: true)
             }
+        default:
+            connectAsAction()
         }
+    }
+    
+    private func connectAsAction() {
+        let alert = UIAlertController(title: nil, message: "Выберите способ", preferredStyle: .actionSheet)
+        alert.view.tintColor = ColorsManager.zbzbTextColor
+ 
+        
+        let telegram = DeviceAppCaller.SocialNetwork.telegram(id: "@mariaKhamitsevich")
+        let instagram = DeviceAppCaller.SocialNetwork.instagram(id: "dragunova.mariia")
+        let telephone = "+375259369661"
+        
+        let backAction = UIAlertAction(title: "Отмена", style: .cancel)
+
+        //telegram
+        let telegramImage = UIImage(systemName: "paperplane.circle.fill")?.withTintColor(ColorsManager.zbzbTextColor) ?? UIImage()
+        let tgImage = telegramImage.sd_resizedImage(with: CGSize(width: 32, height: 32), scaleMode: SDImageScaleMode(rawValue: 10)!) ?? UIImage()
+        let telegramAction = UIAlertAction(title: "Telegram", image: tgImage, style: .default) { _ in
+            DeviceAppCaller.open(socialNetwork: telegram)
+        }
+        
+        //instagram
+        let instagramImage = UIImage(systemName: "camera.circle.fill")?.withTintColor(ColorsManager.zbzbTextColor) ?? UIImage()
+        let instImage = instagramImage.sd_resizedImage(with: CGSize(width: 32, height: 32), scaleMode: SDImageScaleMode(rawValue: 10)!) ?? UIImage()
+        let instagramAction = UIAlertAction(title: "Instagram", image: instImage, style: .default) { _ in
+            DeviceAppCaller.open(socialNetwork: instagram)
+        }
+        
+        //phone
+        let phoneImage = UIImage(systemName: "phone.circle.fill")?.withTintColor(ColorsManager.zbzbTextColor) ?? UIImage()
+        let phImage = phoneImage.sd_resizedImage(with: CGSize(width: 32, height: 32), scaleMode: SDImageScaleMode(rawValue: 10)!) ?? UIImage()
+        let phoneAction = UIAlertAction(title: "Телефон", image: phImage, style: .default) { _ in
+            DeviceAppCaller.openPhone(telephone)
+        }
+        
+        alert.addAction(telegramAction)
+        alert.addAction(instagramAction)
+        alert.addAction(phoneAction)
+        alert.addAction(backAction)
+
+        selfController?.present(alert, animated: true)
     }
 }
 

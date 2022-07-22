@@ -71,7 +71,7 @@ class OrdersTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateValue(product: Product) {
+    func updateValue(product: ProductSettable) {
         productName.text = product.productName
         productPrice.text = "Цена: " + String(product.priceForKg) + " BYN"
         amount.text = "Количество, кг: \(product.productAmount)"

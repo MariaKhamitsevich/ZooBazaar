@@ -122,7 +122,7 @@ final class CartTableViewCell: UITableViewCell {
         return label
     }()
     
-    var currentProduct: Product?
+    var currentProduct: ProductSettable?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -138,7 +138,7 @@ final class CartTableViewCell: UITableViewCell {
     }
     
     
-    func updateValue(product: Product, indexPath: IndexPath) {
+    func updateValue(product: ProductSettable, indexPath: IndexPath) {
         productName.text = product.productName
         productPrice.text = "Цена: " + String(Double(round(100 * product.totalCost) / 100) ) + " BYN"
         currentProduct = product

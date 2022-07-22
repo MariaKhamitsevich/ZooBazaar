@@ -9,7 +9,7 @@ import UIKit
 
 final class CartManager {
     
-    private(set) var cartProducts: [Product] = []
+    private(set) var cartProducts: [ProductSettable] = []
     
     static var shared = CartManager()
     
@@ -19,11 +19,11 @@ final class CartManager {
         cartProducts.count
     }
     
-    func getProduct(indexPath: IndexPath) -> Product {
+    func getProduct(indexPath: IndexPath) -> ProductSettable {
         cartProducts[indexPath.row]
     }
     
-    func addProduct(product: Product) {
+    func addProduct(product: ProductSettable) {
         guard !cartProducts.isEmpty
         else {
             cartProducts.append(product)
@@ -40,7 +40,7 @@ final class CartManager {
        
     }
     
-    func deleteProduct(product: Product) {
+    func deleteProduct(product: ProductSettable) {
         if !cartProducts.isEmpty {
             let count = cartProducts.count
             var products = cartProducts
@@ -54,7 +54,7 @@ final class CartManager {
         }
     }
     
-    func decreaseAmount(product: Product) {
+    func decreaseAmount(product: ProductSettable) {
         for i in 0...(cartProducts.count - 1) {
             if product.productID == cartProducts[i].productID {
                 if cartProducts[i].productAmount != 1 {
@@ -65,7 +65,7 @@ final class CartManager {
         }
     }
     
-    func increaseAmount(product: Product) {
+    func increaseAmount(product: ProductSettable) {
         for i in 0...(cartProducts.count - 1) {
             if product.productID == cartProducts[i].productID {
                 cartProducts[i].productAmount += 1
